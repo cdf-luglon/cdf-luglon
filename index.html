@@ -8,9 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap" rel="stylesheet">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
   
   <style>
@@ -502,7 +499,8 @@
     <div class="tab-content">
       <div id="presentation" class="tab-pane active">
         <div class="card">
-          <h2 style="text-align: center;">Planning des Fêtes de Luglon 2025</h2> <p class="small">Ne manquez aucun événement ! Toutes les activités sont gratuites sauf le repas du soir (sur réservation).</p>
+          <h2>Planning des Fêtes de Luglon 2025</h2>
+          <p class="small">Ne manquez aucun événement ! Toutes les activités sont gratuites sauf le repas du soir (sur réservation).</p>
           <hr style="margin:12px 0;border:none;border-top:1px solid #ccc">
           
           <div class="planning-section align-left">
@@ -682,6 +680,11 @@
     // Constante pour la valeur par défaut pour l'initialisation
     const DEFAULT_PEOPLE = 1; 
 
+    // *************************************************************************
+    // REMPLACEZ 'VOTRE_URL_APPS_SCRIPT_ICI' PAR L'URL DE DÉPLOIEMENT OBTENUE APRÈS L'ÉTAPE 3
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec'; 
+    // *************************************************************************
+    
     // PARTIE RÉSERVATION
     const form = document.getElementById('resForm');
     const list = document.getElementById('list');
@@ -690,7 +693,6 @@
     const menuContainer = document.getElementById('menu-container');
     const totalCountMessage = document.getElementById('total-count-message');
     const soirSelect = document.getElementById('soir'); 
-    // const priceRecap = document.getElementById('price-recap'); // NON UTILISÉ
     // Éléments d'erreur
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
@@ -884,29 +886,56 @@
             selectedMenus.push(menuSelect.value);
         }
         
-        // Si tout est valide, on enregistre
-        const cleanPhone = phoneInput.value.replace(/\s/g, '').trim();
-
-        const data=loadReservations();
-        const entry={
-            name: nameInput.value.trim(),
-            phone: cleanPhone,
-            people: numPeople,
-            soir: form.soir.value,
-            menus: selectedMenus,
-            notes: form.notes.value.trim()
+        // Préparer les données pour l'envoi au Google Sheet
+        const formData = {
+            'Nom': nameInput.value.trim(),
+            'Telephone': phoneInput.value.replace(/\s/g, '').trim(),
+            'NbPersonnes': numPeople,
+            'Soir': form.soir.value,
+            'Menus_Details': selectedMenus.join(', '), // Envoie les menus sous forme de chaîne
+            'Notes': form.notes.value.trim(),
+            'Total_Euros': totalAmountEl.textContent,
+            'Timestamp': new Date().toLocaleString('fr-FR'), // Date/heure pour le sheet
         };
         
-        data.push(entry);
-        saveReservations(data);
-        render();
-        alert(`Réservation enregistrée pour ${entry.name} (${entry.people} pers) — ${entry.soir} — Total: ${totalAmountEl.textContent}`);
-        
-        // Réinitialisation après soumission
-        form.reset();
-        peopleInput.value = DEFAULT_PEOPLE; 
-        generateMenuInputs(); 
-        calculateTotalPrice();
+        // Envoi des données au Google Apps Script
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Requis pour contourner CORS
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(formData).toString(),
+        })
+        .then(() => {
+            // Logique de confirmation pour le stockage local
+            const data=loadReservations();
+            const entry={
+                name: formData.Nom,
+                phone: formData.Telephone,
+                people: formData.NbPersonnes,
+                soir: formData.Soir,
+                menus: selectedMenus,
+                notes: formData.Notes
+            };
+            
+            data.push(entry);
+            saveReservations(data);
+            render();
+
+            // Confirmation affichée à l'utilisateur
+            alert(`Réservation ENVOYÉE (via Apps Script) et enregistrée localement pour ${formData.Nom} (${formData.NbPersonnes} pers) — Total: ${formData.Total_Euros}`);
+            
+            // Réinitialisation après soumission
+            form.reset();
+            peopleInput.value = DEFAULT_PEOPLE; 
+            generateMenuInputs(); 
+            calculateTotalPrice();
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'envoi au Google Sheet:', error);
+            alert(`Erreur lors de l'envoi au Google Sheet. Vérifiez la console pour les détails. (La réservation locale a pu échouer aussi).`);
+        });
     });
 
     // PARTIE GESTION DES ONGLETS (TABS)
