@@ -655,7 +655,7 @@
             <form id="resForm" autocomplete="off">
               <div class="row">
                 <div style="flex:1">
-                  <label for="name"><strong>Nom du contact (Réservation)</strong></label>
+                  <label for="name"><strong>Nom du contact</strong></label>
                   <input id="name" name="Nom" required placeholder="Jean Dupont">
                   <p id="name-error" class="error-feedback"></p>
                 </div>
@@ -669,8 +669,8 @@
               <div style="margin-top:12px">
                 <label for="soir"><strong>Choix du soir</strong></label>
                 <select id="soir" name="Soir" onchange="calculateTotalPrice();">
-                  <option value="vendredi">Vendredi soir — Menu: Salade landaise, araignée de porc, flan</option>
-                  <option value="samedi">Samedi soir — Menu: Salade gasconne, entrecôte, pastis landais</option>
+                  <option value="vendredi">Vendredi soir — Menu: Terrine de saumon, Araignée de porc ou Txistorra, Flan</option>
+                  <option value="samedi">Samedi soir — Menu: Assiette Luglonaise, Entrecôte, Pastis landais</option>
                 </select>
               </div>
 
@@ -687,19 +687,19 @@
               <div id="menu-container"></div>
               
               <div style="margin-top:12px">
-                <label for="notes">Commentaire général</label>
-                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, besoin d'une chaise haute..."></textarea>
+                <label for="notes">Commentaire (facultatif)</label>
+                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, personne à mobilité réduite..."></textarea>
               </div>
 
               <div id="final-total">
-                <span>Prix Total estimé (à payer sur place)</span>
+                <span>Prix Total (à payer sur place)</span>
                 <span class="amount" id="total-amount">0.00€</span>
               </div>
 
               <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
                 <button class="btn" type="submit" id="submit-button">Réserver</button>
                 <div id="submission-status"></div> 
-<div style="margin-left:auto;font-size:13px">Stockage local • <span id="count">0</span></div>
+<div style="margin-left:auto;font-size:13px">Réservations sur cet appareil • <span id="count">0</span></div>
               </div>
             </form>
 
