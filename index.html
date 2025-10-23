@@ -213,12 +213,26 @@
         color:white; 
         font-weight:700;
         overflow: hidden; 
+        flex-shrink: 0; /* Empêche le logo d'être compressé */
     }
     .logo img {
         width: 100%;
         height: 100%;
         object-fit: cover; 
         display: block; 
+    }
+
+    /* Correction spécifique pour le logo sur petits écrans */
+    @media (max-width: 600px) {
+        .header-content {
+            flex-direction: column; /* Empile le logo et le texte */
+            text-align: center;
+        }
+        .logo {
+            width: 90px; /* Taille un peu plus petite sur mobile */
+            height: 90px;
+            margin-bottom: 10px; /* Espace sous le logo */
+        }
     }
     
     .grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:18px}
@@ -231,6 +245,11 @@
 
     .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer;font-weight:600}
     .btn:active{transform:translateY(1px)}
+    /* Nouveau style pour le bouton désactivé */
+    .btn:disabled {
+        background-color: #a0a0a0; /* Gris */
+        cursor: not-allowed;
+    }
 
     .reservations{max-height:420px;overflow:auto}
     .empty{padding:24px;text-align:center}
@@ -373,8 +392,8 @@
     /* 2. DISPOSITION COMPACTE DES CHOIX DE MENUS */
     #menu-container {
       display: flex;
-      flex-wrap: wrap; 
-      gap: 15px 10px; 
+      flex-wrap: wrap;  
+      gap: 15px 10px;  
       margin-top: 12px;
     }
 
@@ -387,19 +406,19 @@
     }
     @media (max-width: 800px) { /* Sur les écrans un peu plus petits, passer à 3 colonnes */
         .menu-selection-group {
-            flex: 0 0 calc(33.333% - 6.666px); 
-            min-width: 140px; 
+            flex: 0 0 calc(33.333% - 6.666px);  
+            min-width: 140px;  
         }
     }
     @media (max-width: 600px) { /* Sur les écrans moyens, passer à 2 colonnes */
         .menu-selection-group {
-            flex: 0 0 calc(50% - 5px); 
-            min-width: 150px; 
+            flex: 0 0 calc(50% - 5px);  
+            min-width: 150px;  
         }
     }
     @media (max-width: 400px) { /* Sur les très petits écrans, 1 colonne */
         .menu-selection-group {
-            flex: 1 1 100%; 
+            flex: 1 1 100%;  
             min-width: unset; /* Annuler le min-width pour s'adapter */
         }
     }
@@ -410,7 +429,7 @@
       color: var(--accent);
     }
     .menu-options {
-      display: block; 
+      display: block;  
     }
     /* FIN DE STYLISATION COMPACTE */
 
@@ -419,10 +438,10 @@
     .warning-note {
         padding: 10px 12px;
         border-radius: 8px;
-        background-color: rgba(255, 165, 0, 0.1); 
+        background-color: rgba(255, 165, 0, 0.1);  
         border: 1px solid orange;
         font-size: 13px;
-        margin-bottom: 15px; 
+        margin-bottom: 15px;  
     }
     .warning-note strong {
         font-weight: 700;
@@ -433,7 +452,7 @@
         color: var(--error-red);
         font-size: 12px;
         margin: 2px 0 0 0;
-        height: 15px; 
+        height: 15px;  
     }
     /* Style pour le champ en erreur */
     .input-error {
@@ -468,6 +487,40 @@
     #final-total .amount {
       color: var(--accent);
       font-size: 18px;
+    }
+
+    /* Nouveau style pour le message de chargement/succès */
+    #submission-status {
+        margin-left: auto; /* Aligne à droite */
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background-color: #f0f0f0; /* Fond neutre */
+        color: var(--text-light);
+        display: none; /* Caché par défaut */
+        align-items: center; /* Pour aligner avec un potentiel spinner */
+        gap: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+        #submission-status {
+            background-color: #333;
+            color: var(--text-dark);
+        }
+    }
+    #submission-status.sending {
+        background-color: #ffe0b2; /* Jaune clair */
+        color: #e65100; /* Texte orange foncé */
+        display: flex; /* Affiché quand en cours d'envoi */
+    }
+    #submission-status.success {
+        background-color: #e8f5e9; /* Vert clair */
+        color: #2e7d32; /* Texte vert foncé */
+        display: flex; /* Affiché quand succès */
+    }
+    #submission-status.error {
+        background-color: #ffebee; /* Rouge clair */
+        color: #c62828; /* Texte rouge foncé */
+        display: flex; /* Affiché quand erreur */
     }
   </style>
 </head>
@@ -536,7 +589,7 @@
                 <p>10h30-11h30 : Karting Luglonnais (réservées aux enfants - au stade)</p>
                 <p>16h30 : <strong>COURSE LANDAISE</strong> (Ganaderia Maynus) 10€ / 5€ -18ans / gratuit -12ans - au stade</p>
                 <p>20h30-23h30 : Animation musicale avec "Les gésiers en salade"</p>
-                <p>20h : <strong>REPAS DU COMITE</strong> - Adulte 16€ - Enfant (- de 12 ans) 8€</p>
+                <p>20h : <strong>REPAS DU COMITE</strong> - Adulte 17€ - Enfant (- de 12 ans) 8.50€</p>
                 <p class="small">assiette luglonaise, entrecôte au brasero et sa sauce maison-frites, pastis (Les frères pastis)/ crème anglaise, café</p>
                 <p class="small" style="font-style: italic;">Sur réservation auprès de Tiphaine au <strong>06.14.99.44.46</strong> ou Félix au <strong>07.87.84.29.04</strong> avant le 29/07</p>
             </div>
@@ -636,8 +689,8 @@
               </div>
 
               <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
-                <button class="btn" type="submit">Réserver</button>
-                <div style="margin-left:auto;font-size:13px">Stockage local • <span id="count">0</span></div>
+                <button class="btn" type="submit" id="submit-button">Réserver</button>
+                <div id="submission-status"></div> <div style="margin-left:auto;font-size:13px">Stockage local • <span id="count">0</span></div>
               </div>
             </form>
 
@@ -660,12 +713,12 @@
     const PRICES_BY_DAY = {
         'vendredi': {
             'standard': 14.00,
-            'poisson': 14.00, 
+            'poisson': 14.00,  
             'enfant': 7.00
         },
         'samedi': {
             'standard': 17.00,
-            'poisson': 17.00, 
+            'poisson': 17.00,  
             'enfant': 8.50
         }
     };
@@ -673,16 +726,16 @@
     // Structure simple des options de menu
     const MENU_OPTIONS = [
         { value: 'standard', label: 'Viande' },
-        { value: 'poisson', label: 'Poisson' }, 
+        { value: 'poisson', label: 'Poisson' },  
         { value: 'enfant', label: 'Menu enfant' }
     ];
 
     // Constante pour la valeur par défaut pour l'initialisation
-    const DEFAULT_PEOPLE = 1; 
+    const DEFAULT_PEOPLE = 1;  
 
     // *************************************************************************
     // VOICI L'URL DE DÉPLOIEMENT DU GOOGLE APPS SCRIPT
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec'; 
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec';  
     // *************************************************************************
     
     // PARTIE RÉSERVATION
@@ -692,7 +745,7 @@
     const peopleInput = document.getElementById('people');
     const menuContainer = document.getElementById('menu-container');
     const totalCountMessage = document.getElementById('total-count-message');
-    const soirSelect = document.getElementById('soir'); 
+    const soirSelect = document.getElementById('soir');  
     // Éléments d'erreur
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
@@ -700,7 +753,10 @@
     const phoneError = document.getElementById('phone-error');
     const phoneMasker = document.getElementById('phone');
     // Élément pour l'affichage du total en temps réel
-    const totalAmountEl = document.getElementById('total-amount'); 
+    const totalAmountEl = document.getElementById('total-amount');  
+    // Nouveaux éléments pour la gestion du statut de soumission
+    const submitButton = document.getElementById('submit-button');
+    const submissionStatus = document.getElementById('submission-status');
 
 
     // FONCTION UTILITAIRE : Calcule le prix d'un seul menu en fonction du jour
@@ -758,7 +814,7 @@
 
     // FONCTION INUTILE MAIS CONSERVÉE POUR LA CLARTÉ DU JS
     function updatePriceRecap() {
-        calculateTotalPrice(); 
+        calculateTotalPrice();  
     }
 
     // NOUVELLE FONCTION : Calcule et affiche le prix total en temps réel
@@ -775,6 +831,7 @@
                     const menuType = menuSelect.value;
                     currentTotal += getMenuPrice(selectedDay, menuType);
                 } else if (menuSelect) {
+                    // Si pas de sélection, prend le premier menu par défaut pour le calcul
                     currentTotal += getMenuPrice(selectedDay, MENU_OPTIONS[0].value);
                 }
             }
@@ -797,7 +854,7 @@
             const group = document.createElement('div');
             group.className = 'menu-selection-group';
             group.innerHTML = `
-                <h5>Personne ${i + 1}</h5> 
+                <h5>Personne ${i + 1}</h5>  
                 <div class="menu-options">
                     <div>
                         <select id="menu-${i}" name="menu-${i}" required>
@@ -811,13 +868,13 @@
             // Écouteur pour mettre à jour le total quand un menu est changé
             document.getElementById(`menu-${i}`).addEventListener('change', calculateTotalPrice);
         }
-        calculateTotalPrice(); 
+        calculateTotalPrice();  
     }
 
     // 4. FORMATAGE DU TÉLÉPHONE (AJOUT DE L'ESPACE AUTO)
     phoneMasker.addEventListener('input', (e) => {
         const input = e.target;
-        let value = input.value.replace(/[^0-9]/g, ''); 
+        let value = input.value.replace(/[^0-9]/g, '');  
         
         if (value.length > 0) {
             value = value.match(/.{1,2}/g).join(' ');
@@ -834,7 +891,7 @@
     function validateContactFields() {
         let isValid = true;
         const nameValue = nameInput.value.trim();
-        const phoneValue = phoneInput.value.replace(/\s/g, '').trim(); 
+        const phoneValue = phoneInput.value.replace(/\s/g, '').trim();  
         const errorMessage = 'Remplir ce champ';
 
         // Validation du Nom
@@ -860,6 +917,27 @@
         return isValid;
     }
     
+    // Fonction pour afficher le statut de soumission
+    let statusTimeout; // Pour effacer le message après un délai
+    function setSubmissionStatus(status, message = '') {
+        submissionStatus.className = ''; // Réinitialise toutes les classes
+        submissionStatus.style.display = 'none'; // Cache par défaut
+        clearTimeout(statusTimeout); // Efface tout timeout précédent
+
+        if (status) {
+            submissionStatus.classList.add(status);
+            submissionStatus.textContent = message;
+            submissionStatus.style.display = 'flex';
+        }
+
+        if (status === 'success' || status === 'error') {
+            statusTimeout = setTimeout(() => {
+                submissionStatus.style.display = 'none';
+            }, 5000); // Masque après 5 secondes
+        }
+    }
+
+
     // 6. GESTION DE LA SOUMISSION DU FORMULAIRE
     form.addEventListener('submit',e=>{
         e.preventDefault();
@@ -871,7 +949,7 @@
 
         const numPeople = Number(peopleInput.value);
         if (numPeople < 1) {
-            alert("Veuillez indiquer le nombre de personnes.");
+            setSubmissionStatus('error', "Veuillez indiquer le nombre de personnes.");
             return;
         }
 
@@ -880,12 +958,16 @@
         for (let i = 0; i < numPeople; i++) {
             const menuSelect = document.getElementById(`menu-${i}`);
             if (!menuSelect || !menuSelect.value) {
-                alert(`Le type de repas n'a pas été sélectionné pour la personne ${i + 1}.`);
+                setSubmissionStatus('error', `Le type de repas n'a pas été sélectionné pour la personne ${i + 1}.`);
                 return;
             }
             selectedMenus.push(menuSelect.value);
         }
         
+        // Désactiver le bouton et afficher le statut "Envoi en cours..."
+        submitButton.disabled = true;
+        setSubmissionStatus('sending', 'Envoi de votre réservation...');
+
         // Préparer les données pour l'envoi au Google Sheet
         const formData = {
             'Nom': nameInput.value.trim(),
@@ -923,18 +1005,21 @@
             saveReservations(data);
             render();
 
-            // Confirmation affichée à l'utilisateur
-            alert(`Réservation ENVOYÉE (via Apps Script) et enregistrée localement pour ${formData.Nom} (${formData.NbPersonnes} pers) — Total: ${formData.Total_Euros}`);
+            // Afficher une confirmation de succès
+            setSubmissionStatus('success', `Réservation pour ${formData.Nom} ENVOYÉE ! (Total: ${formData.Total_Euros})`);
             
             // Réinitialisation après soumission
             form.reset();
-            peopleInput.value = DEFAULT_PEOPLE; 
-            generateMenuInputs(); 
+            peopleInput.value = DEFAULT_PEOPLE;  
+            generateMenuInputs();  
             calculateTotalPrice();
         })
         .catch(error => {
             console.error('Erreur lors de l\'envoi au Google Sheet:', error);
-            alert(`Erreur lors de l'envoi au Google Sheet. Vérifiez la console pour les détails. (La réservation locale a pu échouer aussi).`);
+            setSubmissionStatus('error', "Erreur lors de l'envoi. Veuillez réessayer.");
+        })
+        .finally(() => {
+            submitButton.disabled = false; // Réactiver le bouton
         });
     });
 
@@ -951,15 +1036,15 @@
         document.getElementById(targetTab).classList.add('active');
 
         if(targetTab === 'reservation') {
-            render(); 
+            render();  
         }
       });
     });
 
     // Initialisation
-    peopleInput.value = DEFAULT_PEOPLE; 
-    generateMenuInputs(); 
-    calculateTotalPrice(); 
+    peopleInput.value = DEFAULT_PEOPLE;  
+    generateMenuInputs();  
+    calculateTotalPrice();  
   </script>
 </body>
 </html>
