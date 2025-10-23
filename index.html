@@ -95,7 +95,7 @@
         border-bottom-color: var(--luglon-green) !important;
       }
 
-      /* NOUVEAU: Correction de la plaquette de tarifs en Dark Mode */
+      /* Correction de la plaquette de tarifs en Dark Mode */
       .price-plaque {
         background: var(--luglon-dark-green-bg); /* Fond vert sombre légèrement moins agressif */
         border: 1px solid #333;
@@ -317,7 +317,7 @@
         text-align: right;
     }
     
-    /* CENTRAGE DU H2 DU PLANNING */
+    /* CORRECTION : CENTRAGE DU H2 DU PLANNING */
     .card h2 {
         text-align: center;
     }
@@ -502,8 +502,7 @@
     <div class="tab-content">
       <div id="presentation" class="tab-pane active">
         <div class="card">
-          <h2>Planning des Fêtes de Luglon 2025</h2>
-          <p class="small">Ne manquez aucun événement ! Toutes les activités sont gratuites sauf le repas du soir (sur réservation).</p>
+          <h2 style="text-align: center;">Planning des Fêtes de Luglon 2025</h2> <p class="small">Ne manquez aucun événement ! Toutes les activités sont gratuites sauf le repas du soir (sur réservation).</p>
           <hr style="margin:12px 0;border:none;border-top:1px solid #ccc">
           
           <div class="planning-section align-left">
@@ -859,14 +858,6 @@
         return isValid;
     }
     
-    // Empêcher la soumission du formulaire avec la touche "Entrée"
-    form.addEventListener('keydown', (e) => {
-        // On bloque la touche "Entrée" sur tous les champs sauf les zones de texte (textarea)
-        if (e.key === 'Enter' && e.target.tagName.toLowerCase() !== 'textarea') {
-            e.preventDefault();
-        }
-    });
-
     // 6. GESTION DE LA SOUMISSION DU FORMULAIRE
     form.addEventListener('submit',e=>{
         e.preventDefault();
