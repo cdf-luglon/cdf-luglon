@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Luglon en fête</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' style='fill:%23166136;'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23ffffff' font-family='Arial, sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+  <title>Luglon en fête</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -113,6 +113,11 @@
       .price-table tr:nth-child(even) {
         background-color: rgba(255, 255, 255, 0.05); /* Légère alternance claire */
       }
+      
+      /* Ligne de séparation solide pour les jours (DARK MODE) */
+      .planning-section {
+          border-bottom: 2px solid #333 !important;
+      }
     }
 
     @media (prefers-color-scheme: light) {
@@ -161,6 +166,11 @@
       }
       .price-table th {
         border-bottom: 2px solid var(--luglon-green);
+      }
+      
+      /* Ligne de séparation solide pour les jours (LIGHT MODE) */
+      .planning-section {
+          border-bottom: 2px solid #ccc !important;
       }
     }
 
@@ -290,7 +300,8 @@
     /* STYLES SPÉCIFIQUES AU PROGRAMME */
     .planning-section {
         padding: 10px 0; 
-        border-bottom: 1px dashed #ccc;
+        /* BORDURE SOLIDE APPLIQUÉE ICI */
+        
     }
     .planning-section:last-child {
         border-bottom: none;
@@ -587,7 +598,7 @@
             <div class="day-content">
                 <p>8h30-12h : <strong>BALL-TRAP</strong>, planche au mérite - Menon</p>
                 <p>10h30-11h30 : Karting Luglonnais (réservées aux enfants - au stade)</p>
-                <p>16h30 : <strong>COURSE LANDAISE</strong> (Ganaderia Maynus) 10€ / 5€ -18ans / gratuit -12ans - au stade</p>
+                <p>16h30 : <strong>COURSE LANDAISE</strong> (Ganaderia Maynus) 10€ / 5€ -18ans / gratuit -12ans - au stade)</p>
                 <p>20h30-23h30 : Animation musicale avec "Les gésiers en salade"</p>
                 <p>20h : <strong>REPAS DU COMITE</strong> - Adulte 17€ - Enfant (- de 12 ans) 8.50€</p>
                 <p class="small">assiette luglonaise, entrecôte au brasero et sa sauce maison-frites, pastis (Les frères pastis)/ crème anglaise, café</p>
@@ -608,7 +619,6 @@
                 <p>23h : <strong>FEU D'ARTIFICE</strong> (selon météo)</p>
             </div>
           </div>
-          <p class="small" style="text-align: right; margin-top: 15px; font-style: italic;">Imprimé par nos soins - Ne pas jeter sur la voie publique</p>
         </div>
       </div>
 
