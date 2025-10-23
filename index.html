@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Luglon en Fête</title>
+  <title>Luglon en fête</title> <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' style='fill:%23166136;'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23ffffff' font-family='Arial, sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -392,8 +392,8 @@
     /* 2. DISPOSITION COMPACTE DES CHOIX DE MENUS */
     #menu-container {
       display: flex;
-      flex-wrap: wrap;  
-      gap: 15px 10px;  
+      flex-wrap: wrap; 
+      gap: 15px 10px; 
       margin-top: 12px;
     }
 
@@ -406,19 +406,19 @@
     }
     @media (max-width: 800px) { /* Sur les écrans un peu plus petits, passer à 3 colonnes */
         .menu-selection-group {
-            flex: 0 0 calc(33.333% - 6.666px);  
-            min-width: 140px;  
+            flex: 0 0 calc(33.333% - 6.666px); 
+            min-width: 140px; 
         }
     }
     @media (max-width: 600px) { /* Sur les écrans moyens, passer à 2 colonnes */
         .menu-selection-group {
-            flex: 0 0 calc(50% - 5px);  
-            min-width: 150px;  
+            flex: 0 0 calc(50% - 5px); 
+            min-width: 150px; 
         }
     }
     @media (max-width: 400px) { /* Sur les très petits écrans, 1 colonne */
         .menu-selection-group {
-            flex: 1 1 100%;  
+            flex: 1 1 100%; 
             min-width: unset; /* Annuler le min-width pour s'adapter */
         }
     }
@@ -429,7 +429,7 @@
       color: var(--accent);
     }
     .menu-options {
-      display: block;  
+      display: block; 
     }
     /* FIN DE STYLISATION COMPACTE */
 
@@ -438,10 +438,10 @@
     .warning-note {
         padding: 10px 12px;
         border-radius: 8px;
-        background-color: rgba(255, 165, 0, 0.1);  
+        background-color: rgba(255, 165, 0, 0.1); 
         border: 1px solid orange;
         font-size: 13px;
-        margin-bottom: 15px;  
+        margin-bottom: 15px; 
     }
     .warning-note strong {
         font-weight: 700;
@@ -452,7 +452,7 @@
         color: var(--error-red);
         font-size: 12px;
         margin: 2px 0 0 0;
-        height: 15px;  
+        height: 15px; 
     }
     /* Style pour le champ en erreur */
     .input-error {
@@ -690,7 +690,8 @@
 
               <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
                 <button class="btn" type="submit" id="submit-button">Réserver</button>
-                <div id="submission-status"></div> <div style="margin-left:auto;font-size:13px">Stockage local • <span id="count">0</span></div>
+                <div id="submission-status"></div> 
+<div style="margin-left:auto;font-size:13px">Stockage local • <span id="count">0</span></div>
               </div>
             </form>
 
@@ -713,12 +714,12 @@
     const PRICES_BY_DAY = {
         'vendredi': {
             'standard': 14.00,
-            'poisson': 14.00,  
+            'poisson': 14.00, 
             'enfant': 7.00
         },
         'samedi': {
             'standard': 17.00,
-            'poisson': 17.00,  
+            'poisson': 17.00, 
             'enfant': 8.50
         }
     };
@@ -726,16 +727,16 @@
     // Structure simple des options de menu
     const MENU_OPTIONS = [
         { value: 'standard', label: 'Viande' },
-        { value: 'poisson', label: 'Poisson' },  
+        { value: 'poisson', label: 'Poisson' }, 
         { value: 'enfant', label: 'Menu enfant' }
     ];
 
     // Constante pour la valeur par défaut pour l'initialisation
-    const DEFAULT_PEOPLE = 1;  
+    const DEFAULT_PEOPLE = 1; 
 
     // *************************************************************************
     // VOICI L'URL DE DÉPLOIEMENT DU GOOGLE APPS SCRIPT
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec';  
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec'; 
     // *************************************************************************
     
     // PARTIE RÉSERVATION
@@ -745,7 +746,7 @@
     const peopleInput = document.getElementById('people');
     const menuContainer = document.getElementById('menu-container');
     const totalCountMessage = document.getElementById('total-count-message');
-    const soirSelect = document.getElementById('soir');  
+    const soirSelect = document.getElementById('soir'); 
     // Éléments d'erreur
     const nameInput = document.getElementById('name');
     const phoneInput = document.getElementById('phone');
@@ -753,7 +754,7 @@
     const phoneError = document.getElementById('phone-error');
     const phoneMasker = document.getElementById('phone');
     // Élément pour l'affichage du total en temps réel
-    const totalAmountEl = document.getElementById('total-amount');  
+    const totalAmountEl = document.getElementById('total-amount'); 
     // Nouveaux éléments pour la gestion du statut de soumission
     const submitButton = document.getElementById('submit-button');
     const submissionStatus = document.getElementById('submission-status');
@@ -814,7 +815,7 @@
 
     // FONCTION INUTILE MAIS CONSERVÉE POUR LA CLARTÉ DU JS
     function updatePriceRecap() {
-        calculateTotalPrice();  
+        calculateTotalPrice(); 
     }
 
     // NOUVELLE FONCTION : Calcule et affiche le prix total en temps réel
@@ -831,7 +832,6 @@
                     const menuType = menuSelect.value;
                     currentTotal += getMenuPrice(selectedDay, menuType);
                 } else if (menuSelect) {
-                    // Si pas de sélection, prend le premier menu par défaut pour le calcul
                     currentTotal += getMenuPrice(selectedDay, MENU_OPTIONS[0].value);
                 }
             }
@@ -854,7 +854,7 @@
             const group = document.createElement('div');
             group.className = 'menu-selection-group';
             group.innerHTML = `
-                <h5>Personne ${i + 1}</h5>  
+                <h5>Personne ${i + 1}</h5> 
                 <div class="menu-options">
                     <div>
                         <select id="menu-${i}" name="menu-${i}" required>
@@ -868,13 +868,13 @@
             // Écouteur pour mettre à jour le total quand un menu est changé
             document.getElementById(`menu-${i}`).addEventListener('change', calculateTotalPrice);
         }
-        calculateTotalPrice();  
+        calculateTotalPrice(); 
     }
 
     // 4. FORMATAGE DU TÉLÉPHONE (AJOUT DE L'ESPACE AUTO)
     phoneMasker.addEventListener('input', (e) => {
         const input = e.target;
-        let value = input.value.replace(/[^0-9]/g, '');  
+        let value = input.value.replace(/[^0-9]/g, ''); 
         
         if (value.length > 0) {
             value = value.match(/.{1,2}/g).join(' ');
@@ -891,7 +891,7 @@
     function validateContactFields() {
         let isValid = true;
         const nameValue = nameInput.value.trim();
-        const phoneValue = phoneInput.value.replace(/\s/g, '').trim();  
+        const phoneValue = phoneInput.value.replace(/\s/g, '').trim(); 
         const errorMessage = 'Remplir ce champ';
 
         // Validation du Nom
@@ -1010,8 +1010,8 @@
             
             // Réinitialisation après soumission
             form.reset();
-            peopleInput.value = DEFAULT_PEOPLE;  
-            generateMenuInputs();  
+            peopleInput.value = DEFAULT_PEOPLE; 
+            generateMenuInputs(); 
             calculateTotalPrice();
         })
         .catch(error => {
@@ -1036,15 +1036,15 @@
         document.getElementById(targetTab).classList.add('active');
 
         if(targetTab === 'reservation') {
-            render();  
+            render(); 
         }
       });
     });
 
     // Initialisation
-    peopleInput.value = DEFAULT_PEOPLE;  
-    generateMenuInputs();  
-    calculateTotalPrice();  
+    peopleInput.value = DEFAULT_PEOPLE; 
+    generateMenuInputs(); 
+    calculateTotalPrice(); 
   </script>
 </body>
 </html>
