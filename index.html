@@ -1,1099 +1,1074 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Luglon en fête</title>
-  
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' style='fill:%23166136;'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23ffffff' font-family='Arial, sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Fugaz+One&family=Slackey&display=swap" rel="stylesheet">
-  
-  <style>
-    /* VARIABLES */
-    :root {
-      --bg-light: #f6f7f9;
-      --card-light: #ffffff;
-      --text-light: #0f1724;
-      --muted-light: #6b7280;
-      --accent: #2b8a7e;
-      --error-red: #dc3545; 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Luglon en fête</title>
+  
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' style='fill:%23166136;'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23ffffff' font-family='Arial, sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+  
+  <style>
+    /* VARIABLES */
+    :root {
+      --bg-light: #f6f7f9;
+      --card-light: #ffffff;
+      --text-light: #0f1724;
+      --muted-light: #6b7280;
+      --accent: #2b8a7e;
+      --error-red: #dc3545; 
 
-      --bg-dark: #0a0a0a;
-      --card-dark: #1a1a1a;
-      --text-dark: #f6f6f6;
-      --muted-dark: #a1a1a1;
-      --luglon-green: #166136; /* Votre couleur verte */
-      --luglon-light-green: #e9f2ee; /* Pour le tableau de tarifs (Light Mode) */
-      --luglon-dark-green-bg: #222; /* Pour le tableau de tarifs (Dark Mode) */
-    }
+      --bg-dark: #0a0a0a;
+      --card-dark: #1a1a1a;
+      --text-dark: #f6f6f6;
+      --muted-dark: #a1a1a1;
+      --luglon-green: #166136; /* Votre couleur verte */
+      --luglon-light-green: #e9f2ee; /* Pour le tableau de tarifs (Light Mode) */
+      --luglon-dark-green-bg: #222; /* Pour le tableau de tarifs (Dark Mode) */
+    }
 
-    /* MEDIA QUERIES */
-    @media (prefers-color-scheme: dark) {
-      body {
-        background: var(--bg-dark);
-        color: var(--text-dark);
-      }
-      .card {
-        background: var(--card-dark);
-        color: var(--text-dark);
-        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      }
-      input, select, textarea {
-        background: #121212;
-        color: var(--text-dark);
-        border: 1px solid #333;
-      }
-      .btn {
-        background: var(--accent);
-        color: #fff;
-      }
-      .empty, .meta, .small, footer { 
-        color: var(--muted-dark) !important;
-      }
-      .error-message {
-        color: var(--error-red) !important; 
-      }
-      .error-field {
-        border-color: var(--error-red) !important;
-      }
-      #final-total {
-        background: #1a1a1a;
-        border: 1px solid #333;
-      }
-      #price-recap {
-        border: 1px dashed #444;
-      }
-      .header-banner { 
-        color: white;
-      }
-      .header-banner .logo {
-        background: white; 
-        color: var(--accent);
-      }
-      .logo img { 
-        filter: brightness(0.9); 
-      }
-      
-      /* Titres de jours en mode sombre */
-      .day-title h4 {
-        color: var(--luglon-green); 
-        text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
-      }
-      
-      /* APPLICATION SLACKEY AUX TITRES DE LA BANNIÈRE (Dark Mode) */
-      .header-banner h1, .header-banner p.lead {
-        font-family: "Slackey", cursive;
-        font-weight: 400;
-      }
-      
-      /* APPLICATION FUGAZ ONE AUX ONGLETS (Dark Mode) */
-      .tab-nav a {
-        font-family: "Fugaz One", sans-serif;
-        font-weight: 400;
-        color: var(--muted-dark) !important; /* Rétablis la couleur par défaut pour éviter un problème de sur-écriture */
-      }
-      /* Onglet actif en mode sombre */
-      .tab-nav a.active {
-        color: var(--luglon-green) !important;
-        border-bottom-color: var(--luglon-green) !important;
-      }
+    /* MEDIA QUERIES */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: var(--bg-dark);
+        color: var(--text-dark);
+      }
+      .card {
+        background: var(--card-dark);
+        color: var(--text-dark);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      }
+      input, select, textarea {
+        background: #121212;
+        color: var(--text-dark);
+        border: 1px solid #333;
+      }
+      .btn {
+        background: var(--accent);
+        color: #fff;
+      }
+      .empty, .meta, .small, .tab-nav a, footer { 
+        color: var(--muted-dark) !important;
+      }
+      .error-message {
+        color: var(--error-red) !important; 
+      }
+      .error-field {
+        border-color: var(--error-red) !important;
+      }
+      #final-total {
+        background: #1a1a1a;
+        border: 1px solid #333;
+      }
+      #price-recap {
+        border: 1px dashed #444;
+      }
+      .header-banner { 
+        color: white;
+      }
+      .header-banner .logo {
+        background: white; 
+        color: var(--accent);
+      }
+      .logo img { 
+        filter: brightness(0.9); 
+      }
+      
+      /* Titres de jours en mode sombre */
+      .day-title h4 {
+        color: var(--luglon-green); 
+        text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
+      }
+      /* APPLICATION FUGAZ ONE DARK MODE */
+      .header-banner h1, .header-banner p.lead, .tab-nav a {
+        font-family: "Fugaz One", sans-serif;
+        font-weight: 400; /* Fugaz One n'a qu'un style (400) */
+      }
+      /* Onglet actif en mode sombre */
+      .tab-nav a.active {
+        color: var(--luglon-green) !important;
+        border-bottom-color: var(--luglon-green) !important;
+      }
 
-      /* Correction de la plaquette de tarifs en Dark Mode */
-      .price-plaque {
-        background: var(--luglon-dark-green-bg); /* Fond vert sombre légèrement moins agressif */
-        border: 1px solid #333;
-        color: var(--text-dark); /* Texte blanc */
-      }
-      .price-plaque h3 {
-        color: var(--luglon-green);
-      }
-      .price-table {
-        color: var(--text-dark);
-      }
-      .price-table th, .price-table td {
-        border: 1px solid #444; /* Bordures sombres */
-      }
-      .price-table th {
-        border-bottom: 2px solid var(--luglon-green);
-      }
-      .price-table tr:nth-child(even) {
-        background-color: rgba(255, 255, 255, 0.05); /* Légère alternance claire */
-      }
-      
-      /* Ligne de séparation solide pour les jours (DARK MODE) */
-      .planning-section {
-          border-bottom: 2px solid #333 !important;
-      }
-    }
+      /* Correction de la plaquette de tarifs en Dark Mode */
+      .price-plaque {
+        background: var(--luglon-dark-green-bg); /* Fond vert sombre légèrement moins agressif */
+        border: 1px solid #333;
+        color: var(--text-dark); /* Texte blanc */
+      }
+      .price-plaque h3 {
+        color: var(--luglon-green);
+      }
+      .price-table {
+        color: var(--text-dark);
+      }
+      .price-table th, .price-table td {
+        border: 1px solid #444; /* Bordures sombres */
+      }
+      .price-table th {
+        border-bottom: 2px solid var(--luglon-green);
+      }
+      .price-table tr:nth-child(even) {
+        background-color: rgba(255, 255, 255, 0.05); /* Légère alternance claire */
+      }
+      
+      /* Ligne de séparation solide pour les jours (DARK MODE) */
+      .planning-section {
+          border-bottom: 2px solid #333 !important;
+      }
+    }
 
-    @media (prefers-color-scheme: light) {
-      body {
-        background: var(--bg-light);
-        color: var(--text-light);
-      }
-      .card {
-        background: var(--card-light);
-        color: var(--text-light);
-        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-      }
-      .empty, .meta, .small {
-        color: var(--muted-light);
-      }
-      /* Style pour l'erreur en mode clair */
-      .error-message {
-        color: var(--error-red) !important; 
-      }
-      .error-field {
-        border-color: var(--error-red) !important;
-      }
-      /* Titres de jours en mode clair */
-      .day-title h4 {
-        color: var(--luglon-green); 
-        text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-      }
-      
-      /* APPLICATION SLACKEY AUX TITRES DE LA BANNIÈRE (Light Mode) */
-      .header-banner h1, .header-banner p.lead {
-        font-family: "Slackey", cursive; 
-        font-weight: 400; 
-      }
-      
-      /* APPLICATION FUGAZ ONE AUX ONGLETS (Light Mode) */
-      .tab-nav a {
-        font-family: "Fugaz One", sans-serif;
-        font-weight: 400;
-      }
-      /* Onglet actif en mode clair */
-      .tab-nav a.active {
-        color: var(--luglon-green) !important;
-        border-bottom-color: var(--luglon-green) !important;
-      }
+    @media (prefers-color-scheme: light) {
+      body {
+        background: var(--bg-light);
+        color: var(--text-light);
+      }
+      .card {
+        background: var(--card-light);
+        color: var(--text-light);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      }
+      .empty, .meta, .small {
+        color: var(--muted-light);
+      }
+      /* Style pour l'erreur en mode clair */
+      .error-message {
+        color: var(--error-red) !important; 
+      }
+      .error-field {
+        border-color: var(--error-red) !important;
+      }
+      /* Titres de jours en mode clair */
+      .day-title h4 {
+        color: var(--luglon-green); 
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+      }
+       /* APPLICATION FUGAZ ONE LIGHT MODE */
+      .header-banner h1, .header-banner p.lead, .tab-nav a {
+        font-family: "Fugaz One", sans-serif;
+        font-weight: 400; 
+      }
+      /* Onglet actif en mode clair */
+      .tab-nav a.active {
+        color: var(--luglon-green) !important;
+        border-bottom-color: var(--luglon-green) !important;
+      }
 
-      /* Plaquette de tarifs en Light Mode */
-      .price-plaque {
-        background: var(--luglon-light-green);
-        border: 1px solid var(--luglon-green);
-      }
-      .price-table th, .price-table td {
-        border: 1px solid #ccc; /* Bordures claires */
-      }
-      .price-table th {
-        border-bottom: 2px solid var(--luglon-green);
-      }
-      
-      /* Ligne de séparation solide pour les jours (LIGHT MODE) */
-      .planning-section {
-          border-bottom: 2px solid #ccc !important;
-      }
-    }
+      /* Plaquette de tarifs en Light Mode */
+      .price-plaque {
+        background: var(--luglon-light-green);
+        border: 1px solid var(--luglon-green);
+      }
+      .price-table th, .price-table td {
+        border: 1px solid #ccc; /* Bordures claires */
+      }
+      .price-table th {
+        border-bottom: 2px solid var(--luglon-green);
+      }
+      
+      /* Ligne de séparation solide pour les jours (LIGHT MODE) */
+      .planning-section {
+          border-bottom: 2px solid #ccc !important;
+      }
+    }
 
-    /* STYLES GÉNÉRAUX */
-    *{box-sizing:border-box}
-    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;}
-    .wrap{max-width:100%;margin:40px 0;padding:20px}
-    
-    /* Style pour la bannière d'en-tête avec image de fond */
-    .header-banner {
-        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
-                    url('dessin_luglon.jpeg') no-repeat center center; 
-        background-size: cover;
-        border-radius: 12px;
-        height: 300px; 
-        padding: 20px 30px;
-        margin-bottom: 20px;
-        display: flex; 
-        align-items: center;
-        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
-    }
-    .header-content {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        color: white;
-    }
-    .header-banner h1 {
-        color: white;
-        margin: 0;
-        font-size: 3.5rem; /* Ajustez la taille pour Slackey si nécessaire */
-        line-height: 1.1;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.7); /* Garder le shadow pour la lisibilité */
-    }
-    .header-banner p.lead {
-        color: rgba(255, 255, 255, 0.9);
-        margin: 4px 0 0;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
-        font-size: 1.2rem; /* Ajustez la taille pour Slackey si nécessaire */
-    }
+    /* STYLES GÉNÉRAUX */
+    *{box-sizing:border-box}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; margin:0;}
+    .wrap{max-width:100%;margin:40px 0;padding:20px}
+    
+    /* Style pour la bannière d'en-tête avec image de fond */
+    .header-banner {
+        background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), 
+                    url('dessin_luglon.jpeg') no-repeat center center; 
+        background-size: cover;
+        border-radius: 12px;
+        height: 300px; 
+        padding: 20px 30px;
+        margin-bottom: 20px;
+        display: flex; 
+        align-items: center;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+    }
+    .header-content {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        color: white;
+    }
+    .header-banner h1 {
+        color: white;
+        margin: 0;
+    }
+    .header-banner p.lead {
+        color: rgba(255, 255, 255, 0.9);
+        margin: 4px 0 0;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+    }
 
-    /* ANCIEN HEADER MASQUÉ */
-    header{display:none} 
-    
-    /* MODIFICATIONS DU LOGO (maintenant rond) */
-    .logo{
-        width:128px;
-        height:128px;
-        border-radius:50%; 
-        background:linear-gradient(135deg,var(--accent),#6fc3b1); 
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        color:white; 
-        font-weight:700;
-        overflow: hidden; 
-        flex-shrink: 0; /* Empêche le logo d'être compressé */
-    }
-    .logo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover; 
-        display: block; 
-    }
+    /* ANCIEN HEADER MASQUÉ */
+    header{display:none} 
+    
+    /* MODIFICATIONS DU LOGO (maintenant rond) */
+    .logo{
+        width:128px;
+        height:128px;
+        border-radius:50%; 
+        background:linear-gradient(135deg,var(--accent),#6fc3b1); 
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:white; 
+        font-weight:700;
+        overflow: hidden; 
+        flex-shrink: 0; /* Empêche le logo d'être compressé */
+    }
+    .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+        display: block; 
+    }
 
-    /* Correction spécifique pour le logo sur petits écrans */
-    @media (max-width: 600px) {
-        .header-content {
-            flex-direction: column; /* Empile le logo et le texte */
-            text-align: center;
-        }
-        .logo {
-            width: 90px; /* Taille un peu plus petite sur mobile */
-            height: 90px;
-            margin-bottom: 10px; /* Espace sous le logo */
-        }
-    }
-    
-    .grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:18px}
-    .card{padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.3)}
+    /* Correction spécifique pour le logo sur petits écrans */
+    @media (max-width: 600px) {
+        .header-content {
+            flex-direction: column; /* Empile le logo et le texte */
+            text-align: center;
+        }
+        .logo {
+            width: 90px; /* Taille un peu plus petite sur mobile */
+            height: 90px;
+            margin-bottom: 10px; /* Espace sous le logo */
+        }
+    }
+    
+    .grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:18px}
+    .card{padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.3)}
 
-    form .row{display:flex;gap:10px}
-    form label{font-size:13px;display:block;margin-bottom:6px}
-    input,select,textarea{width:100%;padding:10px;border-radius:8px;font-size:14px;border:1px solid #ccc}
-    input[type='number']{max-width:120px}
+    form .row{display:flex;gap:10px}
+    form label{font-size:13px;display:block;margin-bottom:6px}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;font-size:14px;border:1px solid #ccc}
+    input[type='number']{max-width:120px}
 
-    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer;font-weight:600}
-    .btn:active{transform:translateY(1px)}
-    /* Nouveau style pour le bouton désactivé */
-    .btn:disabled {
-        background-color: #a0a0a0; /* Gris */
-        cursor: not-allowed;
-    }
+    .btn{display:inline-block;padding:10px 14px;border-radius:10px;background:var(--accent);color:white;border:none;cursor:pointer;font-weight:600}
+    .btn:active{transform:translateY(1px)}
+    /* Nouveau style pour le bouton désactivé */
+    .btn:disabled {
+        background-color: #a0a0a0; /* Gris */
+        cursor: not-allowed;
+    }
 
-    .reservations{max-height:420px;overflow:auto}
-    .empty{padding:24px;text-align:center}
-    .res-item{padding:12px;border-radius:10px;border:1px solid #333;margin-bottom:10px;background:rgba(255,255,255,0.03)}
-    .res-item h4{margin:0 0 4px;font-size:15px}
-    .meta{font-size:13px}
-    footer{margin-top:18px;font-size:13px}
+    .reservations{max-height:420px;overflow:auto}
+    .empty{padding:24px;text-align:center}
+    .res-item{padding:12px;border-radius:10px;border:1px solid #333;margin-bottom:10px;background:rgba(255,255,255,0.03)}
+    .res-item h4{margin:0 0 4px;font-size:15px}
+    .meta{font-size:13px}
+    footer{margin-top:18px;font-size:13px}
 
-    /* Styles pour les onglets (tabs) */
-    .tab-nav{display:flex;gap:0;margin-top:20px;border-bottom:1px solid #ccc}
-    @media (prefers-color-scheme: dark) {.tab-nav{border-bottom:1px solid #333}}
-    
-    .tab-nav a{
-        flex: 1; 
-        text-align: center; 
-        padding:10px 0;
-        text-decoration:none;
-        font-weight:600;
-        display:block;
-        margin-bottom:-1px;
-        color:var(--muted-light);
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        font-size: 16px; 
-        transition: color 0.2s, border-bottom 0.2s;
-    }
-    @media (prefers-color-scheme: dark) {.tab-nav a{color:var(--muted-dark)}}
-    
-    .tab-nav a.active{
-        border-bottom:3px solid var(--luglon-green); 
-        color:var(--luglon-green) !important;
-    }
+    /* Styles pour les onglets (tabs) */
+    .tab-nav{display:flex;gap:0;margin-top:20px;border-bottom:1px solid #ccc}
+    @media (prefers-color-scheme: dark) {.tab-nav{border-bottom:1px solid #333}}
+    
+    .tab-nav a{
+        flex: 1; 
+        text-align: center; 
+        padding:10px 0;
+        text-decoration:none;
+        font-weight:600;
+        display:block;
+        margin-bottom:-1px;
+        color:var(--muted-light);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 16px; 
+        transition: color 0.2s, border-bottom 0.2s;
+    }
+    @media (prefers-color-scheme: dark) {.tab-nav a{color:var(--muted-dark)}}
+    
+    .tab-nav a.active{
+        border-bottom:3px solid var(--luglon-green); 
+        color:var(--luglon-green) !important;
+    }
 
-    .tab-content{padding-top:20px}
-    .tab-pane{display:none} 
-    .tab-pane.active{display:block}
+    .tab-content{padding-top:20px}
+    .tab-pane{display:none} 
+    .tab-pane.active{display:block}
 
-    /* STYLES SPÉCIFIQUES AU PROGRAMME */
-    .planning-section {
-        padding: 10px 0; 
-        border-bottom: 2px solid #ccc; /* CORRECTION: Ligne solide */
-    }
-    .planning-section:last-child {
-        border-bottom: none;
-    }
-    @media (prefers-color-scheme: dark) {
-      .planning-section {
-          border-bottom: 2px solid #333 !important; /* CORRECTION: Ligne solide Dark Mode */
-      }
-    }
-    
-    .day-title {
-        margin-bottom: 5px;
-    }
-    .day-title h4 {
-        font-family: "Fascinate Inline", cursive; 
-        font-size: 28px; 
-        font-weight: 400;
-        letter-spacing: 2px; 
-        text-transform: uppercase; 
-        margin: 0;
-        padding: 10px 0;
-        line-height: 1.1;
-        color: var(--luglon-green); 
-    }
-    .day-content {
-        padding: 5px 0;
-    }
-    .day-content p {
-        margin: 0;
-        padding: 2px 0;
-        font-size: 15px;
-    }
-    .day-content .small {
-        font-size: 13px;
-        margin: 2px 0;
-    }
+    /* STYLES SPÉCIFIQUES AU PROGRAMME */
+    .planning-section {
+        padding: 10px 0; 
+        border-bottom: 2px solid #ccc; /* CORRECTION: Ligne solide */
+    }
+    .planning-section:last-child {
+        border-bottom: none;
+    }
+    @media (prefers-color-scheme: dark) {
+      .planning-section {
+          border-bottom: 2px solid #333 !important; /* CORRECTION: Ligne solide Dark Mode */
+      }
+    }
+    
+    .day-title {
+        margin-bottom: 5px;
+    }
+    .day-title h4 {
+        font-family: "Fascinate Inline", cursive; 
+        font-size: 28px; 
+        font-weight: 400;
+        letter-spacing: 2px; 
+        text-transform: uppercase; 
+        margin: 0;
+        padding: 10px 0;
+        line-height: 1.1;
+        color: var(--luglon-green); 
+    }
+    .day-content {
+        padding: 5px 0;
+    }
+    .day-content p {
+        margin: 0;
+        padding: 2px 0;
+        font-size: 15px;
+    }
+    .day-content .small {
+        font-size: 13px;
+        margin: 2px 0;
+    }
 
-    /* MISE EN PLACE DE L'ALTERNANCE GAUCHE/DROITE */
-    .align-left .day-title,
-    .align-left .day-content {
-        text-align: left;
-    }
-    .align-right .day-title,
-    .align-right .day-content {
-        text-align: right;
-    }
-    
-    /* CORRECTION : CENTRAGE DU H2 DU PLANNING */
-    .card h2 {
-        text-align: center;
-    }
-    /* FIN DES STYLES SPÉCIFIQUES AU PROGRAMME */
-    
-    /* ******************************************* */
-    /* STYLES SPÉCIFIQUES À L'ONGLET RÉSERVATION */
-    /* ******************************************* */
-    
-    /* 1. PLAQUETTE DE TARIFS */
-    .price-plaque {
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-    .price-plaque h3 {
-        color: var(--luglon-green);
-        margin-top: 0;
-        font-size: 18px;
-    }
-    .price-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 14px;
-    }
-    .price-table th, .price-table td {
-        padding: 8px 5px;
-        border: 1px solid #ccc; /* Bordures générales */
-    }
-    @media (prefers-color-scheme: dark) {
-        .price-table th, .price-table td {
-            border: 1px solid #444; /* Bordures sombres pour le dark mode */
-        }
-    }
-    .price-table th {
-        color: var(--luglon-green);
-        text-align: center;
-        font-weight: 600;
-        text-transform: uppercase;
-        font-size: 13px;
-        padding-bottom: 10px;
-    }
-    .price-table tr:nth-child(even) {
-        background-color: rgba(0,0,0,0.02); /* Légère alternance en light mode */
-    }
-    @media (prefers-color-scheme: dark) {
-        .price-table tr:nth-child(even) {
-            background-color: rgba(255, 255, 255, 0.05); /* Légère alternance claire en dark mode */
-        }
-    }
-    .price-table td {
-        text-align: center;
-    }
+    /* MISE EN PLACE DE L'ALTERNANCE GAUCHE/DROITE */
+    .align-left .day-title,
+    .align-left .day-content {
+        text-align: left;
+    }
+    .align-right .day-title,
+    .align-right .day-content {
+        text-align: right;
+    }
+    
+    /* CORRECTION : CENTRAGE DU H2 DU PLANNING */
+    .card h2 {
+        text-align: center;
+    }
+    /* FIN DES STYLES SPÉCIFIQUES AU PROGRAMME */
+    
+    /* ******************************************* */
+    /* STYLES SPÉCIFIQUES À L'ONGLET RÉSERVATION */
+    /* ******************************************* */
+    
+    /* 1. PLAQUETTE DE TARIFS */
+    .price-plaque {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    .price-plaque h3 {
+        color: var(--luglon-green);
+        margin-top: 0;
+        font-size: 18px;
+    }
+    .price-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+    }
+    .price-table th, .price-table td {
+        padding: 8px 5px;
+        border: 1px solid #ccc; /* Bordures générales */
+    }
+    @media (prefers-color-scheme: dark) {
+        .price-table th, .price-table td {
+            border: 1px solid #444; /* Bordures sombres pour le dark mode */
+        }
+    }
+    .price-table th {
+        color: var(--luglon-green);
+        text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 13px;
+        padding-bottom: 10px;
+    }
+    .price-table tr:nth-child(even) {
+        background-color: rgba(0,0,0,0.02); /* Légère alternance en light mode */
+    }
+    @media (prefers-color-scheme: dark) {
+        .price-table tr:nth-child(even) {
+            background-color: rgba(255, 255, 255, 0.05); /* Légère alternance claire en dark mode */
+        }
+    }
+    .price-table td {
+        text-align: center;
+    }
 
-    /* 2. DISPOSITION COMPACTE DES CHOIX DE MENUS */
-    #menu-container {
-      display: flex;
-      flex-wrap: wrap; 
-      gap: 15px 10px; 
-      margin-top: 12px;
-    }
+    /* 2. DISPOSITION COMPACTE DES CHOIX DE MENUS */
+    #menu-container {
+      display: flex;
+      flex-wrap: wrap; 
+      gap: 15px 10px; 
+      margin-top: 12px;
+    }
 
-    .menu-selection-group {
-      flex: 0 0 calc(25% - 7.5px); /* 4 colonnes (- ajustement pour le gap) */
-      min-width: 120px; /* Taille minimale pour ne pas trop compresser */
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-    }
-    @media (max-width: 800px) { /* Sur les écrans un peu plus petits, passer à 3 colonnes */
-        .menu-selection-group {
-            flex: 0 0 calc(33.333% - 6.666px); 
-            min-width: 140px; 
-        }
-    }
-    @media (max-width: 600px) { /* Sur les écrans moyens, passer à 2 colonnes */
-        .menu-selection-group {
-            flex: 0 0 calc(50% - 5px); 
-            min-width: 150px; 
-        }
-    }
-    @media (max-width: 400px) { /* Sur les très petits écrans, 1 colonne */
-        .menu-selection-group {
-            flex: 1 1 100%; 
-            min-width: unset; /* Annuler le min-width pour s'adapter */
-        }
-    }
+    .menu-selection-group {
+      flex: 0 0 calc(25% - 7.5px); /* 4 colonnes (- ajustement pour le gap) */
+      min-width: 120px; /* Taille minimale pour ne pas trop compresser */
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+    }
+    @media (max-width: 800px) { /* Sur les écrans un peu plus petits, passer à 3 colonnes */
+        .menu-selection-group {
+            flex: 0 0 calc(33.333% - 6.666px); 
+            min-width: 140px; 
+        }
+    }
+    @media (max-width: 600px) { /* Sur les écrans moyens, passer à 2 colonnes */
+        .menu-selection-group {
+            flex: 0 0 calc(50% - 5px); 
+            min-width: 150px; 
+        }
+    }
+    @media (max-width: 400px) { /* Sur les très petits écrans, 1 colonne */
+        .menu-selection-group {
+            flex: 1 1 100%; 
+            min-width: unset; /* Annuler le min-width pour s'adapter */
+        }
+    }
 
-    .menu-selection-group h5 {
-      margin: 0 0 8px;
-      font-size: 14px;
-      color: var(--accent);
-    }
-    .menu-options {
-      display: block; 
-    }
-    /* FIN DE STYLISATION COMPACTE */
+    .menu-selection-group h5 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--accent);
+    }
+    .menu-options {
+      display: block; 
+    }
+    /* FIN DE STYLISATION COMPACTE */
 
 
-    /* Style pour la note d'avertissement */
-    .warning-note {
-        padding: 10px 12px;
-        border-radius: 8px;
-        background-color: rgba(255, 165, 0, 0.1); 
-        border: 1px solid orange;
-        font-size: 13px;
-        margin-bottom: 15px; 
-    }
-    .warning-note strong {
-        font-weight: 700;
-    }
-    
-    /* Style du message d'erreur */
-    .error-feedback {
-        color: var(--error-red);
-        font-size: 12px;
-        margin: 2px 0 0 0;
-        height: 15px; 
-    }
-    /* Style pour le champ en erreur */
-    .input-error {
-        border-color: var(--error-red) !important;
-    }
-    
-    /* Style pour le prix total dans la liste */
-    .total-price {
-        font-weight: bold;
-        color: var(--accent);
-        margin-left: 10px;
-    }
-    
-    /* Style pour le récapitulatif des prix */
-    #price-recap {
-        display: none;
-    }
+    /* Style pour la note d'avertissement */
+    .warning-note {
+        padding: 10px 12px;
+        border-radius: 8px;
+        background-color: rgba(255, 165, 0, 0.1); 
+        border: 1px solid orange;
+        font-size: 13px;
+        margin-bottom: 15px; 
+    }
+    .warning-note strong {
+        font-weight: 700;
+    }
+    
+    /* Style du message d'erreur */
+    .error-feedback {
+        color: var(--error-red);
+        font-size: 12px;
+        margin: 2px 0 0 0;
+        height: 15px; 
+    }
+    /* Style pour le champ en erreur */
+    .input-error {
+        border-color: var(--error-red) !important;
+    }
+    
+    /* Style pour le prix total dans la liste */
+    .total-price {
+        font-weight: bold;
+        color: var(--accent);
+        margin-left: 10px;
+    }
+    
+    /* Style pour le récapitulatif des prix */
+    #price-recap {
+        display: none;
+    }
 
-    /* Style pour le total avant soumission */
-    #final-total {
-      margin: 15px 0 10px 0;
-      padding: 10px 15px;
-      border-radius: 8px;
-      background: var(--bg-light);
-      border: 1px solid #eee;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-weight: 600;
-      font-size: 16px;
-    }
-    @media (prefers-color-scheme: dark) {
-        #final-total {
-            background: var(--card-dark); /* Correction du fond en dark mode */
-            border: 1px solid #333;
-        }
-    }
-    #final-total .amount {
-      color: var(--accent);
-      font-size: 18px;
-    }
+    /* Style pour le total avant soumission */
+    #final-total {
+      margin: 15px 0 10px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      background: var(--bg-light);
+      border: 1px solid #eee;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    #final-total .amount {
+      color: var(--accent);
+      font-size: 18px;
+    }
 
-    /* Nouveau style pour le message de chargement/succès */
-    #submission-status {
-        margin-left: auto; /* Aligne à droite */
-        font-size: 14px;
-        padding: 5px 10px;
-        border-radius: 6px;
-        background-color: #f0f0f0; /* Fond neutre */
-        color: var(--text-light);
-        display: none; /* Caché par défaut */
-        align-items: center; /* Pour aligner avec un potentiel spinner */
-        gap: 8px;
-    }
-    @media (prefers-color-scheme: dark) {
-        #submission-status {
-            background-color: #333;
-            color: var(--text-dark);
-        }
-    }
-    #submission-status.sending {
-        background-color: #ffe0b2; /* Jaune clair */
-        color: #e65100; /* Texte orange foncé */
-        display: flex; /* Affiché quand en cours d'envoi */
-    }
-    #submission-status.success {
-        background-color: #e8f5e9; /* Vert clair */
-        color: #2e7d32; /* Texte vert foncé */
-        display: flex; /* Affiché quand succès */
-    }
-    #submission-status.error {
-        background-color: #ffebee; /* Rouge clair */
-        color: #c62828; /* Texte rouge foncé */
-        display: flex; /* Affiché quand erreur */
-    }
-  </style>
+    /* Nouveau style pour le message de chargement/succès */
+    #submission-status {
+        margin-left: auto; /* Aligne à droite */
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background-color: #f0f0f0; /* Fond neutre */
+        color: var(--text-light);
+        display: none; /* Caché par défaut */
+        align-items: center; /* Pour aligner avec un potentiel spinner */
+        gap: 8px;
+    }
+    @media (prefers-color-scheme: dark) {
+        #submission-status {
+            background-color: #333;
+            color: var(--text-dark);
+        }
+    }
+    #submission-status.sending {
+        background-color: #ffe0b2; /* Jaune clair */
+        color: #e65100; /* Texte orange foncé */
+        display: flex; /* Affiché quand en cours d'envoi */
+    }
+    #submission-status.success {
+        background-color: #e8f5e9; /* Vert clair */
+        color: #2e7d32; /* Texte vert foncé */
+        display: flex; /* Affiché quand succès */
+    }
+    #submission-status.error {
+        background-color: #ffebee; /* Rouge clair */
+        color: #c62828; /* Texte rouge foncé */
+        display: flex; /* Affiché quand erreur */
+    }
+  </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="header-banner">
-        <div class="header-content">
-            <div class="logo">
-                <img src="logo_cdf.jpg" alt="Logo Luglon"> </div>
-            <div>
-                <h1>LUGLON EN FÊTE</h1>
-                <p class="lead">PROGRAMME ET RÉSERVATION DES REPAS</p>
-            </div>
-        </div>
-    </div>
-    <header>
-      <div class="logo">Lu</div> 
-      <div>
-        <h1>Luglon en fête</h1>
-        <p class="lead">Programme et Réservation des repas</p>
-      </div>
-    </header>
+  <div class="wrap">
+    <div class="header-banner">
+        <div class="header-content">
+            <div class="logo">
+                <img src="logo_cdf.jpg" alt="Logo Luglon"> </div>
+            <div>
+                <h1>LUGLON EN FÊTE</h1>
+                <p class="lead">PROGRAMME ET RÉSERVATION DES REPAS</p>
+            </div>
+        </div>
+    </div>
+    <header>
+      <div class="logo">Lu</div> 
+      <div>
+        <h1>Luglon en fête</h1>
+        <p class="lead">Programme et Réservation des repas</p>
+      </div>
+    </header>
 
-    <nav class="tab-nav">
-      <a href="#presentation" class="tab-link active" data-tab="presentation">Programme</a>
-      <a href="#reservation" class="tab-link" data-tab="reservation">Réservation des repas</a>
-    </nav>
+    <nav class="tab-nav">
+      <a href="#presentation" class="tab-link active" data-tab="presentation">Programme</a>
+      <a href="#reservation" class="tab-link" data-tab="reservation">Réservation des repas</a>
+    </nav>
 
-    <div class="tab-content">
-      <div id="presentation" class="tab-pane active">
-        <div class="card">
-          <h2>PROGRAMME DES FÊTES DE LUGLON 2025</h2>
-          <p class="small">Ne manquez aucun événement ! Toutes les activités sont gratuites sauf le repas du soir (sur réservation).</p>
-          <hr style="margin:12px 0;border:none;border-top:1px solid #ccc">
-          
-          <div class="planning-section align-left">
-            <div class="day-title">
-                <h4>Jeudi 31 Juillet</h4>
-            </div>
-            <div class="day-content">
-                <p>20h30 : <strong>LOTO BINGO</strong> (nombreux lots)</p>
-                <p>Buvette + Sandwichs/ Frites</p>
-            </div>
-          </div>
+    <div class="tab-content">
+      <div id="presentation" class="tab-pane active">
+        <div class="card">
+          <h2>PROGRAMME DES FÊTES DE LUGLON 2025</h2>
+          <p class="small">Ne manquez aucun événement ! Toutes les activités sont gratuites sauf le repas du soir (sur réservation).</p>
+          <hr style="margin:12px 0;border:none;border-top:1px solid #ccc">
+          
+          <div class="planning-section align-left">
+            <div class="day-title">
+                <h4>Jeudi 31 Juillet</h4>
+            </div>
+            <div class="day-content">
+                <p>20h30 : <strong>LOTO BINGO</strong> (nombreux lots)</p>
+                <p>Buvette + Sandwichs/ Frites</p>
+            </div>
+          </div>
 
-          <div class="planning-section align-right">
-            <div class="day-title">
-                <h4>Vendredi 01 Août</h4>
-            </div>
-            <div class="day-content">
-                <p>19h30 : <strong>OUVERTURE DES FÊTES</strong></p>
-                <p>Remise des clés par le Maire</p>
-                <p>20h : BANDA La Juventud</p>
-                <p>20h : <strong>REPAS D'OUVERTURE</strong> - Adulte 14€ | Enfant (-12 ans) 7€</p>
-                <p class="small">Macédoine et terrine de saumon, Araignées de porc marinées aux épices ou txistorra + frites, Flan gourmand, Café</p>
-            </div>
-          </div>
+          <div class="planning-section align-right">
+            <div class="day-title">
+                <h4>Vendredi 01 Août</h4>
+            </div>
+            <div class="day-content">
+                <p>19h30 : <strong>OUVERTURE DES FÊTES</strong></p>
+                <p>Remise des clés par le Maire</p>
+                <p>20h : BANDA La Juventud</p>
+                <p>20h : <strong>REPAS D'OUVERTURE</strong> - Adulte 14€ | Enfant (-12 ans) 7€</p>
+                <p class="small">Macédoine et terrine de saumon, Araignées de porc marinées aux épices ou txistorra + frites, Flan gourmand, Café</p>
+            </div>
+          </div>
 
-          <div class="planning-section align-left">
-            <div class="day-title">
-                <h4>Samedi 02 Août</h4>
-            </div>
-            <div class="day-content">
-                <p>8h30-12h : <strong>BALL-TRAP</strong>, planche au mérite - Menon</p>
-                <p>10h30-11h30 : Karting Luglonnais (réservé aux enfants - au stade)</p>
-                <p>16h30 : <strong>COURSE LANDAISE</strong> (Ganaderia Maynus). Tarifs : 10€ / 5€ pour les -18ans / gratuit -12ans - au stade)</p>
-                <p>20h30-23h30 : Animation musicale avec "Les gésiers en salade"</p>
-                <p>20h : <strong>REPAS DU COMITÉ</strong> - Adulte 17€ | Enfant (-12 ans) 8,50€</p>
-                <p class="small">Assiette luglonaise, Entrecôte au brasero et sa sauce maison + frites, Pastis (Les frères pastis) et Crème anglaise, Café</p>
-            </div>
-          </div>
+          <div class="planning-section align-left">
+            <div class="day-title">
+                <h4>Samedi 02 Août</h4>
+            </div>
+            <div class="day-content">
+                <p>8h30-12h : <strong>BALL-TRAP</strong>, planche au mérite - Menon</p>
+                <p>10h30-11h30 : Karting Luglonnais (réservé aux enfants - au stade)</p>
+                <p>16h30 : <strong>COURSE LANDAISE</strong> (Ganaderia Maynus). Tarifs : 10€ / 5€ pour les -18ans / gratuit -12ans - au stade)</p>
+                <p>20h30-23h30 : Animation musicale avec "Les gésiers en salade"</p>
+                <p>20h : <strong>REPAS DU COMITÉ</strong> - Adulte 17€ | Enfant (-12 ans) 8,50€</p>
+                <p class="small">Assiette luglonaise, Entrecôte au brasero et sa sauce maison + frites, Pastis (Les frères pastis) et Crème anglaise, Café</p>
+            </div>
+          </div>
 
-          <div class="planning-section align-right">
-            <div class="day-title">
-                <h4>Dimanche 03 Août</h4>
-            </div>
-            <div class="day-content">
-                <p>11h : MESSE avec Cor de chasse</p>
-                <p>12h : VIN D'HONNEUR offert par la Mairie</p>
-                <p>14h30 : CONCOURS DE PÉTANQUE - au stade (inscription sur place)</p>
-                <p>20h-23h : ANIMATION MUSICALE avec "Border Line"</p>
-                <p>20h : SOIRÉE TAPAS - 7€</p>
-                <p>23h : <strong>FEU D'ARTIFICE</strong> (selon météo)</p>
-            </div>
-          </div>
-        </div>
-      </div>
+          <div class="planning-section align-right">
+            <div class="day-title">
+                <h4>Dimanche 03 Août</h4>
+            </div>
+            <div class="day-content">
+                <p>11h : MESSE avec Cor de chasse</p>
+                <p>12h : VIN D'HONNEUR offert par la Mairie</p>
+                <p>14h30 : CONCOURS DE PÉTANQUE - au stade (inscription sur place)</p>
+                <p>20h-23h : ANIMATION MUSICALE avec "Border Line"</p>
+                <p>20h : SOIRÉE TAPAS - 7€</p>
+                <p>23h : <strong>FEU D'ARTIFICE</strong> (selon météo)</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <div id="reservation" class="tab-pane">
-        <div class="grid">
-          <main class="card">
-            
-            <div class="price-plaque">
-                <h3>Tarifs des Repas</h3>
-                <table class="price-table">
-                    <thead>
-                        <tr>
-                            <th>Jour</th>
-                            <th>Menu Adulte (Viande / Poisson)</th>
-                            <th>Menu Enfant (Moins de 12 ans)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Vendredi soir</td>
-                            <td>14.00€</td>
-                            <td>7.00€</td>
-                        </tr>
-                        <tr>
-                            <td>Samedi soir</td>
-                            <td>17.00€</td>
-                            <td>8.50€</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="warning-note">
-                <strong>Note :</strong> Les repas sont à réserver.
-            </div>
+      <div id="reservation" class="tab-pane">
+        <div class="grid">
+          <main class="card">
+            
+            <div class="price-plaque">
+                <h3>Tarifs des Repas</h3>
+                <table class="price-table">
+                    <thead>
+                        <tr>
+                            <th>Jour</th>
+                            <th>Menu Adulte (Viande / Poisson)</th>
+                            <th>Menu Enfant (Moins de 12 ans)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Vendredi soir</td>
+                            <td>14.00€</td>
+                            <td>7.00€</td>
+                        </tr>
+                        <tr>
+                            <td>Samedi soir</td>
+                            <td>17.00€</td>
+                            <td>8.50€</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="warning-note">
+                <strong>Note :</strong> Les repas sont à réserver.
+            </div>
 
-            <form id="resForm" autocomplete="off">
-              <div class="row">
-                <div style="flex:1">
-                  <label for="name"><strong>Nom du contact</strong></label>
-                  <input id="name" name="Nom" required placeholder="Jean Dupont">
-                  <p id="name-error" class="error-feedback"></p>
-                </div>
-                <div style="width:160px">
-                  <label for="phone"><strong>Téléphone</strong></label>
-                  <input id="phone" name="Telephone" type="tel" required placeholder="06 XX XX XX XX">
-                  <p id="phone-error" class="error-feedback"></p>
-                </div>
-              </div>
+            <form id="resForm" autocomplete="off">
+              <div class="row">
+                <div style="flex:1">
+                  <label for="name"><strong>Nom du contact</strong></label>
+                  <input id="name" name="Nom" required placeholder="Jean Dupont">
+                  <p id="name-error" class="error-feedback"></p>
+                </div>
+                <div style="width:160px">
+                  <label for="phone"><strong>Téléphone</strong></label>
+                  <input id="phone" name="Telephone" type="tel" required placeholder="06 XX XX XX XX">
+                  <p id="phone-error" class="error-feedback"></p>
+                </div>
+              </div>
 
-              <div style="margin-top:12px">
-                <label for="email"><strong>Adresse Email</strong></label>
-                <input id="email" name="Email" type="email" required placeholder="votre.email@exemple.com">
-              </div>
+              <div style="margin-top:12px">
+                <label for="email"><strong>Adresse Email</strong></label>
+                <input id="email" name="Email" type="email" required placeholder="votre.email@exemple.com">
+              </div>
 
-              <div style="margin-top:12px">
-                <label for="soir"><strong>Choix du soir</strong></label>
-                <select id="soir" name="Soir" onchange="calculateTotalPrice();">
-                  <option value="vendredi">Vendredi soir — Menu: Terrine de saumon, Araignée de porc ou Txistorra, Flan</option>
-                  <option value="samedi">Samedi soir — Menu: Assiette Luglonaise, Entrecôte, Pastis landais</option>
-                </select>
-              </div>
+              <div style="margin-top:12px">
+                <label for="soir"><strong>Choix du soir</strong></label>
+                <select id="soir" name="Soir" onchange="calculateTotalPrice();">
+                  <option value="vendredi">Vendredi soir — Menu: Terrine de saumon, Araignée de porc ou Txistorra, Flan</option>
+                  <option value="samedi">Samedi soir — Menu: Assiette Luglonaise, Entrecôte, Pastis landais</option>
+                </select>
+              </div>
 
-              <div class="row" style="margin-top:12px; align-items:flex-end;">
-                  <div style="width:160px">
-                    <label for="people"><strong>Nombre de personnes (Total)</strong></label>
-                    <input id="people" name="NbPersonnes" type="number" min="1" max="20" value="1" required onchange="generateMenuInputs(); calculateTotalPrice();">
-                  </div>
-                  <div style="flex:1">
-                    <p class="small" id="total-count-message">Veuillez choisir le menu pour chaque personne.</p>
-                  </div>
-              </div>
+              <div class="row" style="margin-top:12px; align-items:flex-end;">
+                  <div style="width:160px">
+                    <label for="people"><strong>Nombre de personnes (Total)</strong></label>
+                    <input id="people" name="NbPersonnes" type="number" min="1" max="20" value="1" required onchange="generateMenuInputs(); calculateTotalPrice();">
+                  </div>
+                  <div style="flex:1">
+                    <p class="small" id="total-count-message">Veuillez choisir le menu pour chaque personne.</p>
+                  </div>
+              </div>
 
-              <div id="menu-container"></div>
-              
-              <div style="margin-top:12px">
-                <label for="notes">Commentaire (facultatif)</label>
-                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, personne à mobilité réduite..."></textarea>
-              </div>
+              <div id="menu-container"></div>
+              
+              <div style="margin-top:12px">
+                <label for="notes">Commentaire (facultatif)</label>
+                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, personne à mobilité réduite..."></textarea>
+              </div>
 
-              <div id="final-total">
-                <span>Prix Total (à payer sur place)</span>
-                <span class="amount" id="total-amount">0.00€</span>
-              </div>
+              <div id="final-total">
+                <span>Prix Total (à payer sur place)</span>
+                <span class="amount" id="total-amount">0.00€</span>
+              </div>
 
-              <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
-                <button class="btn" type="submit" id="submit-button">Réserver</button>
-                <div id="submission-status"></div> 
+              <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
+                <button class="btn" type="submit" id="submit-button">Réserver</button>
+                <div id="submission-status"></div> 
 <div style="margin-left:auto;font-size:13px">Réservations sur cet appareil • <span id="count">0</span></div>
-              </div>
-            </form>
+              </div>
+            </form>
 
-            <hr style="margin:16px 0;border:none;border-top:1px solid #333">
-            <h3 style="margin:0 0 8px">Dernières réservations</h3>
-            <div class="reservations" id="list">
-              <div class="empty">Aucune réservation pour l'instant.</div>
-            </div>
-          </main>
-        </div>
-      </div>
-    </div>
-    <footer>
-      <div>Site développé par le comité des fêtes de Luglon - Tous droits réservés.</div>
-    </footer>
-  </div>
+            <hr style="margin:16px 0;border:none;border-top:1px solid #333">
+            <h3 style="margin:0 0 8px">Dernières réservations</h3>
+            <div class="reservations" id="list">
+              <div class="empty">Aucune réservation pour l'instant.</div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <div>Site développé par le comité des fêtes de Luglon - Tous droits réservés.</div>
+    </footer>
+  </div>
 
-  <script>
-    // Configuration des prix par jour et par type de menu
-    const PRICES_BY_DAY = {
-        'vendredi': {
-            'standard': 14.00,
-            'poisson': 14.00, 
-            'enfant': 7.00
-        },
-        'samedi': {
-            'standard': 17.00,
-            'poisson': 17.00, 
-            'enfant': 8.50
-        }
-    };
-    
-    // Structure simple des options de menu
-    const MENU_OPTIONS = [
-        { value: 'standard', label: 'Viande' },
-        { value: 'poisson', label: 'Poisson' }, 
-        { value: 'enfant', label: 'Menu enfant' }
-    ];
+  <script>
+    // Configuration des prix par jour et par type de menu
+    const PRICES_BY_DAY = {
+        'vendredi': {
+            'standard': 14.00,
+            'poisson': 14.00, 
+            'enfant': 7.00
+        },
+        'samedi': {
+            'standard': 17.00,
+            'poisson': 17.00, 
+            'enfant': 8.50
+        }
+    };
+    
+    // Structure simple des options de menu
+    const MENU_OPTIONS = [
+        { value: 'standard', label: 'Viande' },
+        { value: 'poisson', label: 'Poisson' }, 
+        { value: 'enfant', label: 'Menu enfant' }
+    ];
 
-    // Constante pour la valeur par défaut pour l'initialisation
-    const DEFAULT_PEOPLE = 1; 
+    // Constante pour la valeur par défaut pour l'initialisation
+    const DEFAULT_PEOPLE = 1; 
 
-    // *************************************************************************
-    // VOICI L'URL DE DÉPLOIEMENT DU GOOGLE APPS SCRIPT
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec'; 
-    // *************************************************************************
-    
-    // PARTIE RÉSERVATION
-    const form = document.getElementById('resForm');
-    const list = document.getElementById('list');
-    const countEl = document.getElementById('count');
-    const peopleInput = document.getElementById('people');
-    const menuContainer = document.getElementById('menu-container');
-    const totalCountMessage = document.getElementById('total-count-message');
-    const soirSelect = document.getElementById('soir'); 
-    // Éléments d'erreur
-    const nameInput = document.getElementById('name');
-    const phoneInput = document.getElementById('phone');
-    const nameError = document.getElementById('name-error');
-    const phoneError = document.getElementById('phone-error');
-    const phoneMasker = document.getElementById('phone');
-    const emailInput = document.getElementById('email'); // NOUVEL ÉLÉMENT AJOUTÉ
-    // Élément pour l'affichage du total en temps réel
-    const totalAmountEl = document.getElementById('total-amount'); 
-    // Nouveaux éléments pour la gestion du statut de soumission
-    const submitButton = document.getElementById('submit-button');
-    const submissionStatus = document.getElementById('submission-status');
-
-
-    // FONCTION UTILITAIRE : Calcule le prix d'un seul menu en fonction du jour
-    function getMenuPrice(day, menuType) {
-        return PRICES_BY_DAY[day] ? (PRICES_BY_DAY[day][menuType] || 0) : 0;
-    }
-
-    // 1. GESTION DES RÉSERVATIONS (Stockage Local)
-    function loadReservations(){
-      try{return JSON.parse(localStorage.getItem('luglon_reservations')||'[]');}catch{return[];}
-    }
-    function saveReservations(arr){localStorage.setItem('luglon_reservations',JSON.stringify(arr));}
-    
-    // 2. RENDU DE LA LISTE DES RÉSERVATIONS
-    function render(){
-      const data=loadReservations();
-      countEl.textContent=data.length;
-      list.innerHTML='';
-      if(!data.length){list.innerHTML='<div class="empty">Aucune réservation pour l\'instant.</div>';return;}
-      
-      data.slice().reverse().forEach(r=>{
-        const el=document.createElement('div');
-        el.className='res-item';
-        
-        // Calculer la répartition des menus et le prix total en fonction du jour
-        const menuCounts = {};
-        let totalPrice = 0;
-        const day = r.soir;
-
-        r.menus.forEach(menuValue => {
-            menuCounts[menuValue] = (menuCounts[menuValue] || 0) + 1;
-            totalPrice += getMenuPrice(day, menuValue);
-        });
-        
-        // Transformer l'objet des comptes en une chaîne lisible avec les prix par personne
-        const menuSummary = Object.keys(menuCounts).map(key => {
-            const menuOption = MENU_OPTIONS.find(opt => opt.value === key);
-            const price = getMenuPrice(day, key);
-            const label = menuOption ? `${menuOption.label} (${price.toFixed(2)}€)` : key;
-            return `${menuCounts[key]} x ${label}`;
-        }).join(' / ');
-
-        const now = new Date();
-        const formattedDate = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} (aujourd'hui)`;
-        
-        el.innerHTML=`
-          <h4>${r.name} (${r.phone}) — ${r.people} pers 
-          <span class="total-price">Total: ${totalPrice.toFixed(2)}€</span></h4>
-          <div class="meta">${r.soir} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
-          <div>Notes: ${r.notes || '—'}</div>
-        `;
-        list.appendChild(el);
-      });
-    }
-
-    // FONCTION INUTILE MAIS CONSERVÉE POUR LA CLARTÉ DU JS
-    function updatePriceRecap() {
-        calculateTotalPrice(); 
-    }
-
-    // NOUVELLE FONCTION : Calcule et affiche le prix total en temps réel
-    function calculateTotalPrice() {
-        const selectedDay = soirSelect.value;
-        const numPeople = Number(peopleInput.value);
-        let currentTotal = 0;
-
-        if (numPeople >= 1 && PRICES_BY_DAY[selectedDay]) {
-            // Parcourt tous les sélecteurs de menu générés dynamiquement
-            for (let i = 0; i < numPeople; i++) {
-                const menuSelect = document.getElementById(`menu-${i}`);
-                if (menuSelect && menuSelect.value) {
-                    const menuType = menuSelect.value;
-                    currentTotal += getMenuPrice(selectedDay, menuType);
-                } else if (menuSelect) {
-                    currentTotal += getMenuPrice(selectedDay, MENU_OPTIONS[0].value);
-                }
-            }
-        }
-        
-        totalAmountEl.textContent = `${currentTotal.toFixed(2)}€`;
-    }
+    // *************************************************************************
+    // VOICI L'URL DE DÉPLOIEMENT DU GOOGLE APPS SCRIPT
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyjCgyoCbRvHz85FXt7o2Z9g5Baeo7Akdu1ZntSEaWEbVgmhM89Rg/exec'; 
+    // *************************************************************************
+    
+    // PARTIE RÉSERVATION
+    const form = document.getElementById('resForm');
+    const list = document.getElementById('list');
+    const countEl = document.getElementById('count');
+    const peopleInput = document.getElementById('people');
+    const menuContainer = document.getElementById('menu-container');
+    const totalCountMessage = document.getElementById('total-count-message');
+    const soirSelect = document.getElementById('soir'); 
+    // Éléments d'erreur
+    const nameInput = document.getElementById('name');
+    const phoneInput = document.getElementById('phone');
+    const nameError = document.getElementById('name-error');
+    const phoneError = document.getElementById('phone-error');
+    const phoneMasker = document.getElementById('phone');
+    const emailInput = document.getElementById('email'); // NOUVEL ÉLÉMENT AJOUTÉ
+    // Élément pour l'affichage du total en temps réel
+    const totalAmountEl = document.getElementById('total-amount'); 
+    // Nouveaux éléments pour la gestion du statut de soumission
+    const submitButton = document.getElementById('submit-button');
+    const submissionStatus = document.getElementById('submission-status');
 
 
-    // 3. GÉNÉRATION DYNAMIQUE DES CHAMPS DE MENUS
-    function generateMenuInputs() {
-        const numPeople = Number(peopleInput.value);
-        menuContainer.innerHTML = '';
-        
-        totalCountMessage.textContent = `Veuillez choisir le menu pour chacune des ${numPeople} personne${numPeople > 1 ? 's' : ''}.`;
+    // FONCTION UTILITAIRE : Calcule le prix d'un seul menu en fonction du jour
+    function getMenuPrice(day, menuType) {
+        return PRICES_BY_DAY[day] ? (PRICES_BY_DAY[day][menuType] || 0) : 0;
+    }
 
-        if (numPeople < 1) return;
+    // 1. GESTION DES RÉSERVATIONS (Stockage Local)
+    function loadReservations(){
+      try{return JSON.parse(localStorage.getItem('luglon_reservations')||'[]');}catch{return[];}
+    }
+    function saveReservations(arr){localStorage.setItem('luglon_reservations',JSON.stringify(arr));}
+    
+    // 2. RENDU DE LA LISTE DES RÉSERVATIONS
+    function render(){
+      const data=loadReservations();
+      countEl.textContent=data.length;
+      list.innerHTML='';
+      if(!data.length){list.innerHTML='<div class="empty">Aucune réservation pour l\'instant.</div>';return;}
+      
+      data.slice().reverse().forEach(r=>{
+        const el=document.createElement('div');
+        el.className='res-item';
+        
+        // Calculer la répartition des menus et le prix total en fonction du jour
+        const menuCounts = {};
+        let totalPrice = 0;
+        const day = r.soir;
 
-        for (let i = 0; i < numPeople; i++) {
-            const group = document.createElement('div');
-            group.className = 'menu-selection-group';
-            group.innerHTML = `
-                <h5>Personne ${i + 1}</h5> 
-                <div class="menu-options">
-                    <div>
-                        <select id="menu-${i}" name="menu-${i}" required>
-                            ${MENU_OPTIONS.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
-                        </select>
-                    </div>
-                </div>
-            `;
-            menuContainer.appendChild(group);
-            
-            // Écouteur pour mettre à jour le total quand un menu est changé
-            document.getElementById(`menu-${i}`).addEventListener('change', calculateTotalPrice);
-        }
-        calculateTotalPrice(); 
-    }
+        r.menus.forEach(menuValue => {
+            menuCounts[menuValue] = (menuCounts[menuValue] || 0) + 1;
+            totalPrice += getMenuPrice(day, menuValue);
+        });
+        
+        // Transformer l'objet des comptes en une chaîne lisible avec les prix par personne
+        const menuSummary = Object.keys(menuCounts).map(key => {
+            const menuOption = MENU_OPTIONS.find(opt => opt.value === key);
+            const price = getMenuPrice(day, key);
+            const label = menuOption ? `${menuOption.label} (${price.toFixed(2)}€)` : key;
+            return `${menuCounts[key]} x ${label}`;
+        }).join(' / ');
 
-    // 4. FORMATAGE DU TÉLÉPHONE (AJOUT DE L'ESPACE AUTO)
-    phoneMasker.addEventListener('input', (e) => {
-        const input = e.target;
-        let value = input.value.replace(/[^0-9]/g, ''); 
-        
-        if (value.length > 0) {
-            value = value.match(/.{1,2}/g).join(' ');
-        }
-        
-        if (value.length > 14) {
-             value = value.substring(0, 14);
-        }
-        
-        input.value = value;
-    });
+        const now = new Date();
+        const formattedDate = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} (aujourd'hui)`;
+        
+        el.innerHTML=`
+          <h4>${r.name} (${r.phone}) — ${r.people} pers 
+          <span class="total-price">Total: ${totalPrice.toFixed(2)}€</span></h4>
+          <div class="meta">${r.soir} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
+          <div>Notes: ${r.notes || '—'}</div>
+        `;
+        list.appendChild(el);
+      });
+    }
 
-    // 5. FONCTION DE VALIDATION DES CHAMPS DE CONTACT
-    function validateContactFields() {
-        let isValid = true;
-        const nameValue = nameInput.value.trim();
-        const phoneValue = phoneInput.value.replace(/\s/g, '').trim(); 
-        const emailValue = emailInput.value.trim(); // AJOUTÉ: Récupérer l'email ici
-        const errorMessage = 'Remplir ce champ';
+    // FONCTION INUTILE MAIS CONSERVÉE POUR LA CLARTÉ DU JS
+    function updatePriceRecap() {
+        calculateTotalPrice(); 
+    }
 
-        // Validation du Nom
-        if (nameValue === '') {
-            nameError.textContent = errorMessage;
-            nameInput.classList.add('input-error');
-            isValid = false;
-        } else {
-            nameError.textContent = '';
-            nameInput.classList.remove('input-error');
-        }
+    // NOUVELLE FONCTION : Calcule et affiche le prix total en temps réel
+    function calculateTotalPrice() {
+        const selectedDay = soirSelect.value;
+        const numPeople = Number(peopleInput.value);
+        let currentTotal = 0;
 
-        // Validation du Téléphone
-        if (phoneValue.length !== 10) {
-            phoneError.textContent = 'Numéro invalide (10 chiffres)';
-            phoneInput.classList.add('input-error');
-            isValid = false;
-        } else {
-            phoneError.textContent = '';
-            phoneInput.classList.remove('input-error');
-        }
-        
-        // Validation de l'Email est gérée par l'attribut required du HTML
-
-        return isValid;
-    }
-    
-    // Fonction pour afficher le statut de soumission
-    let statusTimeout; // Pour effacer le message après un délai
-    function setSubmissionStatus(status, message = '') {
-        submissionStatus.className = ''; // Réinitialise toutes les classes
-        submissionStatus.style.display = 'none'; // Cache par défaut
-        clearTimeout(statusTimeout); // Efface tout timeout précédent
-
-        if (status) {
-            submissionStatus.classList.add(status);
-            submissionStatus.textContent = message;
-            submissionStatus.style.display = 'flex';
-        }
-
-        if (status === 'success' || status === 'error') {
-            statusTimeout = setTimeout(() => {
-                submissionStatus.style.display = 'none';
-            }, 5000); // Masque après 5 secondes
-        }
-    }
+        if (numPeople >= 1 && PRICES_BY_DAY[selectedDay]) {
+            // Parcourt tous les sélecteurs de menu générés dynamiquement
+            for (let i = 0; i < numPeople; i++) {
+                const menuSelect = document.getElementById(`menu-${i}`);
+                if (menuSelect && menuSelect.value) {
+                    const menuType = menuSelect.value;
+                    currentTotal += getMenuPrice(selectedDay, menuType);
+                } else if (menuSelect) {
+                    currentTotal += getMenuPrice(selectedDay, MENU_OPTIONS[0].value);
+                }
+            }
+        }
+        
+        totalAmountEl.textContent = `${currentTotal.toFixed(2)}€`;
+    }
 
 
-    // 6. GESTION DE LA SOUMISSION DU FORMULAIRE
-    form.addEventListener('submit',e=>{
-        e.preventDefault();
-        
-        // Validation des champs de contact
-        if (!validateContactFields()) {
-            return;
-        }
+    // 3. GÉNÉRATION DYNAMIQUE DES CHAMPS DE MENUS
+    function generateMenuInputs() {
+        const numPeople = Number(peopleInput.value);
+        menuContainer.innerHTML = '';
+        
+        totalCountMessage.textContent = `Veuillez choisir le menu pour chacune des ${numPeople} personne${numPeople > 1 ? 's' : ''}.`;
 
-        const numPeople = Number(peopleInput.value);
-        if (numPeople < 1) {
-            setSubmissionStatus('error', "Veuillez indiquer le nombre de personnes.");
-            return;
-        }
+        if (numPeople < 1) return;
 
-        // Récupérer tous les choix de menus dynamiques (et vérifier qu'ils sont choisis)
-        const selectedMenus = [];
-        for (let i = 0; i < numPeople; i++) {
-            const menuSelect = document.getElementById(`menu-${i}`);
-            if (!menuSelect || !menuSelect.value) {
-                setSubmissionStatus('error', `Le type de repas n'a pas été sélectionné pour la personne ${i + 1}.`);
-                return;
-            }
-            selectedMenus.push(menuSelect.value);
-        }
-        
-        // Désactiver le bouton et afficher le statut "Envoi en cours..."
-        submitButton.disabled = true;
-        setSubmissionStatus('sending', 'Envoi de votre réservation...');
+        for (let i = 0; i < numPeople; i++) {
+            const group = document.createElement('div');
+            group.className = 'menu-selection-group';
+            group.innerHTML = `
+                <h5>Personne ${i + 1}</h5> 
+                <div class="menu-options">
+                    <div>
+                        <select id="menu-${i}" name="menu-${i}" required>
+                            ${MENU_OPTIONS.map(opt => `<option value="${opt.value}">${opt.label}</option>`).join('')}
+                        </select>
+                    </div>
+                </div>
+            `;
+            menuContainer.appendChild(group);
+            
+            // Écouteur pour mettre à jour le total quand un menu est changé
+            document.getElementById(`menu-${i}`).addEventListener('change', calculateTotalPrice);
+        }
+        calculateTotalPrice(); 
+    }
 
-        // Préparer les données pour l'envoi au Google Sheet
-        const formData = {
-            'Nom': nameInput.value.trim(),
-            'Email': emailInput.value.trim(), // AJOUTÉ: Récupération de l'email
-            'Telephone': phoneInput.value.replace(/\s/g, '').trim(),
-            'NbPersonnes': numPeople,
-            'Soir': form.soir.value,
-            'Menus_Details': selectedMenus.join(', '), // Envoie les menus sous forme de chaîne
-            'Notes': form.notes.value.trim(),
-            'Total_Euros': totalAmountEl.textContent,
-            'Timestamp': new Date().toLocaleString('fr-FR'), // Date/heure pour le sheet
-        };
-        
-        // Envoi des données au Google Apps Script
-        fetch(WEB_APP_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Requis pour contourner CORS
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams(formData).toString(),
-        })
-        .then(() => {
-            // Logique de confirmation pour le stockage local
-            const data=loadReservations();
-            const entry={
-                name: formData.Nom,
-                phone: formData.Telephone,
-                people: formData.NbPersonnes,
-                soir: formData.Soir,
-                menus: selectedMenus,
-                notes: formData.Notes
-            };
-            
-            data.push(entry);
-            saveReservations(data);
-            render();
+    // 4. FORMATAGE DU TÉLÉPHONE (AJOUT DE L'ESPACE AUTO)
+    phoneMasker.addEventListener('input', (e) => {
+        const input = e.target;
+        let value = input.value.replace(/[^0-9]/g, ''); 
+        
+        if (value.length > 0) {
+            value = value.match(/.{1,2}/g).join(' ');
+        }
+        
+        if (value.length > 14) {
+             value = value.substring(0, 14);
+        }
+        
+        input.value = value;
+    });
 
-            // Afficher une confirmation de succès
-            setSubmissionStatus('success', `Réservation pour ${formData.Nom} ENVOYÉE ! (Total: ${formData.Total_Euros})`);
-            
-            // Réinitialisation après soumission
-            form.reset();
-            peopleInput.value = DEFAULT_PEOPLE; 
-            generateMenuInputs(); 
-            calculateTotalPrice();
-        })
-        .catch(error => {
-            console.error('Erreur lors de l\'envoi au Google Sheet:', error);
-            setSubmissionStatus('error', "Erreur lors de l'envoi. Veuillez réessayer.");
-        })
-        .finally(() => {
-            submitButton.disabled = false; // Réactiver le bouton
-        });
-    });
+    // 5. FONCTION DE VALIDATION DES CHAMPS DE CONTACT
+    function validateContactFields() {
+        let isValid = true;
+        const nameValue = nameInput.value.trim();
+        const phoneValue = phoneInput.value.replace(/\s/g, '').trim(); 
+        const emailValue = emailInput.value.trim(); // AJOUTÉ: Récupérer l'email ici
+        const errorMessage = 'Remplir ce champ';
 
-    // PARTIE GESTION DES ONGLETS (TABS)
-    document.querySelectorAll('.tab-link').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetTab = e.target.getAttribute('data-tab');
+        // Validation du Nom
+        if (nameValue === '') {
+            nameError.textContent = errorMessage;
+            nameInput.classList.add('input-error');
+            isValid = false;
+        } else {
+            nameError.textContent = '';
+            nameInput.classList.remove('input-error');
+        }
 
-        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
-        e.target.classList.add('active');
+        // Validation du Téléphone
+        if (phoneValue.length !== 10) {
+            phoneError.textContent = 'Numéro invalide (10 chiffres)';
+            phoneInput.classList.add('input-error');
+            isValid = false;
+        } else {
+            phoneError.textContent = '';
+            phoneInput.classList.remove('input-error');
+        }
+        
+        // Validation de l'Email est gérée par l'attribut required du HTML
 
-        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
-        document.getElementById(targetTab).classList.add('active');
+        return isValid;
+    }
+    
+    // Fonction pour afficher le statut de soumission
+    let statusTimeout; // Pour effacer le message après un délai
+    function setSubmissionStatus(status, message = '') {
+        submissionStatus.className = ''; // Réinitialise toutes les classes
+        submissionStatus.style.display = 'none'; // Cache par défaut
+        clearTimeout(statusTimeout); // Efface tout timeout précédent
 
-        if(targetTab === 'reservation') {
-            render(); 
-        }
-      });
-    });
+        if (status) {
+            submissionStatus.classList.add(status);
+            submissionStatus.textContent = message;
+            submissionStatus.style.display = 'flex';
+        }
 
-    // Initialisation
-    peopleInput.value = DEFAULT_PEOPLE; 
-    generateMenuInputs(); 
-    calculateTotalPrice(); 
-  </script>
+        if (status === 'success' || status === 'error') {
+            statusTimeout = setTimeout(() => {
+                submissionStatus.style.display = 'none';
+            }, 5000); // Masque après 5 secondes
+        }
+    }
+
+
+    // 6. GESTION DE LA SOUMISSION DU FORMULAIRE
+    form.addEventListener('submit',e=>{
+        e.preventDefault();
+        
+        // Validation des champs de contact
+        if (!validateContactFields()) {
+            return;
+        }
+
+        const numPeople = Number(peopleInput.value);
+        if (numPeople < 1) {
+            setSubmissionStatus('error', "Veuillez indiquer le nombre de personnes.");
+            return;
+        }
+
+        // Récupérer tous les choix de menus dynamiques (et vérifier qu'ils sont choisis)
+        const selectedMenus = [];
+        for (let i = 0; i < numPeople; i++) {
+            const menuSelect = document.getElementById(`menu-${i}`);
+            if (!menuSelect || !menuSelect.value) {
+                setSubmissionStatus('error', `Le type de repas n'a pas été sélectionné pour la personne ${i + 1}.`);
+                return;
+            }
+            selectedMenus.push(menuSelect.value);
+        }
+        
+        // Désactiver le bouton et afficher le statut "Envoi en cours..."
+        submitButton.disabled = true;
+        setSubmissionStatus('sending', 'Envoi de votre réservation...');
+
+        // Préparer les données pour l'envoi au Google Sheet
+        const formData = {
+            'Nom': nameInput.value.trim(),
+            'Email': emailInput.value.trim(), // AJOUTÉ: Récupération de l'email
+            'Telephone': phoneInput.value.replace(/\s/g, '').trim(),
+            'NbPersonnes': numPeople,
+            'Soir': form.soir.value,
+            'Menus_Details': selectedMenus.join(', '), // Envoie les menus sous forme de chaîne
+            'Notes': form.notes.value.trim(),
+            'Total_Euros': totalAmountEl.textContent,
+            'Timestamp': new Date().toLocaleString('fr-FR'), // Date/heure pour le sheet
+        };
+        
+        // Envoi des données au Google Apps Script
+        fetch(WEB_APP_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Requis pour contourner CORS
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams(formData).toString(),
+        })
+        .then(() => {
+            // Logique de confirmation pour le stockage local
+            const data=loadReservations();
+            const entry={
+                name: formData.Nom,
+                phone: formData.Telephone,
+                people: formData.NbPersonnes,
+                soir: formData.Soir,
+                menus: selectedMenus,
+                notes: formData.Notes
+            };
+            
+            data.push(entry);
+            saveReservations(data);
+            render();
+
+            // Afficher une confirmation de succès
+            setSubmissionStatus('success', `Réservation pour ${formData.Nom} ENVOYÉE ! (Total: ${formData.Total_Euros})`);
+            
+            // Réinitialisation après soumission
+            form.reset();
+            peopleInput.value = DEFAULT_PEOPLE; 
+            generateMenuInputs(); 
+            calculateTotalPrice();
+        })
+        .catch(error => {
+            console.error('Erreur lors de l\'envoi au Google Sheet:', error);
+            setSubmissionStatus('error', "Erreur lors de l'envoi. Veuillez réessayer.");
+        })
+        .finally(() => {
+            submitButton.disabled = false; // Réactiver le bouton
+        });
+    });
+
+    // PARTIE GESTION DES ONGLETS (TABS)
+    document.querySelectorAll('.tab-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetTab = e.target.getAttribute('data-tab');
+
+        document.querySelectorAll('.tab-link').forEach(l => l.classList.remove('active'));
+        e.target.classList.add('active');
+
+        document.querySelectorAll('.tab-pane').forEach(pane => pane.classList.remove('active'));
+        document.getElementById(targetTab).classList.add('active');
+
+        if(targetTab === 'reservation') {
+            render(); 
+        }
+      });
+    });
+
+    // Initialisation
+    peopleInput.value = DEFAULT_PEOPLE; 
+    generateMenuInputs(); 
+    calculateTotalPrice(); 
+  </script>
 </body>
 </html>
