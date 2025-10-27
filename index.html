@@ -51,7 +51,7 @@
         background: var(--accent);
         color: #fff;
       }
-      .empty, .meta, .small, .tab-nav a, footer { 
+      .empty, .meta, .small, footer { 
         color: var(--muted-dark) !important;
       }
       .error-message {
@@ -84,15 +84,17 @@
         text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
       }
       
-            .header-banner h1, .header-banner p.lead {
-        font-family: "Slackey", cursive; /* Application de Slackey */
-        font-weight: 400; /* Slackey n'a qu'un style (400) */
+      /* APPLICATION SLACKEY AUX TITRES DE LA BANNIÈRE (Dark Mode) */
+      .header-banner h1, .header-banner p.lead {
+        font-family: "Slackey", cursive;
+        font-weight: 400;
       }
       
-      /* APPLICATION FUGAZ ONE DARK MODE (pour les onglets) */
+      /* APPLICATION FUGAZ ONE AUX ONGLETS (Dark Mode) */
       .tab-nav a {
         font-family: "Fugaz One", sans-serif;
         font-weight: 400;
+        color: var(--muted-dark) !important; /* Rétablis la couleur par défaut pour éviter un problème de sur-écriture */
       }
       /* Onglet actif en mode sombre */
       .tab-nav a.active {
@@ -154,15 +156,16 @@
         text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
       }
       
-            .header-banner h1, .header-banner p.lead {
-        font-family: "Slackey", cursive; /* Application de Slackey */
+      /* APPLICATION SLACKEY AUX TITRES DE LA BANNIÈRE (Light Mode) */
+      .header-banner h1, .header-banner p.lead {
+        font-family: "Slackey", cursive; 
         font-weight: 400; 
       }
       
-      /* APPLICATION FUGAZ ONE LIGHT MODE (pour les onglets) */
+      /* APPLICATION FUGAZ ONE AUX ONGLETS (Light Mode) */
       .tab-nav a {
         font-family: "Fugaz One", sans-serif;
-        font-weight: 400; 
+        font-weight: 400;
       }
       /* Onglet actif en mode clair */
       .tab-nav a.active {
