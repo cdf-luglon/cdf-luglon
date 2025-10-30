@@ -83,10 +83,18 @@
         text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
       }
       /* APPLICATION SLACKEY DARK MODE */
-      .header-banner h1, .header-banner p.lead, .tab-nav a {
+      .header-banner h1, .header-banner p.lead {
         font-family: "Slackey", sans-serif;
         font-weight: 400; /* Fugaz One n'a qu'un style (400) */
       }
+
+      /* NOUVEAU: FUGAZ ONE POUR LES ONGLETS (Dark Mode) */
+      .tab-nav a {
+        font-family: "Fugaz One", sans-serif; /* Choisissez la police désirée */
+        font-weight: 400;
+        color: var(--muted-dark) !important; /* Ajouté pour garantir une couleur de texte appropriée au mode sombre */
+      }
+      
       /* Onglet actif en mode sombre */
       .tab-nav a.active {
         color: var(--luglon-green) !important;
@@ -147,10 +155,17 @@
         text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
       }
        /* APPLICATION SLACKEY LIGHT MODE */
-      .header-banner h1, .header-banner p.lead, .tab-nav a {
+      .header-banner h1, .header-banner p.lead {
         font-family: "Slackey", sans-serif;
-        font-weight: 400; 
+        font-weight: 400;
       }
+
+      /* NOUVEAU: FUGAZ ONE POUR LES ONGLETS (Light Mode) */
+      .tab-nav a {
+        font-family: "Fugaz One", sans-serif; /* Choisissez la police désirée */
+        font-weight: 400;
+      }
+
       /* Onglet actif en mode clair */
       .tab-nav a.active {
         color: var(--luglon-green) !important;
