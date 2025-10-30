@@ -125,7 +125,7 @@
       
       /* Ligne de séparation solide pour les jours (DARK MODE) */
       .planning-section {
-          border-bottom: 2px solid #333 !important;
+          border-bottom: none !important;
       }
     }
 
@@ -186,7 +186,7 @@
       
       /* Ligne de séparation solide pour les jours (LIGHT MODE) */
       .planning-section {
-          border-bottom: 2px solid #ccc !important;
+          border-bottom: none !important;
       }
     }
 
@@ -315,12 +315,9 @@
 
     /* STYLES SPÉCIFIQUES AU PROGRAMME */
     .planning-section {
-        padding: 10px 0; 
-        border-bottom: 2px solid #ccc; /* CORRECTION: Ligne solide */
+        padding: 10px 0;
     }
-    .planning-section:last-child {
-        border-bottom: none;
-    }
+    
     @media (prefers-color-scheme: dark) {
       .planning-section {
           border-bottom: 2px solid #333 !important; /* CORRECTION: Ligne solide Dark Mode */
