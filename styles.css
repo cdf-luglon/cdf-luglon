@@ -119,7 +119,7 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* 4. LOGO FIXE EN HAUT À GAUCHE */
+/* 4. LOGO FIXE EN HAUT À GAUCHE (COULEUR DÉFINIE PAR MEDIA QUERY) */
 .floating-logo img {
   width: 60px;
   height: 60px;
@@ -174,13 +174,13 @@ body {
 
 /* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
 .main-title {
-  font-size: 9rem;
+  font-size: 7rem;
   font-family: "Special Gothic Condensed One", sans-serif;
   line-height: 1.1;
   margin: 0 0 10px;
 }
 .main-subtitle {
-  font-size: 3.6rem;
+  font-size: 3rem;
   font-family: "Special Gothic Condensed One", sans-serif;
 }
 
@@ -195,12 +195,14 @@ body {
 /* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
 .history-section h3 {
   font-family: "Special Gothic Condensed One", sans-serif;
-  font-size: 2rem;
+  font-size: 4rem;
   margin-bottom: 20px;
 }
 .history-text {
+  /* AJOUT DE LA NOUVELLE POLICE */
+  font-family: "Special Gothic Condensed One", sans-serif;
   font-style: normal;
-  font-size: 1.1rem;
+  font-size: 2rem;
 }
 
 /* 3. GRILLE DE NAVIGATION (ZONES CLICABLES) */
