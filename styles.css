@@ -55,7 +55,7 @@
   /* STYLES DES TITRES */
   .main-title, .main-subtitle, .nav-card h3 {
     font-family: "Slackey", sans-serif;
-    color: white;
+    color: --text-light;
   }
   .day-title h4, .committee-name {
     color: var(--luglon-green);
