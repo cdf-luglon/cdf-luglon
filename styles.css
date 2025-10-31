@@ -2,13 +2,13 @@
 :root {
   --bg-light: #f6f7f9;
   --card-light: #ffffff;
-  --text-light: #0f1724;
+  --text-light: #0f1724; /* Noir foncé */
   --muted-light: #6b7280;
   --accent: #2b8a7e;
   --error-red: #dc3545;
   --bg-dark: #0a0a0a;
-  --card-dark: #1a1a1a;
-  --text-dark: #f6f6f6;
+  --card-dark: #1a1a1a; /* Fond des cartes/boîtes sombre */
+  --text-dark: #f6f6f6; /* Blanc cassé */
   --muted-dark: #a1a1a1;
   --luglon-green: #166136;
   --luglon-light-green: #e9f2ee;
@@ -24,10 +24,10 @@
   .card {
     background: var(--card-dark);
     color: var(--text-dark);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
   }
 
-  /* FORMULAIRES - DARK MODE (Input et Textarea) */
+  /* 1. FORMULAIRES - FOND SOMBRE ET TEXTE CLAIR */
   input, textarea {
     background: #121212;
     color: var(--text-dark);
@@ -38,58 +38,60 @@
     background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%23ffffff%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c4.8-4.8 12.5-4.8 17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c4.8-4.8 4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
   }
 
-  .btn {
-    background: var(--accent);
-    color: #fff;
-  }
   .empty, .meta, .small, footer {
     color: var(--muted-dark) !important;
   }
 
-  /* FOND DU PRIX TOTAL (CORRIGÉ) */
+  /* 2. FOND DU PRIX TOTAL (CORRIGÉ) */
   #final-total {
-    background: #1a1a1a !important;
-    color: white;
+    background: var(--card-dark) !important; /* Utilise la variable Dark Card */
+    color: var(--text-dark); /* Texte blanc */
     border: 1px solid #333;
   }
-  /* STYLES DES TITRES */
-  .main-title, .main-subtitle, .nav-card h3 {
-    font-family: "Slackey", sans-serif;
-    color: --text-light;
+  
+  /* 3. COULEURS DU TEXTE DE L'ACCUEIL (BLANC/CLAIR) */
+  .main-title, .main-subtitle, .history-section h3, .nav-card h3,
+  .history-text, .floating-logo { 
+      color: var(--text-dark); 
   }
-  .day-title h4, .committee-name {
+  /* Correction des accents verts spécifiques en Dark Mode */
+  .day-title h4, .committee-name, .logo-fixed-text .logo-line-2 {
     color: var(--luglon-green);
     text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
   }
-  /* LIGNES DE SÉPARATION (SUPPRIMÉES) */
+  
+  /* 4. PROGRAMME ET TABLES */
   .planning-section {
     border-bottom: none !important;
   }
   .price-table th, .price-table td {
     border: 1px solid #444;
   }
-
-  .floating-logo {
-    color: var(--text-dark); /* Rend le texte du lien blanc */
-  }
-  .floating-logo .logo-line-2 {
-    color: var(--luglon-green); /* Conserve l'accent vert sur "Luglon" */
-  }
 }
 
 @media (prefers-color-scheme: light) {
-  /* STYLES DES TITRES */
-  .main-title, .main-subtitle, .nav-card h3 {
-    font-family: "Slackey", sans-serif;
-    color: var(--text-light);
+  /* Assure que la couleur de fond reste claire (pour le .main-hero par exemple) */
+  .main-hero {
+    background: linear-gradient(180deg, var(--bg-light), var(--card-light));
   }
-  .day-title h4, .committee-name {
+  
+  /* COULEURS DU TEXTE DE L'ACCUEIL (NOIR/FONCÉ) */
+  .main-title, .main-subtitle, .history-section h3, .nav-card h3,
+  .history-text, .floating-logo { 
+      color: var(--text-light); /* Assure le noir foncé */
+  }
+
+  /* Correction des accents verts spécifiques en Light Mode */
+  .day-title h4, .committee-name, .logo-fixed-text .logo-line-2 {
     color: var(--luglon-green);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
   }
-  /* LIGNES DE SÉPARATION (SUPPRIMÉES) */
+  
   .planning-section {
     border-bottom: none !important;
+  }
+  .price-table th, .price-table td {
+    border: 1px solid #ccc;
   }
 }
 
@@ -112,7 +114,7 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* 4. LOGO FIXE EN HAUT À GAUCHE */
+/* 4. LOGO FIXE EN HAUT À GAUCHE (COULEUR DÉFINIE PAR MEDIA QUERY) */
 .floating-logo img {
   width: 60px;
   height: 60px;
@@ -125,27 +127,25 @@ body {
   z-index: 1000;
   overflow: hidden;
   display: flex;
-  align-items: center; /* Aligne l'image et le texte verticalement */
-  gap: 8px; /* Espacement entre le logo et le texte */
-  text-decoration: none; /* Supprime le soulignement du lien */
-  color: var(--text-light); /* Couleur du texte par défaut (Light Mode) */
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
   transition: opacity 0.3s;
 }
 
 .floating-logo:hover {
-    opacity: 0.8; /* Effet subtil au survol */
+  opacity: 0.8;
 }
 
 .logo-fixed-text {
-    display: flex;
-    flex-direction: column; /* Place les deux spans l'un au-dessus de l'autre */
-    line-height: 1.1;
-    font-weight: 600;
-    font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+  font-weight: 600;
+  font-size: 14px;
 }
 .logo-line-2 {
-    font-weight: 700;
-    color: var(--luglon-green); /* Pour que le mot "Luglon" ressorte */
+  font-weight: 700;
 }
 
 /* 1 & 5. MISE EN PAGE DE LA PAGE D'ACCUEIL (NON BLOC) */
@@ -154,7 +154,6 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 100px 5% 50px;
-  background: linear-gradient(180deg, var(--bg-light), var(--card-light));
 }
 .hero-content {
   flex-basis: 55%;
@@ -166,32 +165,15 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
-.site-branding {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.logo-text-inline {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-.committee-name {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  color: var(--luglon-green);
-}
 .main-title {
   font-size: 4.5rem;
+  font-family: "Slackey", sans-serif;
   line-height: 1.1;
   margin: 0 0 10px;
-  color: var(--luglon-green);
 }
 .main-subtitle {
   font-size: 1.8rem;
-  color: var(--accent);
+  font-family: "Slackey", sans-serif;
 }
 
 /* 2. SECTION HISTOIRE */
@@ -202,14 +184,12 @@ body {
   margin: 0 auto;
 }
 .history-section h3 {
-    font-family: "Slackey", sans-serif;
-    font-size: 2rem;
-    color: var(--luglon-green);
-    margin-bottom: 20px;
+  font-family: "Slackey", sans-serif;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 .history-text {
   font-style: normal;
-  color: var(--luglon-green);
   font-size: 1.1rem;
 }
 
@@ -289,6 +269,7 @@ select {
 input[type="number"] {
   max-width: 120px;
 }
+
 .btn {
   display: inline-block;
   padding: 10px 14px;
