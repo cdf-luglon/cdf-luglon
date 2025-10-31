@@ -67,6 +67,11 @@
   .price-table th, .price-table td {
     border: 1px solid #444;
   }
+  
+  /* Correction du fond du bloc principal */
+  .main-hero {
+    background: var(--bg-dark); /* Remplace le dégradé clair par une couleur sombre unie */
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -114,7 +119,7 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* 4. LOGO FIXE EN HAUT À GAUCHE (COULEUR DÉFINIE PAR MEDIA QUERY) */
+/* 4. LOGO FIXE EN HAUT À GAUCHE */
 .floating-logo img {
   width: 60px;
   height: 60px;
@@ -152,7 +157,8 @@ body {
 .main-hero {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* Correction : Aligne les éléments en haut */
+  align-items: flex-start; 
   padding: 100px 5% 50px;
 }
 .hero-content {
@@ -174,7 +180,7 @@ body {
   margin: 0 0 10px;
 }
 .main-subtitle {
-  font-size: 3.5rem;
+  font-size: 3.6rem;
   font-family: "Special Gothic Condensed One", sans-serif;
 }
 
@@ -248,7 +254,7 @@ body {
 }
 .header-banner-small h1 {
   font-size: 3rem;
-  font-family: "Special Gothic Condensed One", sans-serif;
+  font-family: "Special Gothic Condensed One", sans-serif; /* Remplacement de 'Slackey' */
   margin: 0;
 }
 
