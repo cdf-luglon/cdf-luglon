@@ -114,7 +114,7 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* 4. LOGO FIXE EN HAUT À GAUCHE */
+/* 4. LOGO FIXE EN HAUT À GAUCHE (COULEUR DÉFINIE PAR MEDIA QUERY) */
 .floating-logo img {
   width: 60px;
   height: 60px;
@@ -165,15 +165,17 @@ body {
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
+
+/* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
 .main-title {
   font-size: 4.5rem;
-  font-family: "Slackey", sans-serif;
+  font-family: "Special Gothic Condensed One", sans-serif;
   line-height: 1.1;
   margin: 0 0 10px;
 }
 .main-subtitle {
   font-size: 1.8rem;
-  font-family: "Slackey", sans-serif;
+  font-family: "Special Gothic Condensed One", sans-serif;
 }
 
 /* 2. SECTION HISTOIRE */
@@ -183,8 +185,10 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+
+/* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
 .history-section h3 {
-  font-family: "Slackey", sans-serif;
+  font-family: "Special Gothic Condensed One", sans-serif;
   font-size: 2rem;
   margin-bottom: 20px;
 }
@@ -206,9 +210,9 @@ body {
 .nav-card {
   padding: 30px;
   border-radius: 0;
-  box-shadow: none; /* SUPPRIMÉ */
-  background: transparent; /* SUPPRIMÉ LE FOND BLANC */
-  transition: none; /* SUPPRIMÉ LA TRANSITION */
+  box-shadow: none;
+  background: transparent;
+  transition: none;
 }
 .nav-card:hover {
   transform: none;
@@ -216,8 +220,10 @@ body {
 }
 /* FIN RETRAIT DU STYLE DE BLOC/CARRÉ */
 
+/* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
 .nav-card h3 {
   margin-top: 10px;
+  font-family: "Special Gothic Condensed One", sans-serif;
 }
 .nav-card .nav-logo {
   width: 80px;
@@ -242,7 +248,7 @@ body {
 }
 .header-banner-small h1 {
   font-size: 3rem;
-  font-family: "Slackey", cursive;
+  font-family: "Special Gothic Condensed One", sans-serif;
   margin: 0;
 }
 
