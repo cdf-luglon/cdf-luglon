@@ -68,6 +68,13 @@
   .price-table th, .price-table td {
     border: 1px solid #444;
   }
+
+  .floating-logo {
+    color: var(--text-dark); /* Rend le texte du lien blanc */
+  }
+  .floating-logo .logo-line-2 {
+    color: var(--luglon-green); /* Conserve l'accent vert sur "Luglon" */
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -117,7 +124,28 @@ body {
   left: 20px;
   z-index: 1000;
   overflow: hidden;
-  display: block;
+  display: flex;
+  align-items: center; /* Aligne l'image et le texte verticalement */
+  gap: 8px; /* Espacement entre le logo et le texte */
+  text-decoration: none; /* Supprime le soulignement du lien */
+  color: var(--text-light); /* Couleur du texte par défaut (Light Mode) */
+  transition: opacity 0.3s;
+}
+
+.floating-logo:hover {
+    opacity: 0.8; /* Effet subtil au survol */
+}
+
+.logo-fixed-text {
+    display: flex;
+    flex-direction: column; /* Place les deux spans l'un au-dessus de l'autre */
+    line-height: 1.1;
+    font-weight: 600;
+    font-size: 14px;
+}
+.logo-line-2 {
+    font-weight: 700;
+    color: var(--luglon-green); /* Pour que le mot "Luglon" ressorte */
 }
 
 /* 1 & 5. MISE EN PAGE DE LA PAGE D'ACCUEIL (NON BLOC) */
