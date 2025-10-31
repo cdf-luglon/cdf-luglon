@@ -173,9 +173,15 @@ body {
   max-width: 900px;
   margin: 0 auto;
 }
+.history-section h3 {
+    font-family: "Slackey", sans-serif;
+    font-size: 2rem;
+    color: var(--luglon-green);
+    margin-bottom: 20px;
+}
 .history-text {
-  font-style: italic;
-  color: var(--muted-light);
+  font-style: normal;
+  color: var(--luglon-green);
   font-size: 1.1rem;
 }
 
