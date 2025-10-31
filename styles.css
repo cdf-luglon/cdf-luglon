@@ -27,11 +27,7 @@
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
   }
 
-  .main-hero {
-    background: var(--bg-dark); /* Remplace le dégradé clair par une couleur sombre unie */
-  }
-
-  /* 1. FORMULAIRES - FOND SOMBRE ET TEXTE CLAIR */
+  /* FORMULAIRES - FOND SOMBRE ET TEXTE CLAIR */
   input, textarea {
     background: #121212;
     color: var(--text-dark);
@@ -39,21 +35,21 @@
   }
   /* SURCHARGE SPECIFIQUE SELECT POUR LA FLECHE BLANCHE */
   select {
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%23ffffff%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c4.8-4.8 12.5-4.8 17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c4.8-4.8 4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%23ffffff%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c-4.8-4.8-12.5-4.8-17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c-4.8-4.8-4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
   }
 
   .empty, .meta, .small, footer {
     color: var(--muted-dark) !important;
   }
 
-  /* 2. FOND DU PRIX TOTAL (CORRIGÉ) */
+  /* FOND DU PRIX TOTAL (CORRIGÉ) */
   #final-total {
     background: var(--card-dark) !important; /* Utilise la variable Dark Card */
     color: var(--text-dark); /* Texte blanc */
     border: 1px solid #333;
   }
   
-  /* 3. COULEURS DU TEXTE DE L'ACCUEIL (BLANC/CLAIR) */
+  /* COULEURS DU TEXTE DE L'ACCUEIL (BLANC/CLAIR) */
   .main-title, .main-subtitle, .history-section h3, .nav-card h3,
   .history-text, .floating-logo { 
       color: var(--text-dark); 
@@ -64,7 +60,7 @@
     text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
   }
   
-  /* 4. PROGRAMME ET TABLES */
+  /* PROGRAMME ET TABLES */
   .planning-section {
     border-bottom: none !important;
   }
@@ -118,7 +114,7 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
 }
 
-/* 4. LOGO FIXE EN HAUT À GAUCHE (COULEUR DÉFINIE PAR MEDIA QUERY) */
+/* 4. LOGO FIXE EN HAUT À GAUCHE */
 .floating-logo img {
   width: 60px;
   height: 60px;
@@ -205,17 +201,21 @@ body {
   padding: 80px 10%;
   text-align: center;
 }
+
+/* RETRAIT DU STYLE DE BLOC/CARRÉ */
 .nav-card {
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  background: var(--card-light);
-  transition: transform 0.2s;
+  border-radius: 0;
+  box-shadow: none; /* SUPPRIMÉ */
+  background: transparent; /* SUPPRIMÉ LE FOND BLANC */
+  transition: none; /* SUPPRIMÉ LA TRANSITION */
 }
 .nav-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  transform: none;
+  box-shadow: none;
 }
+/* FIN RETRAIT DU STYLE DE BLOC/CARRÉ */
+
 .nav-card h3 {
   margin-top: 10px;
 }
@@ -264,7 +264,7 @@ select {
   border: 1px solid #000;
   appearance: none;
   -webkit-appearance: none;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%236b7280%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c4.8-4.8 12.5-4.8 17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c4.8-4.8 4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%236b7280%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c-4.8-4.8-12.5-4.8-17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c-4.8-4.8-4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
   background-repeat: no-repeat;
   background-position: right 10px top 50%;
   background-size: 10px auto;
