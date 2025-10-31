@@ -210,6 +210,8 @@ body {
 .nav-card .nav-logo {
   width: 80px;
   height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
 }
 .nav-button {
   margin-top: 20px;
