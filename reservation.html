@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Luglon en fête - Réservation</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' style='fill:%23166136;'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23ffffff' font-family='Arial, sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Slackey&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrap">
+        
+        <a href="index.html" class="floating-logo">
+            <img src="logo_cdf.jpg" alt="Logo Comité des Fêtes" />
+        </a>
+
+        <div class="header-banner-small">
+            <h1>RÉSERVATION DES REPAS</h1>
+        </div>
+
+        <div class="tab-content">
+            <div id="reservation" class="tab-pane active">
+                <div class="grid">
+                    <main class="card">
+                        
+                        <div class="price-plaque">
+                            <h3>Tarifs des Repas</h3>
+                            <table class="price-table">
+                                <thead>
+                                    <tr>
+                                        <th>Jour</th>
+                                        <th>Menu Adulte (Viande / Poisson)</th>
+                                        <th>Menu Enfant (Moins de 12 ans)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Vendredi soir</td>
+                                        <td>14.00€</td>
+                                        <td>7.00€</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Samedi soir</td>
+                                        <td>17.00€</td>
+                                        <td>8.50€</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="warning-note">
+                            <strong>Note :</strong> Il faut effectuer 2 réservations pour manger vendredi et samedi.
+                        </div>
+
+                        <form id="resForm" autocomplete="off">
+                            <div class="row">
+                                <div style="flex:1">
+                                    <label for="name"><strong>Nom du contact</strong></label>
+                                    <input id="name" name="Nom" required placeholder="Jean Dupont">
+                                    <p id="name-error" class="error-feedback"></p>
+                                </div>
+                                <div style="width:160px">
+                                    <label for="phone"><strong>Téléphone</strong></label>
+                                    <input id="phone" name="Telephone" type="tel" required placeholder="06 XX XX XX XX">
+                                    <p id="phone-error" class="error-feedback"></p>
+                                </div>
+                            </div>
+
+                            <div style="margin-top:12px">
+                                <label for="email"><strong>Adresse Email</strong></label>
+                                <input id="email" name="Email" type="email" required placeholder="votre.email@exemple.com">
+                            </div>
+
+                            <div style="margin-top:12px">
+                                <label for="soir"><strong>Choix du soir</strong></label>
+                                <select id="soir" name="Soir" onchange="calculateTotalPrice();">
+                                    <option value="vendredi">Vendredi soir — Menu: Terrine de saumon, Araignée de porc ou Txistorra, Flan</option>
+                                    <option value="samedi">Samedi soir — Menu: Assiette Luglonaise, Entrecôte, Pastis landais</option>
+                                </select>
+                            </div>
+
+                            <div class="row" style="margin-top:12px; align-items:flex-end;">
+                                <div style="width:160px">
+                                    <label for="people"><strong>Nombre de personnes (Total)</strong></label>
+                                    <input id="people" name="NbPersonnes" type="number" min="1" max="20" value="1" required onchange="generateMenuInputs(); calculateTotalPrice();">
+                                </div>
+                                <div style="flex:1">
+                                    <p class="small" id="total-count-message">Veuillez choisir le menu pour chaque personne.</p>
+                                </div>
+                            </div>
+
+                            <div id="menu-container"></div>
+                            
+                            <div style="margin-top:12px">
+                                <label for="notes">Commentaire (facultatif)</label>
+                                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, personne à mobilité réduite..."></textarea>
+                            </div>
+
+                            <div id="final-total">
+                                <span>Prix Total (à payer sur place)</span>
+                                <span class="amount" id="total-amount">0.00€</span>
+                            </div>
+
+                            <div style="margin-top:14px;display:flex;gap:8px;align-items:center">
+                                <button class="btn" type="submit" id="submit-button">Réserver</button>
+                                <div id="submission-status"></div> 
+                                <div style="margin-left:auto;font-size:13px">Réservations sur cet appareil • <span id="count">0</span></div>
+                            </div>
+                        </form>
+
+                        <hr style="margin:16px 0;border:none;border-top:1px solid #333">
+                        <h3 style="margin:0 0 8px">Dernières réservations</h3>
+                        <div class="reservations" id="list">
+                            <div class="empty">Aucune réservation pour l'instant.</div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>Site développé par le comité des fêtes de Luglon - Tous droits réservés.</div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>

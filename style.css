@@ -1,0 +1,278 @@
+/* VARIABLES */
+:root {
+  --bg-light: #f6f7f9;
+  --card-light: #ffffff;
+  --text-light: #0f1724;
+  --muted-light: #6b7280;
+  --accent: #2b8a7e;
+  --error-red: #dc3545;
+  --bg-dark: #0a0a0a;
+  --card-dark: #1a1a1a;
+  --text-dark: #f6f6f6;
+  --muted-dark: #a1a1a1;
+  --luglon-green: #166136;
+  --luglon-light-green: #e9f2ee;
+  --luglon-dark-green-bg: #222;
+}
+
+/* MEDIA QUERIES */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--bg-dark);
+    color: var(--text-dark);
+  }
+  .card {
+    background: var(--card-dark);
+    color: var(--text-dark);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  }
+
+  /* FORMULAIRES - DARK MODE (Input et Textarea) */
+  input, textarea {
+    background: #121212;
+    color: var(--text-dark);
+    border: 1px solid #333;
+  }
+  /* SURCHARGE SPECIFIQUE SELECT POUR LA FLECHE BLANCHE */
+  select {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%23ffffff%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c4.8-4.8 12.5-4.8 17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c4.8-4.8 4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
+  }
+
+  .btn {
+    background: var(--accent);
+    color: #fff;
+  }
+  .empty, .meta, .small, footer {
+    color: var(--muted-dark) !important;
+  }
+
+  /* FOND DU PRIX TOTAL (CORRIGÉ) */
+  #final-total {
+    background: #1a1a1a !important;
+    color: white;
+    border: 1px solid #333;
+  }
+  /* STYLES DES TITRES */
+  .main-title, .main-subtitle, .nav-card h3 {
+    font-family: "Slackey", sans-serif;
+    color: white;
+  }
+  .day-title h4, .committee-name {
+    color: var(--luglon-green);
+    text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
+  }
+  /* LIGNES DE SÉPARATION (SUPPRIMÉES) */
+  .planning-section {
+    border-bottom: none !important;
+  }
+  .price-table th, .price-table td {
+    border: 1px solid #444;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  /* STYLES DES TITRES */
+  .main-title, .main-subtitle, .nav-card h3 {
+    font-family: "Slackey", sans-serif;
+    color: var(--text-light);
+  }
+  .day-title h4, .committee-name {
+    color: var(--luglon-green);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+  }
+  /* LIGNES DE SÉPARATION (SUPPRIMÉES) */
+  .planning-section {
+    border-bottom: none !important;
+  }
+}
+
+/* STYLES GÉNÉRAUX ET STRUCTURE */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 0;
+}
+.wrap {
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.card {
+  padding: 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* 4. LOGO FIXE EN HAUT À GAUCHE */
+.floating-logo img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+.floating-logo {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  overflow: hidden;
+  display: block;
+}
+
+/* 1 & 5. MISE EN PAGE DE LA PAGE D'ACCUEIL (NON BLOC) */
+.main-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 5% 50px;
+  background: linear-gradient(180deg, var(--bg-light), var(--card-light));
+}
+.hero-content {
+  flex-basis: 55%;
+  padding-right: 50px;
+}
+.hero-image {
+  max-width: 40%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.site-branding {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.logo-text-inline {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.committee-name {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--luglon-green);
+}
+.main-title {
+  font-size: 4.5rem;
+  line-height: 1.1;
+  margin: 0 0 10px;
+  color: var(--luglon-green);
+}
+.main-subtitle {
+  font-size: 1.8rem;
+  color: var(--accent);
+}
+
+/* 2. SECTION HISTOIRE */
+.history-section {
+  text-align: center;
+  padding: 50px 10%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.history-text {
+  font-style: italic;
+  color: var(--muted-light);
+  font-size: 1.1rem;
+}
+
+/* 3. GRILLE DE NAVIGATION (ZONES CLICABLES) */
+.nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 80px 10%;
+  text-align: center;
+}
+.nav-card {
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: var(--card-light);
+  transition: transform 0.2s;
+}
+.nav-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+.nav-card h3 {
+  margin-top: 10px;
+}
+.nav-card .nav-logo {
+  width: 80px;
+  height: 80px;
+}
+.nav-button {
+  margin-top: 20px;
+  display: block;
+  width: 100%;
+}
+
+/* STYLE DE LA BANNIÈRE DES PAGES PROGRAMME ET RÉSERVATION (SIMPLIFIÉ) */
+.header-banner-small {
+  padding: 40px 20px;
+  background: var(--luglon-green);
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  border-radius: 0 0 12px 12px;
+}
+.header-banner-small h1 {
+  font-size: 3rem;
+  font-family: "Slackey", cursive;
+  margin: 0;
+}
+
+/* STYLES DE FORMULAIRE ET INPUTS */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: 1px solid #000;
+}
+
+/* STYLE DU SELECT (LISTE DÉROULANTE) */
+select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  border: 1px solid #000;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%236b7280%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c4.8-4.8 12.5-4.8 17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c4.8-4.8 4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px top 50%;
+  background-size: 10px auto;
+}
+
+input[type="number"] {
+  max-width: 120px;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* STYLES SPÉCIFIQUES AU PROGRAMME (POLICES DES JOURS) */
+.day-title h4 {
+  font-family: "Fascinate Inline", cursive;
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 10px 0;
+  line-height: 1.1;
+  color: var(--luglon-green);
+}
