@@ -1,130 +1,106 @@
-/* VARIABLES */
+/* Variables */
 :root {
-  --bg-light: #f6f7f9;
-  --card-light: #ffffff;
-  --text-light: #0f1724; /* Noir foncé */
-  --muted-light: #6b7280;
+  --bg: #ffffff;
+  --card: #ebebeb;
+  --text: #0f1724; /* Noir foncé */
+  --muted: #6b7280;
+  --tab-font: #e9f2ee;
+  --tab-border : #ccc;
+  --form-bg: #ffffff;
+  --text-shadow: #0000001a;
+  --luglon-green: #166136; 
+  --resa-shadow: #00000080;
+  
   --accent: #2b8a7e;
   --error-red: #dc3545;
-  --bg-dark: #0a0a0a;
-  --card-dark: #1a1a1a; /* Fond des cartes/boîtes sombre */
-  --text-dark: #f6f6f6; /* Blanc cassé */
-  --muted-dark: #a1a1a1;
-  --luglon-green: #166136;
-  --luglon-light-green: #e9f2ee;
-  --luglon-dark-green-bg: #222;
+  --warning-orange-font: #ffa5001a;
+  --warning-orange-border: #ffa500;
 }
 
-/* MEDIA QUERIES */
+/* --- DARK MODE --- */
 @media (prefers-color-scheme: dark) {
-  body {
-    background: var(--bg-dark);
-    color: var(--text-dark);
-  }
-  .card {
-    background: var(--card-dark);
-    color: var(--text-dark);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
-  }
-
-  /* FORMULAIRES - FOND SOMBRE ET TEXTE CLAIR */
-  input, textarea {
-    background: #121212;
-    color: var(--text-dark);
-    border: 1px solid #333;
-  }
-  /* SURCHARGE SPECIFIQUE SELECT POUR LA FLECHE BLANCHE */
-  select {
-    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%23ffffff%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c-4.8-4.8-12.5-4.8-17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c-4.8-4.8-4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
-  }
-
-  .empty, .meta, .small, footer {
-    color: var(--muted-dark) !important;
-  }
-
-  /* FOND DU PRIX TOTAL (CORRIGÉ) */
-  #final-total {
-    background: var(--card-dark) !important; /* Utilise la variable Dark Card */
-    color: var(--text-dark); /* Texte blanc */
-    border: 1px solid #333;
-  }
-  
-  /* COULEURS DU TEXTE DE L'ACCUEIL (BLANC/CLAIR) */
-  .main-title, .main-subtitle, .history-section h3, .nav-card h3,
-  .history-text, .floating-logo { 
-      color: var(--text-dark); 
-  }
-  /* Correction des accents verts spécifiques en Dark Mode */
-  .day-title h4, .committee-name, .logo-fixed-text .logo-line-2 {
-    color: var(--luglon-green);
-    text-shadow: 0 0 5px rgba(22, 97, 54, 0.5);
-  }
-  
-  /* PROGRAMME ET TABLES */
-  .planning-section {
-    border-bottom: none !important;
-  }
-  .price-table th, .price-table td {
-    border: 1px solid #444;
-  }
-  
-  /* Correction du fond du bloc principal */
-  .main-hero {
-    background: var(--bg-dark); /* Remplace le dégradé clair par une couleur sombre unie */
+  :root {
+    --bg: #1a1a1a; /* Fond principal (BODY) */
+    --card: #121212; /* Fond des cartes/boîtes sombre (HERO) */
+    --text: #f6f6f6; /* Blanc cassé */
+    --muted: #a1a1a1;
+    --tab-font: #222222;
+    --form-bg: #222222;
+    --text-shadow: #16613680;
+    --tab-border : #444444;
+    --resa-shadow: #000000cc;
   }
 }
 
-@media (prefers-color-scheme: light) {
-  /* Assure que la couleur de fond reste claire (pour le .main-hero par exemple) */
-  .main-hero {
-    background: linear-gradient(180deg, var(--bg-light), var(--card-light));
+/* --- ADAPTATION MOBILE POUR TITRE PRINCIPAL --- */
+@media (max-width: 900px) {
+  .main-hero h1.main-title {
+    font-size: 3rem; 
   }
-  
-  /* COULEURS DU TEXTE DE L'ACCUEIL (NOIR/FONCÉ) */
-  .main-title, .main-subtitle, .history-section h3, .nav-card h3,
-  .history-text, .floating-logo { 
-      color: var(--text-light); /* Assure le noir foncé */
+  .history-images-container {
+    flex-direction: column; 
+    gap: 30px;
   }
-
-  /* Correction des accents verts spécifiques en Light Mode */
-  .day-title h4, .committee-name, .logo-fixed-text .logo-line-2 {
-    color: var(--luglon-green);
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 800px) { /* Sur les écrans un peu plus petits, passer à 3 colonnes */
+  .menu-selection-group {
+    flex: 0 0 calc(33.333% - 6.666px); 
+    min-width: 140px; 
   }
-  
-  .planning-section {
-    border-bottom: none !important;
+}
+@media (max-width: 600px) { /* Sur les écrans moyens, passer à 2 colonnes */
+  .menu-selection-group {
+    flex: 0 0 calc(50% - 5px); 
+    min-width: 150px; 
   }
-  .price-table th, .price-table td {
-    border: 1px solid #ccc;
+}
+@media (max-width: 400px) { /* Sur les très petits écrans, 1 colonne */
+  .menu-selection-group {
+    flex: 1 1 100%; 
+    min-width: unset; /* Annuler le min-width pour s'adapter */
   }
 }
 
-/* STYLES GÉNÉRAUX ET STRUCTURE */
+/* ---------------------------------------------------------- */
+/* -------------- STYLES GÉNÉRAUX ET STRUCTURE -------------- */
+/* ---------------------------------------------------------- */
+
 * {
   box-sizing: border-box;
 }
+
+/* Courte description des boutons "Programme" et "Réservation" */
 body {
   font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   margin: 0;
+  background: var(--bg); /* Fond principal */
+  color: var(--text); /* Couleur de texte principal */
 }
+
+/* Incrustation pleine largeur dans le navigateur (pas de marge) */
 .wrap {
   max-width: 100%;
   margin: 0;
   padding: 0;
 }
+
+/* Certains textes : corps du programme, titre des cases à remplir dans les formulaires */
 .card {
   padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text);
 }
 
-/* 4. LOGO FIXE EN HAUT À GAUCHE (COULEUR DÉFINIE PAR MEDIA QUERY) */
+/* Logo dynamique (image) */
 .floating-logo img {
   width: 60px;
   height: 60px;
   border-radius: 50%;
 }
+
+/* Logo dynamique (position fixe en haut à gauche) */
 .floating-logo {
   position: fixed;
   top: 20px;
@@ -136,146 +112,299 @@ body {
   gap: 8px;
   text-decoration: none;
   transition: opacity 0.3s;
+  color: var(--text);
 }
 
-.floating-logo:hover {
-  opacity: 0.8;
+/* Textes de feedback (type merci de remplir la case) */
+.empty, .meta, .small {
+    color: var(--muted);
 }
 
-.logo-fixed-text {
-  display: flex;
-  flex-direction: column;
-  line-height: 1.1;
-  font-weight: 600;
-  font-size: 14px;
-}
-.logo-line-2 {
-  font-weight: 700;
+/* FOOTER CENTRÉ */
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
 }
 
-/* 1 & 5. MISE EN PAGE DE LA PAGE D'ACCUEIL (NON BLOC) */
+/* MISE EN PAGE DE LA PAGE D'ACCUEIL (NON BLOC) */
 .main-hero {
   display: flex;
   justify-content: space-between;
-  /* Correction : Aligne les éléments en haut */
   align-items: flex-start; 
   padding: 100px 5% 50px;
+  background: var(--card); 
 }
 .hero-content {
-  flex-basis: 55%;
-  padding-right: 50px;
+  flex-basis: 70%;
+  padding-right: 15px;
 }
 .hero-image {
-  max-width: 40%;
+  max-width: 30%;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
+/* TITRES PRINCIPAUX : police Special Gothic Condensed One */
 .main-title {
-  font-size: 7rem;
+  font-size: 9rem;
   font-family: "Special Gothic Condensed One", sans-serif;
   line-height: 1.1;
   margin: 0 0 10px;
+  color: var(--text);
 }
 .main-subtitle {
   font-size: 3rem;
   font-family: "Special Gothic Condensed One", sans-serif;
+  color: var(--text);
 }
 
-/* 2. SECTION HISTOIRE */
-.history-section {
-  text-align: center;
-  padding: 50px 10%;
-  max-width: 900px;
+/* ---------------------------------------------------------- */
+/* ---------------- STYLES PROPRES À L'INDEX ---------------- */
+/* ---------------------------------------------------------- */
+
+/* 1. Paragraphe avec images de fougère */
+.history-images-container {
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 20px; 
+  padding: 50px 5%; 
+  max-width: 1400px; 
   margin: 0 auto;
+  background-color: transparent; 
 }
-
-/* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
+.history-image-placeholder {
+  width: 200px; 
+  border-radius: 12px;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; 
+  box-shadow: none;
+}
+.history-image-placeholder img {
+    width: 100%; 
+    height: auto; 
+    object-fit: contain; 
+    display: block; 
+}
+.history-section {
+  flex-shrink: 0;
+  max-width: 900px;
+  width: auto; 
+  padding: 0; 
+  margin: 0;
+  text-align: center;
+  background-color: transparent; 
+}
 .history-section h3 {
   font-family: "Special Gothic Condensed One", sans-serif;
   font-size: 4rem;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
+  color: var(--text);
 }
 .history-text {
-  /* AJOUT DE LA NOUVELLE POLICE */
   font-family: "Special Gothic Condensed One", sans-serif;
-  font-style: normal;
-  font-size: 2rem;
+  font-size: 2rem; 
+  margin-top: 0;
+  color: var(--text);
 }
 
-/* 3. GRILLE DE NAVIGATION (ZONES CLICABLES) */
+/* 2. Grilles de navigation et zones cliquables */
 .nav-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+
+  max-width: 1200px;
+  margin: 0 auto; 
   padding: 80px 10%;
   text-align: center;
+  gap: 40px;
 }
-
-/* RETRAIT DU STYLE DE BLOC/CARRÉ */
 .nav-card {
-  padding: 30px;
-  border-radius: 0;
-  box-shadow: none;
-  background: transparent;
-  transition: none;
+  max-width: 450px;
+  flex-basis: 48%; /* Permet aux cartes de prendre presque la moitié de la largeur chacune */
+  display: flex; /* Activer Flexbox sur la carte */
+  flex-direction: column; /* Organiser le contenu verticalement */
+  justify-content: space-between; /* Pousser le premier contenu vers le haut et le dernier (bouton) vers le bas */
 }
 .nav-card:hover {
   transform: none;
   box-shadow: none;
 }
-/* FIN RETRAIT DU STYLE DE BLOC/CARRÉ */
-
-/* CORRECTION : Remplacement de Slackey par Special Gothic Condensed One */
 .nav-card h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  font-family: "Special Gothic Condensed One", sans-serif;
+  color: var(--text);
+}
+.nav-card p {
+  font-size: 1.2rem; 
   margin-top: 10px;
+  margin-bottom: 20px;
   font-family: "Special Gothic Condensed One", sans-serif;
 }
-.nav-card .nav-logo {
-  width: 80px;
-  height: 80px;
+.nav-logo {
+  width: 160px;
+  height: 160px;
   object-fit: contain;
-  margin-bottom: 15px;
+  display: block; /* Traiter le logo comme un bloc */
+  margin: 0 auto; /* Centrer le bloc horizontalement */
+
 }
 .nav-button {
-  margin-top: 20px;
+  padding: 8px 12px;
+  font-size: 13px;
   display: block;
   width: 100%;
+  margin-top: auto;
 }
 
-/* STYLE DE LA BANNIÈRE DES PAGES PROGRAMME ET RÉSERVATION (SIMPLIFIÉ) */
-.header-banner-small {
-  padding: 40px 20px;
-  background: var(--luglon-green);
-  color: white;
-  text-align: center;
-  margin-bottom: 20px;
-  border-radius: 0 0 12px 12px;
+/* ---------------------------------------------------------- */
+/* -------------- STYLES PROPRES AU PROGRAMME -------------- */
+/* ---------------------------------------------------------- */
+
+/* 1. Styles du planning (Jours, horaires, activités) */
+.day-title h4 {
+  font-family: "Fascinate Inline", cursive;
+  font-size: 4rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-right: 20px; margin-left: 20px;
+  margin-bottom: 0;
+  margin-top: 100px;
+  color: var(--luglon-green);
+  text-shadow: 0 0 5px var(--text-shadow);
 }
-.header-banner-small h1 {
-  font-size: 3rem;
-  font-family: "Special Gothic Condensed One", sans-serif; /* Remplacement de 'Slackey' */
+.day-content {
+  padding: 15px 0;
+  background-color: transparent;
+  display: block;
+}
+
+.committee-name, .logo-fixed-text .logo-line-2 {
+    color: var(--luglon-green);
+    text-shadow: 0 0 5px var(--text-shadow);
+}
+
+/* Alternance G/D des jours */
+.align-left .day-title,
+.align-left .day-content {
+    text-align: left;
+}
+.align-right .day-title,
+.align-right .day-content {
+    text-align: right;
+}
+.day-content p { /* Alignement du programme (Heure et Activité) */
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-style: normal;
+  font-size: 1.5rem;
   margin: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 2px 0; 
+}
+.activity-time { /* Style spécifique à l'horaire (pour le mettre en valeur) */
+    font-weight: 700;
+    color: var(--luglon-green);
+    margin-right: 15px; 
+    display: inline-block; 
+    min-width: 80px;
+    /* text-align: left/right est géré par le parent align-left/align-right */
+}
+.planning-section {
+  border-bottom: none !important;
 }
 
-/* STYLES DE FORMULAIRE ET INPUTS */
-input, textarea {
+/* ---------------------------------------------------------- */
+/* ------------- STYLES PROPRES À LA RÉSERVATION ------------ */
+/* ---------------------------------------------------------- */
+
+.wrap.res-wrap {
+    /* Centrage et Largeur 70% */
+    max-width: 70%; 
+    margin: 40px auto; 
+    padding: 0 0 20px;
+}
+
+.res-wrap .card { /* Ombrage et cadre la width de 80% */
+    background: var(--bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px var(--resa-shadow);
+}
+/* 1. STYLES DU TABLEAU DE PRIX */
+
+.price-plaque {
+  padding: 15px;
+  background: var(--tab-font); /* Fond du tableau des prix */
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+  border: 1px solid var(--luglon-green); 
+  color: var(--text);
+}
+.price-plaque h3 { /* Titre des colonnes du tableau des prix */
+  color: var(--luglon-green);
+  margin-top: 0;
+  font-size: 18px;
+}
+.price-table { /* Tableau des prix sauf titres des colonnes */
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  color: var(--text);
+}
+.price-table th, .price-table td { /* Bordures du tableau des prix */
+  padding: 8px 5px;
+  border: 1px solid var(--tab-border);/* Bordures générales */
+}
+.price-table th {
+  color: var(--luglon-green);
+  text-align: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+.price-table td {
+  text-align: center;
+}
+
+/* 2. STYLES DE LA NOTE D'AVERTISSEMENT */
+
+.warning-note {
+  padding: 10px 12px;
+  border-radius: 8px;
+  background-color: var(--warning-orange-font); 
+  border: 1px solid var(--warning-orange-border);
+  font-size: 13px;
+  margin-bottom: 15px; 
+}
+.warning-note strong {
+  font-weight: 700;
+}
+
+/* 3. STYLES DE FORMULAIRE ET INPUTS */
+label {
+  font-size: 16px;
+  display: block;
+  margin-bottom: 10px;
+  margin-top: 15px;
+}
+input, textarea, select { /* Styles communs aux cases de formulaire */
   width: 100%;
   padding: 10px;
   border-radius: 8px;
+  color: var(--text);
   font-size: 14px;
-  border: 1px solid #000;
+  background-color: var(--form-bg);
+  border: 1px solid var(--tab-border);
 }
-
-/* STYLE DU SELECT (LISTE DÉROULANTE) */
-select {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 14px;
-  border: 1px solid #000;
+select { /* Styles spécifiques au menu de choix du soir */
   appearance: none;
   -webkit-appearance: none;
   background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width%3D%22292.4%22 height%3D%22292.4%22%3E%3Cpath fill%3D%22%236b7280%22 d%3D%22M287 197.8L156.4 67.2c-4.8-4.8-12.5-4.8-17.3 0L5.3 197.8c-4.8 4.8-4.8 12.5 0 17.3l23 23c4.8 4.8 12.5 4.8 17.3 0l101.4-101.4c-4.8-4.8-12.5-4.8-17.3 0l101.4 101.4c4.8 4.8 12.5 4.8 17.3 0l23-23c-4.8-4.8-4.8-12.5 0-17.3z%22%2F%3E%3C%2Fsvg%3E");
@@ -283,31 +412,88 @@ select {
   background-position: right 10px top 50%;
   background-size: 10px auto;
 }
+.field-auto { /* Classe pour les champs qui doivent s'adapter en largeur */
+    flex: 1;
+}
+.field-small { /* Classe pour les petits champs (ex: Téléphone) */
+    width: 160px;
+    flex-shrink: 0; /* Empêche  de rétrécir si l'écran est petit */
+}
+.field-end {
+    align-items: flex-end; /* Utilisé pour les consignes qui doivent aligner leur contenu au bas de la ligne. */
+}
+.form-submit-row { /* Bouton réserver */
+    margin-top: 14px;
+    display: flex;  /* Utilise Flexbox pour aligner le bouton, le statut, et le compteur sur une seule ligne. */
+    gap: 8px; /* Espace entre les éléments (Bouton, Statut, Compteur). */
+    align-items: center; /* Centre les éléments verticalement dans la ligne. */
+}
+.reservation-count {
+    margin-left: auto; /* Assure que le compteur de réservations est poussé complètement à droite. */
+    font-size: 13px;
+}
+form .row {
+    display: flex; /* Active Flexbox pour les lignes contenant plusieurs champs (ex: Nom et Téléphone). */
+    gap: 10px; /* Espace entre les éléments de la ligne (ex: entre Nom et Téléphone). */
+}
+
+/* 2. STYLES DE LA SECTION RÉSERVATION INDIVIDUELLE DE MENUS */
+#menu-container { /* Rend les choix de menu individuels compacts sur une même ligne */
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 15px 10px; 
+  margin-top: 12px;
+}
+.menu-selection-group {/* Encadre les choix de menu individuels */
+  flex: 0 0 calc(25% - 7.5px); /* 4 colonnes (- ajustement pour le gap) */
+  min-width: 120px; /* Taille minimale pour ne pas trop compresser */
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid var(--tab-border);
+}
+.menu-selection-group h5 { /* Stylise et ajuste les marges des choix de menu individuel */
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: var(--accent);
+}
+.menu-options {
+  display: block; 
+}
+
+
+/* Style du message d'erreur */
+.error-feedback {
+  color: var(--error-red);
+  font-size: 12px;
+  margin: 2px 0 0 0;
+  height: 15px; 
+}
+/* Style pour le champ en erreur */
+.input-error {
+  border-color: var(--error-red) !important;
+}
+
+/* Style pour le prix total dans la liste */
+.total-price {
+  font-weight: bold;
+  color: var(--accent);
+  margin-left: 0px;
+}
 
 input[type="number"] {
   max-width: 120px;
 }
-
 .btn {
+  width: 30%;
+  align-self: center;
   display: inline-block;
-  padding: 10px 14px;
+  padding: 15px;
   border-radius: 10px;
   background: var(--accent);
   color: white;
   border: none;
   cursor: pointer;
-  font-weight: 600;
-}
-
-/* STYLES SPÉCIFIQUES AU PROGRAMME (POLICES DES JOURS) */
-.day-title h4 {
-  font-family: "Fascinate Inline", cursive;
-  font-size: 42px;
-  font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  margin: 0;
-  padding: 10px 0;
-  line-height: 1.1;
-  color: var(--luglon-green);
+  font-size: 1.2rem;
+  text-decoration: none; 
+  font-family: "Special Gothic Condensed One", sans-serif;
 }
