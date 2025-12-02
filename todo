@@ -1,8 +1,10 @@
 À faire :
 
 changer l'interface des repas déjà commandés :
-- ils apparaissent tous (faire gaffe qu'ils ne soient pas synchronisés)
+- l'interface est laide
+
 changer le nom des images :
 - si elles ne chargent pas, un nom bizarre leur est attribué
+
 adapter pour le téléphone :
 - page reservation doit occuper tout le telephone
