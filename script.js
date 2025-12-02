@@ -85,16 +85,18 @@ function render(){
     const menuSummary = Object.keys(menuCounts).map(key => {
         const menuOption = MENU_OPTIONS.find(opt => opt.value === key);
         const price = getMenuPrice(day, key);
-        const label = menuOption ? `${menuOption.label} (${price.toFixed(2)}€)` : key;
+        const formattedPrice = price.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
+        const label = menuOption ? `${menuOption.label} (${formattedPrice}€)` : key;
         return `${menuCounts[key]} x ${label}`;
     }).join(' / ');
 
     const now = new Date();
     const formattedDate = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} (aujourd'hui)`;
+    const formattedTotal = totalPrice.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
     
     el.innerHTML=`
       <h4>${r.name} (${r.phone}) — ${r.people} pers 
-      <span class="total-price">Total: ${totalPrice.toFixed(2)}€</span></h4>
+      <span class="total-price">Total: ${formattedTotal}€</span></h4>
       <div class="meta">${r.soir} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
       <div>Notes: ${r.notes || '—'}</div>
     `;
@@ -125,8 +127,9 @@ function calculateTotalPrice() {
             }
         }
     }
-    
-    totalAmountEl.textContent = `${currentTotal.toFixed(2)}€`;
+
+    const formattedTotal = currentTotal.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
+    totalAmountEl.textContent = `${formattedTotal}€`;
 }
 
 
