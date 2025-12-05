@@ -1,10 +1,8 @@
 À faire :
 
-changer l'interface des repas déjà commandés :
-- l'interface est laide
-
-changer le nom des images :
-- si elles ne chargent pas, un nom bizarre leur est attribué
+changer l'interface google sheets et mail :
+- Les éléments en majuscule
+- Les repas dans le google sheets comptés par type
 
 adapter pour le téléphone :
 - page reservation doit occuper tout le telephone
