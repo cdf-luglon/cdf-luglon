@@ -100,6 +100,7 @@ function render(){
       <div class="meta">${r.soir} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
       <div>Notes: ${r.notes || '—'}</div>
     `;
+    
     list.appendChild(el);
   });
 }
@@ -325,3 +326,4 @@ if (peopleInput) {
     generateMenuInputs();
     calculateTotalPrice();
 }
+render()
