@@ -15,6 +15,13 @@
   --error-red: #dc3545;
   --warning-orange-font: #ffa5001a;
   --warning-orange-border: #ffa500;
+
+  --sending-bg: #ffe0b2;
+  --sending-border: #e65100;
+  --error-bg: #ffebee;
+  --error-border: #c62828;
+  --success-bg: #e8f5e9;
+  --success-border: #2e7d32;
 }
 
 /* --- DARK MODE --- */
@@ -33,33 +40,7 @@
 }
 
 /* --- ADAPTATION MOBILE POUR TITRE PRINCIPAL --- */
-@media (max-width: 900px) {
-  .main-hero h1.main-title {
-    font-size: 3rem; 
-  }
-  .history-images-container {
-    flex-direction: column; 
-    gap: 30px;
-  }
-}
-@media (max-width: 800px) { /* Sur les écrans un peu plus petits, passer à 3 colonnes */
-  .menu-selection-group {
-    flex: 0 0 calc(33.333% - 6.666px); 
-    min-width: 140px; 
-  }
-}
-@media (max-width: 600px) { /* Sur les écrans moyens, passer à 2 colonnes */
-  .menu-selection-group {
-    flex: 0 0 calc(50% - 5px); 
-    min-width: 150px; 
-  }
-}
-@media (max-width: 400px) { /* Sur les très petits écrans, 1 colonne */
-  .menu-selection-group {
-    flex: 1 1 100%; 
-    min-width: unset; /* Annuler le min-width pour s'adapter */
-  }
-}
+
 
 /* ---------------------------------------------------------- */
 /* -------------- STYLES GÉNÉRAUX ET STRUCTURE -------------- */
@@ -116,7 +97,7 @@ body {
 }
 
 /* Textes de feedback (type merci de remplir la case) */
-.empty, .meta, .small {
+.empty, .small {
     color: var(--muted);
 }
 
@@ -459,8 +440,6 @@ form .row {
 .menu-options {
   display: block; 
 }
-
-
 /* Style du message d'erreur */
 .error-feedback {
   color: var(--error-red);
@@ -471,13 +450,6 @@ form .row {
 /* Style pour le champ en erreur */
 .input-error {
   border-color: var(--error-red) !important;
-}
-
-/* Style pour le prix total dans la liste */
-.total-price {
-  font-weight: bold;
-  color: var(--accent);
-  margin-left: 0px;
 }
 
 input[type="number"] {
@@ -496,4 +468,52 @@ input[type="number"] {
   font-size: 1.2rem;
   text-decoration: none; 
   font-family: "Special Gothic Condensed One", sans-serif;
+}
+/* 4. STYLES DU STATUT DE RÉSERVATION */
+#submission-status {
+        margin-left: auto; /* Aligne à droite */
+        font-size: 14px;
+        padding: 5px 10px;
+        border-radius: 6px;
+        background-color: var(--muted);
+        color: var(--text);
+        display: none; /* Caché par défaut */
+        align-items: center; /* Pour aligner avec un potentiel spinner */
+        gap: 8px;
+}
+#submission-status.sending {
+  background-color: var(--sending-bg);
+  color: var(--sending-border);
+  display: flex;
+}
+#submission-status.success {
+  background-color: var(--success-bg);
+  color: var(--success-border);
+  display: flex;
+}
+#submission-status.error {
+  background-color: var(--error-bg);
+  color: var(--error-border);
+  display: flex;
+}
+/* STYLES DE LA LISTE DES RÉSERVATIONS PRÉCÉDENTES */
+.res-item {
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--tab-border); 
+  background: var(--form-bg); 
+}
+.res-item h4 {
+    margin: 0 0 4px;
+    font-size: 15px;
+}
+.total-price {
+  font-weight: bold;
+  color: var(--accent);
+  margin-left: 0px;
+}
+.meta {
+  color: var(--muted);
+  font-size: 13px;
 }
