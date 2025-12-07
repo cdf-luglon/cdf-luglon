@@ -11,7 +11,7 @@
   --luglon-green: #166136; 
   --resa-shadow: #00000080;
   
-  --accent: #2b8a7e;
+  --accent: var(--luglon-green);
   --error-red: #dc3545;
   --warning-orange-font: #ffa5001a;
   --warning-orange-border: #ffa500;
@@ -119,7 +119,6 @@ footer {
 }
 .hero-image {
   max-width: 30%;
-  height: auto;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -231,14 +230,19 @@ footer {
   object-fit: contain;
   display: block; /* Traiter le logo comme un bloc */
   margin: 0 auto; /* Centrer le bloc horizontalement */
-
 }
 .nav-button {
-  padding: 8px 12px;
-  font-size: 13px;
+  color: white;
+  background: var(--luglon-green);
+  border-radius: 10px;
+  padding: 15px;
   display: block;
   width: 100%;
-  margin-top: auto;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  text-decoration: none;
+  font-family: "Special Gothic Condensed One", sans-serif;
 }
 
 /* ---------------------------------------------------------- */
@@ -288,7 +292,7 @@ footer {
 }
 .activity-time { /* Style spécifique à l'horaire (pour le mettre en valeur) */
     font-weight: 700;
-    color: var(--luglon-green);
+    color: var(--error-bg);
     margin-right: 15px; 
     display: inline-block; 
     min-width: 80px;
@@ -400,12 +404,6 @@ select { /* Styles spécifiques au menu de choix du soir */
 .field-end {
     align-items: flex-end; /* Utilisé pour les consignes qui doivent aligner leur contenu au bas de la ligne. */
 }
-.form-submit-row { /* Bouton réserver */
-    margin-top: 14px;
-    display: flex;  /* Utilise Flexbox pour aligner le bouton, le statut, et le compteur sur une seule ligne. */
-    gap: 8px; /* Espace entre les éléments (Bouton, Statut, Compteur). */
-    align-items: center; /* Centre les éléments verticalement dans la ligne. */
-}
 .reservation-count {
     margin-left: auto; /* Assure que le compteur de réservations est poussé complètement à droite. */
     font-size: 13px;
@@ -437,7 +435,33 @@ form .row {
 .menu-options {
   display: block; 
 }
-/* Style du message d'erreur */
+.total-price {
+  display: inline-block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: var(--accent);
+}
+.form-submit-row { /* Bouton réserver */
+  margin-top: 14px;
+  display: flex;  /* Utilise Flexbox pour aligner le bouton, le statut, et le compteur sur une seule ligne. */
+  gap: 8px; /* Espace entre les éléments (Bouton, Statut, Compteur). */
+  align-items: center; /* Centre les éléments verticalement dans la ligne. */
+}
+.submit-button {
+  width: 30%;
+  display: inline-block;
+  padding: 15px;
+  margin-top: 15px; margin-bottom: 15px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  font-size: 1.4rem;
+  text-decoration: none;
+  border: none;
+  font-family: "Special Gothic Condensed One", sans-serif;
+}
+/* Erreur de remplissage des champs */
 .error-feedback {
   color: var(--error-red);
   font-size: 12px;
@@ -446,26 +470,12 @@ form .row {
 }
 /* Style pour le champ en erreur */
 .input-error {
-  border-color: var(--error-red) !important;
+  border-color: var(--error-red);
 }
-
 input[type="number"] {
   max-width: 120px;
 }
-.btn {
-  width: 30%;
-  align-self: center;
-  display: inline-block;
-  padding: 15px;
-  border-radius: 10px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-size: 1.2rem;
-  text-decoration: none; 
-  font-family: "Special Gothic Condensed One", sans-serif;
-}
+
 /* 4. STYLES DU STATUT DE RÉSERVATION */
 #submission-status {
         margin-left: auto; /* Aligne à droite */
@@ -505,12 +515,136 @@ input[type="number"] {
     margin: 0 0 4px;
     font-size: 15px;
 }
-.total-price {
-  font-weight: bold;
-  color: var(--accent);
-  margin-left: 0px;
-}
 .meta {
   color: var(--muted);
   font-size: 13px;
+}
+
+/* ---------------------------------------------------------- */
+/* -------------- ADAPTATION MOBILE (MAX-WIDTH 768PX) ------- */
+/* ---------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  /* --- STYLES GÉNÉRAUX --- */
+
+  /* Le wrap de réservation doit prendre plus de place sur petit écran */
+  .wrap.res-wrap {
+      max-width: 95%; 
+      margin: 20px auto; 
+  }
+  /* --- PAGE D'ACCUEIL --- */
+
+  /* 1. MISE EN PAGE PRINCIPALE (HEADER) */
+  .main-hero {
+    display: block; /* Empile les éléments (titre puis image) */ 
+    padding: 30px 5% 30px; /* Réduit le padding pour plus d'espace */
+    text-align: center; /* Centre le texte */
+  }
+  .hero-content {
+    margin-top: 70px;
+    flex-basis: auto; /* Annule le 70% */
+    padding-right: 0;
+  }
+  .hero-image {
+    max-width: 50%; /* L'image prend toute la largeur */
+    margin-top: 20px;
+  }
+  
+  /* Ajustement de la taille des titres pour mobile */
+  .main-title {
+    font-size: 4rem; /* Réduit 9rem -> 4rem */
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+  .main-subtitle {
+    font-size: 1.5rem; /* Réduit 3rem -> 1.5rem */
+  }
+
+  /* 2. SECTION HISTOIRE ET IMAGES DE FOUGÈRE */
+  .history-images-container {
+    display: block; /* Empile les images et le texte */
+    padding: 30px 5%; 
+  }
+  .history-section {
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+  .history-image-placeholder {
+    width: 25%; /* Les images peuvent prendre toute la largeur si vous le souhaitez */
+    max-width: 250px; /* Ou définir une taille maximale pour les centrer */
+    margin: 10px auto;
+  }
+  .history-section h3 {
+    font-size: 2.5rem;
+  }
+  .history-text {
+    font-size: 1.2rem;
+  }
+  
+  /* 3. GRILLE DE NAVIGATION */
+  .nav-grid {
+    flex-direction: column; /* Empile les cartes verticalement */
+    padding: 40px 5%;
+    gap: 30px;
+  }
+  .nav-card {
+    max-width: 100%;
+    flex-basis: auto; /* Annule le 48% */
+  }
+  .nav-button {
+    padding: 12px;
+    font-size: 1.2rem;
+  }
+  /* --- PAGE PROGRAMME --- */
+
+  .day-title h4 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-right: 0; margin-left: 0;
+    margin-bottom: 0;
+  }
+  .day-content {
+    padding: 15px 0;
+  }
+
+  /* --- PAGE RÉSERVATION --- */
+
+  /* 1. STRUCTURE DU FORMULAIRE */
+  form .row {
+    flex-direction: column; /* Empile les champs (Nom et Téléphone) */
+    gap: 0;
+  }
+  .field-small {
+      width: 100%; /* Le petit champ prend toute la largeur */
+  }
+  
+  /* 2. CHOIX DES MENUS INDIVIDUELS */
+  #menu-container {
+    /* Passer de 4 colonnes (25%) à 2 colonnes sur mobile */
+    gap: 15px 5px;
+  }
+  .menu-selection-group {
+    /* Deux colonnes par ligne sur mobile */
+    flex: 0 0 calc(50% - 7.5px); 
+    min-width: 45%; /* S'assure qu'ils ne sont pas trop compressés */
+  }
+  
+  /* 3. BOUTON RÉSERVER */
+  .form-submit-row {
+    flex-wrap: wrap; /* Permet au statut de passer à la ligne */
+    align-items: center;
+    margin-left: 0 auto; margin-right: 0 auto;
+  }
+  .submit-button {
+    width: 60%;
+    padding: 12px;
+    margin: 0 auto;
+    font-size: 1.3rem;
+  }
+  #submission-status {
+    /* Le statut ne s'aligne plus forcément à droite, il suit le bouton */
+    margin-left: 0; 
+    margin-top: 10px;
+  }
 }
