@@ -292,7 +292,7 @@ footer {
 }
 .activity-time { /* Style spécifique à l'horaire (pour le mettre en valeur) */
     font-weight: 700;
-    color: var(--error-bg);
+    color: var(--luglon-green);
     margin-right: 15px; 
     display: inline-block; 
     min-width: 80px;
