@@ -43,7 +43,6 @@ const phoneError = document.getElementById('phone-error');
 const phoneMasker = document.getElementById('phone');
 const emailInput = document.getElementById('email');
 const emailError = document.getElementById('email-error');
-const peopleInput = document.getElementById('num-persons');
 const personsError = document.getElementById('persons-error');
 
 // Élément pour l'affichage du total en temps réel
