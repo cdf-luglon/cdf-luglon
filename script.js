@@ -31,18 +31,18 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwJEpHVydABQd3GZWyj
 const form = document.getElementById('resForm');
 const list = document.getElementById('list');
 const countEl = document.getElementById('count');
-const peopleInput = document.getElementById('people');
 const menuContainer = document.getElementById('menu-container');
 const totalCountMessage = document.getElementById('total-count-message');
 const soirSelect = document.getElementById('soir');
 // Éléments d'erreur
 const nameInput = document.getElementById('name');
-const phoneInput = document.getElementById('phone');
 const nameError = document.getElementById('name-error');
+const phoneInput = document.getElementById('phone');
 const phoneError = document.getElementById('phone-error');
 const phoneMasker = document.getElementById('phone');
 const emailInput = document.getElementById('email');
 const emailError = document.getElementById('email-error');
+const peopleInput = document.getElementById('people');
 const peopleError = document.getElementById('people-error');
 
 // Élément pour l'affichage du total en temps réel
