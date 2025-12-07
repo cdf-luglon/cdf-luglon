@@ -42,6 +42,10 @@ const nameError = document.getElementById('name-error');
 const phoneError = document.getElementById('phone-error');
 const phoneMasker = document.getElementById('phone');
 const emailInput = document.getElementById('email');
+const emailError = document.getElementById('email-error');
+const numPersonsInput = document.getElementById('num-persons');
+const personsError = document.getElementById('persons-error');
+
 // Élément pour l'affichage du total en temps réel
 const totalAmountEl = document.getElementById('total-amount');
 // Nouveaux éléments pour la gestion du statut de soumission
@@ -199,7 +203,11 @@ function validateContactFields() {
     }
 
     // Validation du Téléphone
-    if (phoneValue.length !== 10) {
+    if (phoneValue.length == 0) {
+        phoneError.textContent = errorMessage;
+        phoneInput.classList.add('input-error');
+        isValid = false;
+    } else if (phoneValue.length !== 10) {
         phoneError.textContent = 'Numéro invalide (10 chiffres)';
         phoneInput.classList.add('input-error');
         isValid = false;
@@ -208,7 +216,31 @@ function validateContactFields() {
         phoneInput.classList.remove('input-error');
     }
     
-    // Validation de l'Email est gérée par l'attribut required du HTML
+    // Validation de l'Email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    if (emailValue === '') {
+        emailError.textContent = errorMessage;
+        emailInput.classList.add('input-error');
+        isValid = false;
+    } else if (!emailRegex.test(emailValue)) {
+        emailError.textContent = 'Le format d\'e-mail est invalide';
+        emailInput.classList.add('input-error');
+        isValid = false;
+    } else {
+        emailError.textContent = '';
+        emailInput.classList.remove('input-error');
+    }
+    
+    // 4. Validation du Nombre de Personnes (Minimum 1) <--- NOUVELLE VALIDATION INCRUSTÉE
+    if (numPersonsValue < 1) {
+        personsError.textContent = 'Minimum 1 personne requise.';
+        numPersonsInput.classList.add('input-error');
+        isValid = false;
+    } else {
+        personsError.textContent = '';
+        numPersonsInput.classList.remove('input-error');
+    }
+    
 
     return isValid;
 }
