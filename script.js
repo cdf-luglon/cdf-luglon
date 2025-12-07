@@ -189,7 +189,9 @@ function validateContactFields() {
     let isValid = true;
     const nameValue = nameInput.value.trim();
     const phoneValue = phoneInput.value.replace(/\s/g, '').trim();
-    const emailValue = emailInput.value.trim(); 
+    const emailValue = emailInput.value.trim();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    const numPersonsValue = parseInt(numPersonsInput.value, 10) || 0;
     const errorMessage = 'Remplir ce champ';
 
     // Validation du Nom
@@ -217,7 +219,6 @@ function validateContactFields() {
     }
     
     // Validation de l'Email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
     if (emailValue === '') {
         emailError.textContent = errorMessage;
         emailInput.classList.add('input-error');
