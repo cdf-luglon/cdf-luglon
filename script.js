@@ -43,7 +43,7 @@ const phoneError = document.getElementById('phone-error');
 const phoneMasker = document.getElementById('phone');
 const emailInput = document.getElementById('email');
 const emailError = document.getElementById('email-error');
-const personsError = document.getElementById('persons-error');
+const peopleError = document.getElementById('people-error');
 
 // Élément pour l'affichage du total en temps réel
 const totalAmountEl = document.getElementById('total-amount');
@@ -233,11 +233,11 @@ function validateContactFields() {
     
     // 4. Validation du Nombre de Personnes (Minimum 1) <--- NOUVELLE VALIDATION INCRUSTÉE
     if (numPersonsValue < 1) {
-        personsError.textContent = 'Minimum 1 personne requise.';
+        peopleError.textContent = 'Minimum 1 personne requise.';
         peopleInput.classList.add('input-error');
         isValid = false;
     } else {
-        personsError.textContent = '';
+        peopleError.textContent = '';
         peopleInput.classList.remove('input-error');
     }
     
