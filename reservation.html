@@ -70,19 +70,20 @@
                             <div class="row form-group-spaced">
                                 <div class="field-auto">
                                     <label for="name"><strong>Nom du contact</strong></label>
-                                    <input id="name" name="Nom" required placeholder="Jean Dupont" required autocomplete="name">
+                                    <input id="name" name="Nom" placeholder="Jean Dupont" autocomplete="name">
                                     <p id="name-error" class="error-feedback"></p>
                                 </div>
                                 <div class="field-small">
                                     <label for="phone"><strong>Téléphone</strong></label>
-                                    <input id="phone" name="Telephone" type="tel" required placeholder="06 XX XX XX XX" required autocomplete="tel">
+                                    <input id="phone" name="Telephone" type="tel" placeholder="06 XX XX XX XX" autocomplete="tel">
                                     <p id="phone-error" class="error-feedback"></p>
                                 </div>
                             </div>
 
                             <div class="form-group-spaced">
                                 <label for="email"><strong>Adresse Email</strong></label>
-                                <input id="email" name="Email" type="email" required placeholder="votre.email@exemple.com" required autocomplete="email">
+                                <input id="email" name="Email" type="email" placeholder="votre.email@exemple.com" autocomplete="email">
+                                <p id="email-error" class="error-feedback"></p>
                             </div>
 
                             <div class="form-group-spaced">
@@ -96,7 +97,8 @@
                             <div class="row form-group-spaced field-end">
                                 <div class="field-small">
                                     <label for="people"><strong>Nombre de personnes (Total)</strong></label>
-                                    <input id="people" name="NbPersonnes" type="number" min="1" max="20" value="1" required onchange="generateMenuInputs(); calculateTotalPrice();">
+                                    <input id="people" name="NbPersonnes" type="number" value="1" onchange="generateMenuInputs(); calculateTotalPrice();">
+                                    <p id="people-error" class="error-feedback"></p>
                                 </div>
                                 <div class="field-auto">
                                     <p class="small" id="total-count-message">Veuillez choisir le menu pour chaque personne.</p>
@@ -116,7 +118,7 @@
                             </div>
 
                             <div class="form-submit-row">
-                                <button class="btn" type="submit" id="submit-button">RÉSERVER</button>
+                                <button class="btn submit-button" type="submit" id="submit-button">RÉSERVER</button>
                                 <div id="submission-status"></div> 
                                 <div class="reservation-count">Réservations sur cet appareil • <span id="count">0</span></div>
                             </div>
@@ -133,7 +135,7 @@
         </div>
     </div>
     <footer>
-        <div>Site développé par le comité des fêtes de Luglon - Tous droits réservés.</div>
+        <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
     </footer>
     
     <script src="script.js"></script>
