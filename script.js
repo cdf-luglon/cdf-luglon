@@ -43,7 +43,7 @@ const phoneError = document.getElementById('phone-error');
 const phoneMasker = document.getElementById('phone');
 const emailInput = document.getElementById('email');
 const emailError = document.getElementById('email-error');
-const numPersonsInput = document.getElementById('num-persons');
+const peopleInput = document.getElementById('num-persons');
 const personsError = document.getElementById('persons-error');
 
 // Élément pour l'affichage du total en temps réel
@@ -191,7 +191,7 @@ function validateContactFields() {
     const phoneValue = phoneInput.value.replace(/\s/g, '').trim();
     const emailValue = emailInput.value.trim();
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-    const numPersonsValue = parseInt(numPersonsInput.value, 10) || 0;
+    const numPersonsValue = parseInt(peopleInput.value, 10) || 0;
     const errorMessage = 'Remplir ce champ';
 
     // Validation du Nom
@@ -235,11 +235,11 @@ function validateContactFields() {
     // 4. Validation du Nombre de Personnes (Minimum 1) <--- NOUVELLE VALIDATION INCRUSTÉE
     if (numPersonsValue < 1) {
         personsError.textContent = 'Minimum 1 personne requise.';
-        numPersonsInput.classList.add('input-error');
+        peopleInput.classList.add('input-error');
         isValid = false;
     } else {
         personsError.textContent = '';
-        numPersonsInput.classList.remove('input-error');
+        peopleInput.classList.remove('input-error');
     }
     
 
@@ -275,12 +275,7 @@ form.addEventListener('submit',e=>{
     if (!validateContactFields()) {
         return;
     }
-
     const numPeople = Number(peopleInput.value);
-    if (numPeople < 1) {
-        setSubmissionStatus('error', "Veuillez indiquer le nombre de personnes.");
-        return;
-    }
 
     // Récupérer tous les choix de menus dynamiques (et vérifier qu'ils sont choisis)
     const selectedMenus = [];
