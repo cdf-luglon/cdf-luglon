@@ -548,6 +548,15 @@ input[type="number"] {
       max-width: 95%; 
       margin: 20px auto; 
   }
+
+  .floating-logo {
+    position: relative; /* Annule le mode fixe */
+    top: 0;
+    left: 0;
+    justify-content: center; /* Centre le logo sur mobile, c'est plus joli */
+    padding: 15px 0;
+  }
+  
   /* --- PAGE D'ACCUEIL --- */
 
   /* 1. MISE EN PAGE PRINCIPALE (HEADER) */
