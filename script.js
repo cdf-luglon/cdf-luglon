@@ -24,7 +24,7 @@ const DEFAULT_PEOPLE = 1;
 
 // *************************************************************************
 // NOUVELLE URL : Colle ici l'URL obtenue lors du déploiement Google Apps Script
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyRs-Dx9QeJW5XBx5oa8meJtJ8OVfkwAzwSh-4Evmn6SJJzVIv99NjIPeuEJFOky5_wbg/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbymoPvpN0CWs6XUVVlkESx-jIEd0yni_LZjfQmfD4TQUZi1SfPGa7QwuPIpY9VRRiabVA/exec';
 // *************************************************************************
 
 // PARTIE RÉSERVATION
