@@ -555,7 +555,7 @@ input[type="number"] {
     left: 0;
     justify-content: center; /* Centre le logo sur mobile, c'est plus joli */
     padding: 15px 0;
-    background: var(--bg); /* Assure que le fond est propre */
+    background: var(--card); /* Assure que le fond est propre */
   }
   
   /* --- PAGE D'ACCUEIL --- */
