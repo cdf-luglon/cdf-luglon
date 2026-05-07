@@ -194,7 +194,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-  text-decoration: none;
   max-width: 1200px;
   margin: 0 auto; 
   padding: 80px 10%;
@@ -203,12 +202,24 @@ footer {
 }
 .nav-card {
   max-width: 450px;
-  text-decoration: none;
   flex-basis: 48%; /* Permet aux cartes de prendre presque la moitié de la largeur chacune */
   display: flex; /* Activer Flexbox sur la carte */
   flex-direction: column; /* Organiser le contenu verticalement */
   justify-content: space-between; /* Pousser le premier contenu vers le haut et le dernier (bouton) vers le bas */
 }
+
+a.nav-card, 
+a.nav-card:visited, 
+a.nav-card:active {
+  max-width: 450px;
+  text-decoration: none !important;
+  color: var(--text) !important; /* Force ta couleur noire/blanche selon le mode */
+  flex-basis: 48%; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-between; 
+}
+
 .nav-card:hover {
   transform: none;
   box-shadow: none;
