@@ -101,7 +101,7 @@ function render(){
       <h4>${r.name} (${r.phone}) — ${r.people} pers 
       <span class="total-price">Total: ${formattedTotal}€</span></h4>
       <div class="meta">${r.soir} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
-      <div>Notes: ${r.notes || '—'}</div>
+      <div>Commentaire : ${r.notes || 'Aucun'}</div>
     `;
     
     list.appendChild(el);
@@ -300,7 +300,7 @@ form.addEventListener('submit',e=>{
     
     // Désactiver le bouton et afficher le statut "Envoi en cours..."
     submitButton.disabled = true;
-    setSubmissionStatus('sending', 'Envoi de votre réservation...');
+    setSubmissionStatus('sending', 'Réservation en cours...');
 
     // Préparer les données pour l'envoi au script Google (Format clé:valeur)
     const formData = {
