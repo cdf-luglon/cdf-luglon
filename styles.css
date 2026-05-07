@@ -203,6 +203,7 @@ footer {
 }
 .nav-card {
   max-width: 450px;
+  text-decoration: none;
   flex-basis: 48%; /* Permet aux cartes de prendre presque la moitié de la largeur chacune */
   display: flex; /* Activer Flexbox sur la carte */
   flex-direction: column; /* Organiser le contenu verticalement */
@@ -215,7 +216,6 @@ footer {
 .nav-card h3 {
   margin-top: 0;
   font-size: 1.5rem;
-  text-decoration: none;
   font-family: "Special Gothic Condensed One", sans-serif;
   color: var(--text);
 }
@@ -223,7 +223,6 @@ footer {
   font-size: 1.2rem; 
   margin-top: 10px;
   margin-bottom: 20px;
-  text-decoration: none;
   font-family: "Special Gothic Condensed One", sans-serif;
 }
 .nav-logo {
