@@ -6,3 +6,5 @@ changer l'interface google sheets et mail :
 - Proposer d'appeler Félix / Tiphaine dans le message d'erreur
 - Changer 'nom du contact' par 'nom'
 - Rendre toute la navigation clicable, incluant le logo et tout
+- Créer une page de confirmation d'achat, avec téléchargement possible du billet en pdf
+- Supprimer le index.html dans l'URL c'est pas propre
