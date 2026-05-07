@@ -555,6 +555,7 @@ input[type="number"] {
     left: 0;
     justify-content: center; /* Centre le logo sur mobile, c'est plus joli */
     padding: 15px 0;
+    background: var(--bg); /* Assure que le fond est propre */
   }
   
   /* --- PAGE D'ACCUEIL --- */
@@ -562,11 +563,11 @@ input[type="number"] {
   /* 1. MISE EN PAGE PRINCIPALE (HEADER) */
   .main-hero {
     display: block; /* Empile les éléments (titre puis image) */ 
-    padding: 30px 5% 30px; /* Réduit le padding pour plus d'espace */
+    padding: 10px 5% 30px; /* Réduit le padding pour plus d'espace */
     text-align: center; /* Centre le texte */
   }
   .hero-content {
-    margin-top: 70px;
+    margin-top: 0;
     flex-basis: auto; /* Annule le 70% */
     padding-right: 0;
   }
