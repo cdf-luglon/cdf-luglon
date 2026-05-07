@@ -572,8 +572,7 @@ input[type="number"] {
     padding-right: 0;
   }
   .hero-image {
-    max-width: 50%; /* L'image prend toute la largeur */
-    margin-top: 20px;
+    display: none;
   }
   
   /* Ajustement de la taille des titres pour mobile */
@@ -588,8 +587,7 @@ input[type="number"] {
 
   /* 2. SECTION HISTOIRE ET IMAGES DE FOUGÈRE */
   .history-images-container {
-    display: block; /* Empile les images et le texte */
-    padding: 30px 5%; 
+    display: none; /* Empile les images et le texte */
   }
   .history-section {
     max-width: 100%;
