@@ -571,8 +571,10 @@ input[type="number"] {
     flex-basis: auto; /* Annule le 70% */
     padding-right: 0;
   }
+  
   .hero-image {
-    display: none;
+    max-width: 50%; /* L'image prend toute la largeur */
+    margin-top: 20px;
   }
   
   /* Ajustement de la taille des titres pour mobile */
