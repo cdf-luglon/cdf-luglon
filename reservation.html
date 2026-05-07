@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Luglon en fête - Réservation</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' style='fill:%23166136;'/%3E%3Ctext x='50' y='65' font-size='60' text-anchor='middle' fill='%23ffffff' font-family='Arial, sans-serif' font-weight='bold'%3EL%3C/text%3E%3C/svg%3E">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Slackey&family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="main-hero">
+        <div class="hero-content">
+            <h1 class="main-title">RÉSERVATION DES REPAS</h1>
+            <p class="main-subtitle">Fêtes de Luglon 2026</p> 
+        </div>
+        <img src="dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image">
+    </div>
+
+    <div class="wrap res-wrap">
+        
+        <a href="index.html" class="floating-logo">
+            <img src="logo_cdf.jpg" alt="Logo Comité des Fêtes" />
+            <div class="logo-fixed-text">
+                <span class="logo-line-1">Comité des Fêtes</span>
+                <span class="logo-line-2">Luglon</span>
+            </div>
+        </a>
+
+        <div class="tab-content">
+            <div id="reservation" class="tab-pane active">
+                <!-- <div class="grid"> -->
+                    <main class="card">
+                        
+                        <div class="price-plaque">
+                            <h3>Tarifs des Repas</h3>
+                            <table class="price-table">
+                                <thead>
+                                    <tr>
+                                        <th>Repas</th>
+                                        <th>Menu Adulte (Viande / Poisson)</th>
+                                        <th>Menu Enfant (Moins de 12 ans)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Vendredi soir</td>
+                                        <td>14 €</td>
+                                        <td>7 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Samedi soir</td>
+                                        <td>17 €</td>
+                                        <td>8,50 €</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="warning-note">
+                            <strong>Note :</strong> Pour manger le vendredi et le samedi, il faut effectuer deux réservations.
+                        </div>
+
+                        <form id="resForm" autocomplete="off">
+                            <div class="row form-group-spaced">
+                                <div class="field-auto">
+                                    <label for="name"><strong>Nom du contact</strong></label>
+                                    <input id="name" name="Nom" placeholder="Jean Dupont" autocomplete="name">
+                                    <p id="name-error" class="error-feedback"></p>
+                                </div>
+                                <div class="field-small">
+                                    <label for="phone"><strong>Téléphone</strong></label>
+                                    <input id="phone" name="Telephone" type="tel" placeholder="06 XX XX XX XX" autocomplete="tel">
+                                    <p id="phone-error" class="error-feedback"></p>
+                                </div>
+                            </div>
+
+                            <div class="form-group-spaced">
+                                <label for="email"><strong>Adresse Email</strong></label>
+                                <input id="email" name="Email" type="email" placeholder="votre.email@exemple.com" autocomplete="email">
+                                <p id="email-error" class="error-feedback"></p>
+                            </div>
+
+                            <div class="form-group-spaced">
+                                <label for="soir"><strong>Choix du soir</strong></label>
+                                <select id="soir" name="Soir" onchange="calculateTotalPrice();">
+                                    <option value="vendredi"><strong>Vendredi soir</strong> - Menu : Terrine de saumon, Araignée de porc ou Txistorra, Flan</option>
+                                    <option value="samedi"><strong>Samedi soir</strong> — Menu : Assiette Luglonaise, Entrecôte, Pastis landais</option>
+                                </select>
+                            </div>
+
+                            <div class="row form-group-spaced field-end">
+                                <div class="field-small">
+                                    <label for="people"><strong>Nombre de personnes (Total)</strong></label>
+                                    <input id="people" name="NbPersonnes" type="number" value="1" onchange="generateMenuInputs(); calculateTotalPrice();">
+                                    <p id="people-error" class="error-feedback"></p>
+                                </div>
+                                <div class="field-auto">
+                                    <p class="small" id="total-count-message">Veuillez choisir le menu pour chaque personne.</p>
+                                </div>
+                            </div>
+
+                            <div id="menu-container"></div>
+                            
+                            <div class="form-group-spaced">
+                                <label for="notes"><strong>Commentaire (facultatif)</strong></label>
+                                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, personne à mobilité réduite..."></textarea>
+                            </div>
+
+                            <div id="final-total">
+                                <span class="total-price">Prix Total (à payer sur place) : </span>
+                                <span class="amount" id="total-amount">0,00 €</span>
+                            </div>
+
+                            <div class="form-submit-row">
+                                <button class="btn submit-button" type="submit" id="submit-button">RÉSERVER</button>
+                                <div id="submission-status"></div> 
+                                <div class="reservation-count">Réservations sur cet appareil • <span id="count">0</span></div>
+                            </div>
+                        </form>
+
+                        <hr class="separator-line">
+                        <h3 class="reservation-list-title">Dernières réservations</h3>
+                        <div class="reservations" id="list">
+                            <div class="empty">Aucune réservation pour l'instant.</div>
+                        </div>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <section class="nav-grid">
+            
+            <div class="nav-card program-card">
+                <img src="logo_index.png" alt="Index Logo" class="nav-logo">
+                <h3>Page principale</h3>
+                <p>Retournez à la page principale du site de Luglon.</p>
+                <a href="index.html" class="btn nav-button">PAGE PRINCIPALE</a>
+            </div>
+
+            <div class="nav-card program-card">
+                <img src="logo_programme.png" alt="Programme Logo" class="nav-logo">
+                <h3>Le Programme des Fêtes</h3>
+                <p>Découvrez tous les événements gratuits, les horaires et les animations du weekend.</p>
+                <a href="programme.html" class="btn nav-button">PROGRAMME</a>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
