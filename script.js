@@ -23,8 +23,8 @@ const MENU_OPTIONS = [
 const DEFAULT_PEOPLE = 1;
 
 // *************************************************************************
-// NOUVELLE URL : Pointe vers le fichier PHP hébergé sur ton serveur IONOS
-const WEB_APP_URL = 'process.php';
+// NOUVELLE URL : Colle ici l'URL obtenue lors du déploiement Google Apps Script
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyRs-Dx9QeJW5XBx5oa8meJtJ8OVfkwAzwSh-4Evmn6SJJzVIv99NjIPeuEJFOky5_wbg/exec';
 // *************************************************************************
 
 // PARTIE RÉSERVATION
@@ -63,7 +63,7 @@ function loadReservations(){
 }
 function saveReservations(arr){localStorage.setItem('luglon_reservations',JSON.stringify(arr));}
 
-// 2. RENDU DE LA LISTE DES RÉSERVATIONS
+// 2. RENDU DE LA LISTE DES RÉSERVATIONS (Version complète restaurée)
 function render(){
   const data=loadReservations();
   countEl.textContent=data.length;
@@ -108,12 +108,12 @@ function render(){
   });
 }
 
-// FONCTION INUTILE MAIS CONSERVÉE POUR LA CLARTÉ DU JS
+// FONCTION UTILITAIRE CONSERVÉE POUR LA CLARTÉ
 function updatePriceRecap() {
     calculateTotalPrice();
 }
 
-// NOUVELLE FONCTION : Calcule et affiche le prix total en temps réel
+// FONCTION : Calcule et affiche le prix total en temps réel
 function calculateTotalPrice() {
     const selectedDay = soirSelect.value;
     const numPeople = Number(peopleInput.value);
@@ -302,7 +302,7 @@ form.addEventListener('submit',e=>{
     submitButton.disabled = true;
     setSubmissionStatus('sending', 'Envoi de votre réservation...');
 
-    // Préparer les données pour l'envoi au serveur PHP avec les compteurs séparés
+    // Préparer les données pour l'envoi au script Google (Format clé:valeur)
     const formData = {
         'Nom': nameInput.value.trim(),
         'Email': emailInput.value.trim(), 
@@ -313,11 +313,11 @@ form.addEventListener('submit',e=>{
         'Poisson': nbPoisson,
         'Enfant': nbEnfant,
         'Notes': form.notes.value.trim(),
-        'Total_Euros': parseFloat(totalAmountEl.textContent.replace('€', '').replace(',', '.').replace(/\s/g, '')), // Nettoyage propre pour la DB
+        'Total_Euros': parseFloat(totalAmountEl.textContent.replace('€', '').replace(',', '.').replace(/\s/g, '')),
         'Timestamp': new Date().toLocaleString('fr-FR'), 
     };
     
-    // Envoi des données au script PHP local
+    // Envoi des données au Google Apps Script
     fetch(WEB_APP_URL, {
         method: 'POST',
         headers: {
@@ -325,10 +325,10 @@ form.addEventListener('submit',e=>{
         },
         body: new URLSearchParams(formData).toString(),
     })
-    .then(response => response.json()) // On lit la réponse JSON renvoyée par le PHP
+    .then(response => response.json())
     .then(result => {
         if (!result.success) {
-            throw new Error(result.error || "Erreur inconnue côté serveur");
+            throw new Error(result.error || "Erreur inconnue côté Google");
         }
 
         // Logique de confirmation pour le stockage local
@@ -338,7 +338,7 @@ form.addEventListener('submit',e=>{
             phone: formData.Telephone,
             people: formData.NbPersonnes,
             soir: formData.Soir,
-            menus: selectedMenus, // On garde le tableau pour la fonction render()
+            menus: selectedMenus, 
             notes: formData.Notes
         };
         
@@ -356,7 +356,7 @@ form.addEventListener('submit',e=>{
         calculateTotalPrice();
     })
     .catch(error => {
-        console.error('Erreur lors de l\'envoi à la base de données:', error);
+        console.error('Erreur lors de l\'envoi :', error);
         setSubmissionStatus('error', "Erreur lors de l'envoi. Veuillez réessayer.");
     })
     .finally(() => {
