@@ -347,7 +347,7 @@ form.addEventListener('submit',e=>{
         render();
 
         // 2. Afficher une confirmation de succès vert
-        setSubmissionStatus('success', `Réservation pour ${formData.Nom} ENVOYÉE ! (Total: ${totalAmountEl.textContent})`);
+        setSubmissionStatus('success', `Réservation CONFIRMÉE !`);
         
         // 3. Réinitialisation après soumission
         form.reset();
