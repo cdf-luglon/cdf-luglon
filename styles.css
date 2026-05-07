@@ -215,6 +215,7 @@ footer {
 .nav-card h3 {
   margin-top: 0;
   font-size: 1.5rem;
+  text-decoration: none;
   font-family: "Special Gothic Condensed One", sans-serif;
   color: var(--text);
 }
@@ -222,6 +223,7 @@ footer {
   font-size: 1.2rem; 
   margin-top: 10px;
   margin-bottom: 20px;
+  text-decoration: none;
   font-family: "Special Gothic Condensed One", sans-serif;
 }
 .nav-logo {
