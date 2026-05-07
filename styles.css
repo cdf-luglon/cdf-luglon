@@ -194,7 +194,7 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: stretch;
-
+  text-decoration: none;
   max-width: 1200px;
   margin: 0 auto; 
   padding: 80px 10%;
