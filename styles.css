@@ -543,6 +543,134 @@ input[type="number"] {
 
   /* --- STYLES GÉNÉRAUX --- */
 
+  /* À coller directement dans ton @media (max-width: 768px) existant */
+
+  /* ---------------------------------------------------------- */
+  /* 1. LOGO — intégré dans le flux sur fond vert               */
+  /* ---------------------------------------------------------- */
+  
+  .floating-logo {
+    position: relative;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    padding: 20px 20px 0;
+    background: var(--luglon-green);
+    color: #fff;
+    gap: 10px;
+  }
+  
+  .floating-logo img {
+    width: 44px;
+    height: 44px;
+    border: 2px solid rgba(255, 255, 255, 0.45);
+  }
+  
+  .logo-fixed-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+  
+  .logo-fixed-text .logo-line-1 {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 0.06em;
+    text-shadow: none;
+  }
+  
+  .logo-fixed-text .logo-line-2 {
+    font-size: 15px;
+    color: #fff !important;
+    text-shadow: none;
+  }
+  
+  /* ---------------------------------------------------------- */
+  /* 2. HERO — fond vert, titre centré, motif décoratif         */
+  /* ---------------------------------------------------------- */
+  
+  .main-hero {
+    display: block;
+    background: var(--luglon-green);
+    padding: 16px 24px 32px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .main-hero::before {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    border: 40px solid rgba(255, 255, 255, 0.05);
+    pointer-events: none;
+  }
+  
+  .main-hero::after {
+    content: "";
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 30px solid rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+  
+  .hero-content {
+    flex-basis: auto;
+    padding-right: 0;
+    margin-top: 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .hero-content::before {
+    content: "✦  ÉDITION 2026  ✦";
+    display: block;
+    font-family: "Special Gothic Condensed One", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 10px;
+  }
+  
+  .main-title {
+    font-size: 3.6rem;
+    line-height: 1;
+    margin: 0 0 8px;
+    color: #fff;
+    text-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .main-subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.72);
+    letter-spacing: 0.1em;
+    margin: 0 0 18px;
+  }
+  
+  .hero-pill {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.13);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 30px;
+    padding: 5px 16px;
+    font-family: "Special Gothic Condensed One", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .hero-image {
+    display: none;
+  }
+
   /* Le wrap de réservation doit prendre plus de place sur petit écran */
   .wrap.res-wrap {
       max-width: 95%; 
