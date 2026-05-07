@@ -2,7 +2,7 @@
 
 changer l'interface google sheets et mail :
 - Les éléments en majuscule
-- Les repas dans le google sheets comptés par type
-
-adapter pour le téléphone :
-- page reservation doit occuper tout le telephone
+- Dire d'envoyer un mail à contact@cdf-luglon.fr pour annuler ou modifier la réservation
+- Proposer d'appeler Félix / Tiphaine dans le message d'erreur
+- Changer 'nom du contact' par 'nom'
+- Rendre toute la navigation clicable, incluant le logo et tout
