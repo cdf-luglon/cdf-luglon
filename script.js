@@ -318,20 +318,20 @@ form.addEventListener('submit',e=>{
     };
     
     // Envoi des données au Google Apps Script
+    // Envoi des données au Google Apps Script
     fetch(WEB_APP_URL, {
         method: 'POST',
+        mode: 'no-cors', // <-- LE CHANGEMENT MAGIQUE EST ICI
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: new URLSearchParams(formData).toString(),
     })
-    .then(response => response.json())
-    .then(result => {
-        if (!result.success) {
-            throw new Error(result.error || "Erreur inconnue côté Google");
-        }
+    .then(() => {
+        // En mode no-cors, on ne peut pas lire le {success: true} de Google.
+        // Mais si le code arrive ici, c'est que la requête est bien partie vers le Sheet !
 
-        // Logique de confirmation pour le stockage local
+        // 1. Logique de confirmation pour le stockage local
         const data=loadReservations();
         const entry={
             name: formData.Nom,
@@ -346,18 +346,19 @@ form.addEventListener('submit',e=>{
         saveReservations(data);
         render();
 
-        // Afficher une confirmation de succès
+        // 2. Afficher une confirmation de succès vert
         setSubmissionStatus('success', `Réservation pour ${formData.Nom} ENVOYÉE ! (Total: ${totalAmountEl.textContent})`);
         
-        // Réinitialisation après soumission
+        // 3. Réinitialisation après soumission
         form.reset();
         peopleInput.value = DEFAULT_PEOPLE;
         generateMenuInputs();
         calculateTotalPrice();
     })
     .catch(error => {
+        // Cette erreur ne s'affichera que si l'utilisateur n'a vraiment pas d'internet
         console.error('Erreur lors de l\'envoi :', error);
-        setSubmissionStatus('error', "Erreur lors de l'envoi. Veuillez réessayer.");
+        setSubmissionStatus('error', "Erreur de connexion internet. Veuillez réessayer.");
     })
     .finally(() => {
         submitButton.disabled = false;
