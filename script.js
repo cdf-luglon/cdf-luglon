@@ -1,4 +1,4 @@
-// Configuration des prix par jour et par type de menu
+// Table des prix par jour et par type de menu
 const PRICES_BY_DAY = {
     'vendredi': {
         'standard': 14.00,
