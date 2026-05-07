@@ -217,7 +217,10 @@ a.nav-card:active {
   flex-basis: 48%; 
   display: flex; 
   flex-direction: column; 
-  justify-content: space-between; 
+  justify-content: space-between;
+  border: 2px solid var(--tab-border);
+  border-radius: 12px;
+  padding: 25px;
 }
 
 .nav-card:hover {
