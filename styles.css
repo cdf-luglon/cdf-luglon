@@ -611,19 +611,49 @@ input[type="number"] {
   
   /* 3. GRILLE DE NAVIGATION */
   .nav-grid {
-    flex-direction: column; /* Empile les cartes verticalement */
-    padding: 40px 5%;
-    gap: 30px;
+    flex-direction: row; /* Empile les cartes verticalement */
+    padding: 20px 5%;
+    gap: 10px;
   }
+
+  a.nav-card, 
+  a.nav-card:visited, 
+  a.nav-card:active {
+    flex-basis: 50%; /* Chaque carte prend la moitié de l'écran */
+    flex-direction: column; /* Remet l'icône au-dessus du texte */
+    padding: 15px 10px; /* Réduit un peu les marges intérieures */
+    text-align: center; /* Centre le texte */
+  }
+
+  .nav-logo {
+      width: 60px; /* Icône plus petite pour rentrer */
+      height: 60px;
+      margin: 0 auto 10px auto; /* Centre l'icône */
+    }
+
+  .nav-card h3 {
+    font-size: 1.1rem; /* Texte plus petit */
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  /* On garde le texte caché car il n'y a pas la place */
+  .nav-card p {
+    display: none; 
+  }
+
+  .nav-button {
+    width: 100%;
+    padding: 8px 5px;
+    font-size: 1rem;
+    margin: 0;
+  }
+  
   .nav-card {
     max-width: 100%;
     flex-basis: auto; /* Annule le 48% */
   }
   
-  .nav-button {
-    padding: 12px;
-    font-size: 1.2rem;
-  }
   /* --- PAGE PROGRAMME --- */
 
   .day-title h4 {
