@@ -619,12 +619,7 @@ input[type="number"] {
     max-width: 100%;
     flex-basis: auto; /* Annule le 48% */
   }
-  .nav-card h3 {
-    display: none;
-  }
-  .nav-logo {
-    display: none;
-  }
+  
   .nav-button {
     padding: 12px;
     font-size: 1.2rem;
