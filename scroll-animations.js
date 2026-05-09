@@ -5,149 +5,36 @@
 
 (function () {
 
-  // --- 1. Blocs du programme : planning-section (gauche / droite) ---
-  // rootMargin positif = déclenche AVANT que l'élément entre dans le viewport
-  const planningObserver = new IntersectionObserver(
-    (entries) => {
+  // Fonction utilitaire : crée un observer et l'applique à une liste d'éléments
+  function observe(selector, options) {
+    const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('scroll-visible');
-          planningObserver.unobserve(entry.target);
+          observer.unobserve(entry.target); // Une seule fois
         }
       });
-    },
-    { threshold: 0.08, rootMargin: '0px 0px 60px 0px' }
-  );
+    }, options);
 
-  document.querySelectorAll('.planning-section').forEach((el) => {
-    planningObserver.observe(el);
-  });
+    document.querySelectorAll(selector).forEach((el) => observer.observe(el));
+  }
 
-  // --- 2. Section histoire (accueil) ---
-  const historyObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          historyObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px 80px 0px' }
-  );
+  // rootMargin positif = se déclenche AVANT que l'élément soit complètement visible
 
-  document.querySelectorAll('.history-section').forEach((el) => {
-    historyObserver.observe(el);
-  });
+  // 1. Blocs du programme gauche/droite (la classe scroll-visible va sur .planning-section)
+  observe('.planning-section', { threshold: 0.08, rootMargin: '0px 0px 80px 0px' });
 
-  // --- 3. Cartes de navigation : apparition en cascade ---
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          navObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.05, rootMargin: '0px 0px 80px 0px' }
-  );
+  // 2. Section histoire (accueil)
+  observe('.history-section', { threshold: 0.1, rootMargin: '0px 0px 80px 0px' });
 
-  document.querySelectorAll('.nav-grid a.nav-card').forEach((el) => {
-    navObserver.observe(el);
-  });
+  // 3. Cartes de navigation
+  observe('.nav-grid a.nav-card', { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
 
-  // --- 4. Carte formulaire réservation ---
-  const cardObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          cardObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.02, rootMargin: '0px 0px 100px 0px' }
-  );
+  // 4. Carte formulaire réservation
+  observe('.res-wrap .card', { threshold: 0.02, rootMargin: '0px 0px 100px 0px' });
 
-  document.querySelectorAll('.res-wrap .card').forEach((el) => {
-    cardObserver.observe(el);
-  });
-
-  // --- 5. Tableau de prix et note d'avertissement (page réservation) ---
-  const reservationBlocksObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          reservationBlocksObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.05, rootMargin: '0px 0px 80px 0px' }
-  );
-
-  document.querySelectorAll('.price-plaque, .warning-note').forEach((el) => {
-    reservationBlocksObserver.observe(el);
-  });
-
-})();    { threshold: 0.2 }
-  );
-
-  document.querySelectorAll('.history-section').forEach((el) => {
-    historyObserver.observe(el);
-  });
-
-  // --- 3. Cartes de navigation : apparition en cascade ---
-  const navObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          navObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
-  );
-
-  document.querySelectorAll('.nav-grid a.nav-card').forEach((el) => {
-    navObserver.observe(el);
-  });
-
-  // --- 4. Carte formulaire réservation ---
-  const cardObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          cardObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.05 }
-  );
-
-  document.querySelectorAll('.res-wrap .card').forEach((el) => {
-    cardObserver.observe(el);
-  });
-
-  // --- 5. Éléments génériques avec data-scroll ---
-  // Usage : <div data-scroll="fadeUp"> ou data-scroll="fadeLeft"
-  const genericObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('scroll-visible');
-          genericObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  document.querySelectorAll('[data-scroll]').forEach((el) => {
-    genericObserver.observe(el);
-  });
+  // 5. Tableau de prix et note d'avertissement
+  observe('.price-plaque', { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
+  observe('.warning-note', { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
 
 })();
