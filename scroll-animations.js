@@ -22,19 +22,19 @@
   // rootMargin positif = se déclenche AVANT que l'élément soit complètement visible
 
   // 1. Blocs du programme gauche/droite (la classe scroll-visible va sur .planning-section)
-  observe('.planning-section', { threshold: 0.08, rootMargin: '0px 0px 80px 0px' });
+  observe('.planning-section', { threshold: 0.08, rootMargin: '0px 0px -100px 0px' });
 
   // 2. Section histoire (accueil)
-  observe('.history-section', { threshold: 0.1, rootMargin: '0px 0px 80px 0px' });
+  observe('.history-section', { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
 
   // 3. Cartes de navigation
-  observe('.nav-grid a.nav-card', { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
+  observe('.nav-grid a.nav-card', { threshold: 0.05, rootMargin: '0px 0px -100px 0px' });
 
   // 4. Carte formulaire réservation
-  observe('.res-wrap .card', { threshold: 0.02, rootMargin: '0px 0px 100px 0px' });
+  observe('.res-wrap .card', { threshold: 0.02, rootMargin: '0px 0px -100px 0px' });
 
   // 5. Tableau de prix et note d'avertissement
-  observe('.price-plaque', { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
-  observe('.warning-note', { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
+  observe('.price-plaque', { threshold: 0.05, rootMargin: '0px 0px -100px 0px' });
+  observe('.warning-note', { threshold: 0.05, rootMargin: '0px 0px -100px 0px' });
 
 })();
