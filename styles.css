@@ -40,6 +40,378 @@
 }
 
 /* ---------------------------------------------------------- */
+/* =================== ANIMATIONS DE FEU =================== */
+/* ---------------------------------------------------------- */
+
+/* --- Keyframes --- */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes titleReveal {
+  from { opacity: 0; transform: translateY(-30px) skewY(-3deg); letter-spacing: 0.3em; }
+  to   { opacity: 1; transform: translateY(0) skewY(0); letter-spacing: normal; }
+}
+
+@keyframes subtitleReveal {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-4px); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes fougereWave {
+  0%, 100% { transform: rotate(-3deg) scale(1); }
+  50%       { transform: rotate(3deg) scale(1.04); }
+}
+
+@keyframes heroImageReveal {
+  from { opacity: 0; transform: scale(0.9) rotate(-2deg); }
+  to   { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(22, 97, 54, 0.4); }
+  50%       { box-shadow: 0 0 20px 6px rgba(22, 97, 54, 0.25); }
+}
+
+@keyframes dayTitleSlide {
+  from { opacity: 0; transform: translateX(-50px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+
+@keyframes dayTitleSlideRight {
+  from { opacity: 0; transform: translateX(50px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+
+@keyframes underlineGrow {
+  from { width: 0; }
+  to   { width: 100%; }
+}
+
+@keyframes buttonPop {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(0.94); }
+  60%  { transform: scale(1.04); }
+  100% { transform: scale(1); }
+}
+
+@keyframes spinnerRing {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes confettiFloat {
+  0%   { opacity: 1; transform: translateY(0) rotate(0deg); }
+  100% { opacity: 0; transform: translateY(-120px) rotate(720deg); }
+}
+
+@keyframes navCardIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes backgroundPan {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes resItemIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* --- Hero : titre et sous-titre --- */
+.main-title {
+  animation: titleReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.main-subtitle {
+  animation: subtitleReveal 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Hero : image du dessin --- */
+.hero-image {
+  animation: heroImageReveal 1s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Logo flottant animé --- */
+.floating-logo {
+  animation: floatLogo 3s ease-in-out infinite;
+}
+.floating-logo:hover {
+  animation-play-state: paused;
+  opacity: 0.8;
+}
+
+/* --- Section histoire avec fougères --- */
+.history-image-placeholder.image-left img {
+  animation: fougereWave 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+.history-image-placeholder.image-right img {
+  animation: fougereWave 5s 1.5s ease-in-out infinite reverse;
+  transform-origin: bottom center;
+}
+.history-section {
+  animation: fadeInUp 0.8s 0.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* --- Cartes de navigation --- */
+.nav-grid a.nav-card:nth-child(1) {
+  animation: navCardIn 0.6s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.nav-grid a.nav-card:nth-child(2) {
+  animation: navCardIn 0.6s 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+a.nav-card {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              box-shadow 0.25s ease,
+              border-color 0.25s ease !important;
+}
+a.nav-card:hover {
+  transform: translateY(-6px) scale(1.02) !important;
+  box-shadow: 0 12px 30px rgba(22, 97, 54, 0.2) !important;
+  border-color: var(--luglon-green) !important;
+}
+a.nav-card:active {
+  transform: translateY(-2px) scale(0.99) !important;
+}
+
+/* Bouton nav avec effet shimmer au hover */
+.nav-button {
+  position: relative;
+  overflow: hidden;
+  transition: filter 0.2s, transform 0.15s;
+}
+.nav-button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+a.nav-card:hover .nav-button::after {
+  left: 150%;
+}
+a.nav-card:hover .nav-button {
+  filter: brightness(1.15);
+}
+
+/* Logo de nav tournoie légèrement au hover */
+.nav-logo {
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+a.nav-card:hover .nav-logo {
+  transform: rotate(-8deg) scale(1.1);
+}
+
+/* --- Titres de jours du programme --- */
+.align-left .day-title h4 {
+  animation: dayTitleSlide 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.align-right .day-title h4 {
+  animation: dayTitleSlideRight 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.align-left .day-content {
+  animation: fadeInLeft 0.6s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.align-right .day-content {
+  animation: fadeInRight 0.6s 0.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Ligne verte animée sous le titre du jour */
+.day-title {
+  position: relative;
+}
+.day-title::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: var(--luglon-green);
+  border-radius: 2px;
+  animation: underlineGrow 0.6s 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Lignes du programme : hover subtil */
+.activity-line {
+  transition: background 0.2s, padding-left 0.2s;
+  border-radius: 6px;
+  padding-left: 4px;
+}
+.activity-line:hover {
+  background: rgba(22, 97, 54, 0.07);
+  padding-left: 10px;
+}
+
+/* --- Formulaire de réservation --- */
+.res-wrap .card {
+  animation: scaleIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--luglon-green) !important;
+  box-shadow: 0 0 0 3px rgba(22, 97, 54, 0.18);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input, textarea, select {
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+/* Groupes de menus individuels : apparition en cascade */
+.menu-selection-group {
+  animation: cardSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.menu-selection-group:nth-child(1) { animation-delay: 0.05s; }
+.menu-selection-group:nth-child(2) { animation-delay: 0.10s; }
+.menu-selection-group:nth-child(3) { animation-delay: 0.15s; }
+.menu-selection-group:nth-child(4) { animation-delay: 0.20s; }
+.menu-selection-group:nth-child(5) { animation-delay: 0.25s; }
+.menu-selection-group:nth-child(6) { animation-delay: 0.30s; }
+.menu-selection-group:nth-child(7) { animation-delay: 0.35s; }
+.menu-selection-group:nth-child(8) { animation-delay: 0.40s; }
+
+/* Bouton RÉSERVER */
+.submit-button {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.2s,
+              box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.submit-button::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: left 0.5s ease;
+}
+.submit-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  filter: brightness(1.12);
+  box-shadow: 0 8px 20px rgba(22, 97, 54, 0.35);
+}
+.submit-button:hover::after {
+  left: 150%;
+}
+.submit-button:active {
+  animation: buttonPop 0.3s ease;
+  transform: scale(0.97);
+}
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  filter: none;
+}
+
+/* Total qui change : flash vert */
+#final-total {
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+#total-amount {
+  transition: color 0.3s, transform 0.3s;
+  display: inline-block;
+}
+
+/* Items de réservation : apparition animée */
+.res-item {
+  animation: resItemIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Statut de soumission : pulsation au sending */
+#submission-status.sending::before {
+  content: '';
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--sending-border);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinnerRing 0.8s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Statut succès : icône checkmark */
+#submission-status.success::before {
+  content: '✓';
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Statut erreur : icône croix */
+#submission-status.error::before {
+  content: '✕';
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+/* Prix total en vert pulsant */
+.total-price {
+  animation: glowPulse 2.5s ease-in-out infinite;
+  border-radius: 6px;
+  padding: 2px 6px;
+}
+
+/* Price-plaque : bordure animée */
+.price-plaque {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.3s;
+}
+.price-plaque:hover {
+  box-shadow: 0 4px 16px rgba(22, 97, 54, 0.2);
+}
+
+/* --- Respect de prefers-reduced-motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------------------------------------------------------- */
 /* -------------- STYLES GÉNÉRAUX ET STRUCTURE -------------- */
 /* ---------------------------------------------------------- */
 
