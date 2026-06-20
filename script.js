@@ -193,7 +193,7 @@ function checkExistingReservationForDay() {
         // on prévient, mais le vrai blocage se fera à la soumission (modale).
         existingReservationNotice.style.display = 'block';
         existingReservationNotice.textContent =
-            `Vous avez déjà une réservation pour ${DAY_LABELS[selectedDay]}. Vous pourrez tout de même valider si besoin.`;
+            `Attention : vous avez déjà une réservation pour ${DAY_LABELS[selectedDay]}.`;
         return;
     }
 
@@ -205,7 +205,7 @@ function checkExistingReservationForDay() {
     if (otherExisting) {
         existingReservationNotice.style.display = 'block';
         existingReservationNotice.textContent =
-            `Vous avez déjà réservé pour ${DAY_LABELS[otherDay]}. Si vous souhaitez aussi manger ${DAY_LABELS[selectedDay] === 'Vendredi' ? 'le vendredi' : 'le samedi'}, vous pouvez valider cette réservation en plus.`;
+            `Note : vous êtes en train de réserver pour ${DAY_LABELS[selectedDay] === 'Vendredi' ? 'le vendredi' : 'le samedi'} et avez déjà réservé pour ${DAY_LABELS[otherDay]}.`;
     } else {
         existingReservationNotice.style.display = 'none';
         existingReservationNotice.textContent = '';
