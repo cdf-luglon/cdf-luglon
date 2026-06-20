@@ -22,6 +22,12 @@
   --error-border: #c62828;
   --success-bg: #e8f5e9;
   --success-border: #2e7d32;
+
+  /* Compte à rebours — alerte rouge/orange (volontairement en rupture avec le vert) */
+  --countdown-from: #ff6a00;
+  --countdown-to: #c62828;
+  --countdown-text: #ffffff;
+  --countdown-shadow: rgba(198, 40, 40, 0.35);
 }
 
 /* --- DARK MODE --- */
@@ -66,8 +72,8 @@
 }
 
 @keyframes titleReveal {
-  from { opacity: 0; transform: translateY(-30px) skewY(-3deg); letter-spacing: 0.3em; }
-  to   { opacity: 1; transform: translateY(0) skewY(0); letter-spacing: normal; }
+  from { opacity: 0; transform: translateY(-30px) skewY(-3deg); filter: blur(6px); }
+  to   { opacity: 1; transform: translateY(0) skewY(0); filter: blur(0); }
 }
 
 @keyframes subtitleReveal {
@@ -152,12 +158,172 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
+@keyframes countdownPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--countdown-shadow); }
+  50%       { box-shadow: 0 4px 32px 8px var(--countdown-shadow); }
+}
+
+@keyframes countdownUrgentPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--countdown-shadow); transform: scale(1); }
+  50%       { box-shadow: 0 4px 40px 12px var(--countdown-shadow); transform: scale(1.015); }
+}
+
+@keyframes countdownSecondTick {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 /* --- Hero : titre et sous-titre --- */
 .main-title {
   animation: titleReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .main-subtitle {
   animation: subtitleReveal 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------------------------------------------------------- */
+/* =================== COMPTE À REBOURS ====================== */
+/* ---------------------------------------------------------- */
+
+.countdown-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin: 28px auto 30px;
+  max-width: 720px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  background: transparent;
+  border: 2px solid var(--countdown-to);
+  color: var(--countdown-to);
+  animation: countdownPulse 2.5s ease-in-out infinite;
+}
+
+.countdown-banner.countdown-urgent {
+  animation: countdownUrgentPulse 1.2s ease-in-out infinite;
+}
+
+.countdown-banner.countdown-closed {
+  animation: none;
+  background: transparent;
+  border-color: var(--muted);
+  color: var(--muted);
+  opacity: 0.9;
+}
+
+.countdown-label {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.countdown-timer {
+  display: flex;
+  gap: 10px;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 58px;
+  padding: 6px 4px;
+  border-radius: 8px;
+  background: rgba(198, 40, 40, 0.08);
+}
+
+.countdown-banner.countdown-closed .countdown-unit {
+  background: rgba(107, 114, 128, 0.1);
+}
+
+.countdown-value {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 2rem;
+  line-height: 1;
+  animation: countdownSecondTick 1s ease-in-out infinite;
+}
+
+.countdown-caption {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* --- Message de clôture des réservations --- */
+.closed-message {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  padding: 24px 28px;
+  border-radius: 14px;
+  background: var(--error-bg);
+  border: 1px solid var(--countdown-to);
+  text-align: center;
+}
+.closed-message h3 {
+  margin: 0 0 10px;
+  color: var(--countdown-to);
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+.closed-message p {
+  margin: 6px 0;
+  color: var(--text);
+}
+
+/* --- Bouton "Ajouter au calendrier" (page Programme) --- */
+.btn-add-calendar {
+  margin-top: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--luglon-green);
+  border-radius: 20px;
+  background: var(--luglon-green);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
+}
+.btn-add-calendar:hover {
+  background: #ffffff;
+  color: var(--luglon-green);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(22, 97, 54, 0.3);
+}
+.btn-add-calendar:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Conteneur du bouton, placé en bas de chaque bloc programme du jour */
+.day-calendar-action {
+  margin-top: 14px;
+  display: flex;
+}
+.planning-section.align-left .day-calendar-action {
+  justify-content: flex-start;
+}
+.planning-section.align-right .day-calendar-action {
+  justify-content: flex-end;
+}
+
+@media (max-width: 768px) {
+  .countdown-banner {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  .countdown-unit {
+    min-width: 42px;
+  }
+  .countdown-value {
+    font-size: 1.5rem;
+  }
 }
 
 
@@ -226,7 +392,7 @@ a.nav-card:hover .nav-logo {
 .planning-section,
 .history-section,
 .nav-grid a.nav-card,
-.res-wrap .card,
+.res-wrap .card:not(.confirmation-card),
 .price-plaque,
 .warning-note {
   opacity: 0;
@@ -932,6 +1098,228 @@ form .row {
 /* Style pour le champ en erreur */
 .input-error {
   border-color: var(--error-red);
+}
+
+/* --- Message informatif (non bloquant) : déjà réservé pour un soir --- */
+.info-feedback {
+  color: var(--sending-border);
+  background: var(--sending-bg);
+  font-size: 13px;
+  margin: 8px 0 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  line-height: 1.4;
+}
+
+/* ---------------------------------------------------------- */
+/* ============ MODALE DOUBLE RÉSERVATION (bloquante) ======== */
+/* ---------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 36, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-box {
+  background: var(--form-bg);
+  color: var(--text);
+  max-width: 480px;
+  width: 100%;
+  padding: 28px;
+  border-radius: 16px;
+  border: 2px solid var(--countdown-to);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: scaleIn 0.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.modal-box h3 {
+  margin: 0 0 14px;
+  color: var(--countdown-to);
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.4rem;
+}
+.modal-summary {
+  background: rgba(198, 40, 40, 0.06);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin: 10px 0 16px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.modal-question {
+  font-weight: 600;
+  margin: 14px 0 18px;
+}
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.modal-btn-cancel {
+  flex: 1;
+  background: var(--muted);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Special Gothic Condensed One", sans-serif;
+}
+.modal-btn-confirm {
+  flex: 1;
+  background: var(--countdown-to);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Special Gothic Condensed One", sans-serif;
+}
+.modal-btn-cancel:hover { filter: brightness(1.1); }
+.modal-btn-confirm:hover { filter: brightness(1.1); }
+
+/* --- Variante verte du bouton de confirmation (récap, action positive) --- */
+.modal-btn-confirm-green {
+  flex: 1;
+  background: var(--luglon-green);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Special Gothic Condensed One", sans-serif;
+}
+.modal-btn-confirm-green:hover { filter: brightness(1.1); }
+
+/* --- Modale de récapitulatif final (avant envoi) --- */
+.recap-modal-box {
+  max-width: 520px;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.recap-modal-box h3 {
+  color: var(--luglon-green);
+}
+.recap-event-block {
+  background: rgba(22, 97, 54, 0.07);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+.recap-event-day {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.15rem;
+  color: var(--luglon-green);
+}
+.recap-event-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.recap-summary {
+  background: var(--card);
+}
+
+/* ---------------------------------------------------------- */
+/* ================ PAGE DE CONFIRMATION ====================== */
+/* ---------------------------------------------------------- */
+.confirmation-card {
+  text-align: center;
+  padding: 36px 28px;
+}
+.confirmation-check {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  background: var(--success-border);
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scaleIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.confirmation-title {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.8rem;
+  margin: 0 0 8px;
+  color: var(--luglon-green);
+}
+.confirmation-subtitle {
+  color: var(--muted);
+  margin: 0 0 24px;
+}
+.confirmation-details {
+  text-align: left;
+  background: var(--card);
+  border-radius: 12px;
+  padding: 18px 22px;
+  margin: 0 auto 18px;
+  max-width: 440px;
+}
+.confirmation-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--tab-border);
+  font-size: 14px;
+}
+.confirmation-row:last-child { border-bottom: none; }
+.confirmation-row span {
+  color: var(--muted);
+}
+.confirmation-menus {
+  flex-direction: column;
+  align-items: flex-start;
+}
+.confirmation-menus ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+.confirmation-total-row {
+  font-size: 16px;
+}
+.confirmation-total-row strong {
+  color: var(--luglon-green);
+}
+.confirmation-other-day {
+  max-width: 440px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+.confirmation-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+.confirmation-actions .nav-button {
+  padding: 12px 22px;
+  display: inline-block;
+  width: auto;
+}
+.confirmation-home-btn {
+  background: var(--muted) !important;
+}
+
+@media (max-width: 768px) {
+  .confirmation-card {
+    padding: 26px 18px;
+  }
+  .confirmation-actions {
+    flex-direction: column;
+  }
 }
 input[type="number"] {
   max-width: 120px;
