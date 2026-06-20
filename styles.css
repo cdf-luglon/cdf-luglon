@@ -710,11 +710,93 @@ body {
     color: var(--muted);
 }
 
-/* FOOTER CENTRÉ */
-footer {
-  text-align: center;
-  padding: 20px;
+/* ---------------------------------------------------------- */
+/* ======================= FOOTER ============================= */
+/* ---------------------------------------------------------- */
+.site-footer {
+  margin-top: 40px;
+  background: var(--card);
+  border-top: 1px solid var(--tab-border);
+}
+
+.footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 22px 5%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.footer-title {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.footer-copyright {
+  font-size: 0.75rem;
   color: var(--muted);
+}
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.footer-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--muted);
+  color: var(--card);
+  transition: background 0.2s, transform 0.15s;
+}
+.footer-social-link:hover {
+  background: var(--luglon-green);
+  transform: translateY(-2px);
+}
+
+.footer-icon {
+  width: 17px;
+  height: 17px;
+}
+
+.footer-email {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-email:hover {
+  color: var(--luglon-green);
+  border-color: var(--luglon-green);
+}
+
+@media (max-width: 640px) {
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  .footer-brand {
+    align-items: center;
+  }
 }
 
 /* MISE EN PAGE DE LA PAGE D'ACCUEIL (NON BLOC) */
