@@ -51,6 +51,16 @@ const totalAmountEl = document.getElementById('total-amount');
 const submitButton = document.getElementById('submit-button');
 const submissionStatus = document.getElementById('submission-status');
 
+// Éléments pour la détection de double réservation
+const existingReservationNotice = document.getElementById('existing-reservation-notice');
+const duplicateModal = document.getElementById('duplicate-modal');
+const duplicateDayLabel = document.getElementById('duplicate-day-label');
+const duplicateSummary = document.getElementById('duplicate-summary');
+const duplicateCancelBtn = document.getElementById('duplicate-cancel');
+const duplicateConfirmBtn = document.getElementById('duplicate-confirm');
+
+const DAY_LABELS = { vendredi: 'Vendredi', samedi: 'Samedi' };
+
 
 // FONCTION UTILITAIRE : Calcule le prix d'un seul menu en fonction du jour
 function getMenuPrice(day, menuType) {
@@ -62,6 +72,12 @@ function loadReservations(){
   try{return JSON.parse(localStorage.getItem('luglon_reservations')||'[]');}catch{return[];}
 }
 function saveReservations(arr){localStorage.setItem('luglon_reservations',JSON.stringify(arr));}
+
+// Renvoie la réservation existante pour un soir donné (ou null si aucune)
+function findReservationForDay(day){
+  const data = loadReservations();
+  return data.find(r => r.soir === day) || null;
+}
 
 // 2. RENDU DE LA LISTE DES RÉSERVATIONS (Version complète restaurée)
 function render(){
@@ -111,6 +127,59 @@ function render(){
 // FONCTION UTILITAIRE CONSERVÉE POUR LA CLARTÉ
 function updatePriceRecap() {
     calculateTotalPrice();
+}
+
+// Construit un résumé HTML lisible d'une réservation existante (utilisé par
+// le message d'info et par la modale de double réservation)
+function buildReservationSummaryHTML(r) {
+    const menuCounts = {};
+    let totalPrice = 0;
+    r.menus.forEach(menuValue => {
+        menuCounts[menuValue] = (menuCounts[menuValue] || 0) + 1;
+        totalPrice += getMenuPrice(r.soir, menuValue);
+    });
+    const menuSummary = Object.keys(menuCounts).map(key => {
+        const menuOption = MENU_OPTIONS.find(opt => opt.value === key);
+        const label = menuOption ? menuOption.label : key;
+        return `${menuCounts[key]} x ${label}`;
+    }).join(' / ');
+    const formattedTotal = totalPrice.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
+
+    return `
+        <strong>${r.name}</strong> (${r.phone}) — ${r.people} pers.<br>
+        Menus : ${menuSummary}<br>
+        Total : ${formattedTotal}€
+    `;
+}
+
+// Affiche (ou masque) le message informatif "vous avez déjà réservé pour [autre jour]"
+// Se déclenche au changement du select "soir"
+function checkExistingReservationForDay() {
+    const selectedDay = soirSelect.value;
+    const existing = findReservationForDay(selectedDay);
+
+    if (existing) {
+        // Une réservation existe déjà PILE pour le jour actuellement sélectionné :
+        // on prévient, mais le vrai blocage se fera à la soumission (modale).
+        existingReservationNotice.style.display = 'block';
+        existingReservationNotice.textContent =
+            `Vous avez déjà une réservation pour ${DAY_LABELS[selectedDay]}. Vous pourrez tout de même valider si besoin.`;
+        return;
+    }
+
+    // Sinon, on regarde si une réservation existe pour l'AUTRE jour, pour informer
+    // (sans bloquer) que la personne peut aussi réserver celui-ci en plus.
+    const otherDay = selectedDay === 'vendredi' ? 'samedi' : 'vendredi';
+    const otherExisting = findReservationForDay(otherDay);
+
+    if (otherExisting) {
+        existingReservationNotice.style.display = 'block';
+        existingReservationNotice.textContent =
+            `Vous avez déjà réservé pour ${DAY_LABELS[otherDay]}. Si vous souhaitez aussi manger ${DAY_LABELS[selectedDay] === 'Vendredi' ? 'le vendredi' : 'le samedi'}, vous pouvez valider cette réservation en plus.`;
+    } else {
+        existingReservationNotice.style.display = 'none';
+        existingReservationNotice.textContent = '';
+    }
 }
 
 // FONCTION : Calcule et affiche le prix total en temps réel
@@ -267,20 +336,26 @@ function setSubmissionStatus(status, message = '') {
 
 
 // 6. GESTION DE LA SOUMISSION DU FORMULAIRE
-form.addEventListener('submit',e=>{
+
+// Stocke temporairement les données validées en attendant une éventuelle
+// confirmation de double réservation via la modale.
+let pendingSubmission = null;
+
+form.addEventListener('submit', e => {
     e.preventDefault();
-    
+
     // Validation des champs de contact
     if (!validateContactFields()) {
         return;
     }
     const numPeople = Number(peopleInput.value);
+    const selectedDay = form.soir.value;
 
     // On prépare nos compteurs pour la base de données
     let nbViande = 0;
     let nbPoisson = 0;
     let nbEnfant = 0;
-    
+
     // Récupérer tous les choix de menus dynamiques (et vérifier qu'ils sont choisis)
     const selectedMenus = [];
     for (let i = 0; i < numPeople; i++) {
@@ -289,7 +364,7 @@ form.addEventListener('submit',e=>{
             setSubmissionStatus('error', `Le type de repas n'a pas été sélectionné pour la personne ${i + 1}.`);
             return;
         }
-        
+
         // On incrémente le compteur correspondant
         if (menuSelect.value === 'standard') nbViande++;
         if (menuSelect.value === 'poisson') nbPoisson++;
@@ -297,27 +372,58 @@ form.addEventListener('submit',e=>{
 
         selectedMenus.push(menuSelect.value);
     }
-    
-    // Désactiver le bouton et afficher le statut "Envoi en cours..."
-    submitButton.disabled = true;
-    setSubmissionStatus('sending', 'Réservation en cours...');
 
     // Préparer les données pour l'envoi au script Google (Format clé:valeur)
     const formData = {
         'Nom': nameInput.value.trim(),
-        'Email': emailInput.value.trim(), 
+        'Email': emailInput.value.trim(),
         'Telephone': phoneInput.value.replace(/\s/g, '').trim(),
         'NbPersonnes': numPeople,
-        'Soir': form.soir.value,
+        'Soir': selectedDay,
         'Viande': nbViande,
         'Poisson': nbPoisson,
         'Enfant': nbEnfant,
         'Notes': form.notes.value.trim(),
         'Total_Euros': parseFloat(totalAmountEl.textContent.replace('€', '').replace(',', '.').replace(/\s/g, '')),
-        'Timestamp': new Date().toLocaleString('fr-FR'), 
+        'Timestamp': new Date().toLocaleString('fr-FR'),
     };
-    
-    // Envoi des données au Google Apps Script
+
+    // VÉRIFICATION ANTI DOUBLE-RÉSERVATION : si une réservation existe déjà
+    // pour ce jour précis sur cet appareil, on bloque et on demande confirmation.
+    const existing = findReservationForDay(selectedDay);
+    if (existing) {
+        pendingSubmission = { formData, selectedMenus };
+        duplicateDayLabel.textContent = DAY_LABELS[selectedDay] || selectedDay;
+        duplicateSummary.innerHTML = buildReservationSummaryHTML(existing);
+        duplicateModal.style.display = 'flex';
+        return; // on attend la décision de l'utilisateur via la modale
+    }
+
+    submitReservation(formData, selectedMenus);
+});
+
+// Bouton "Annuler" de la modale de double réservation
+duplicateCancelBtn.addEventListener('click', () => {
+    duplicateModal.style.display = 'none';
+    pendingSubmission = null;
+});
+
+// Bouton "Oui, réserver quand même" de la modale
+duplicateConfirmBtn.addEventListener('click', () => {
+    duplicateModal.style.display = 'none';
+    if (pendingSubmission) {
+        submitReservation(pendingSubmission.formData, pendingSubmission.selectedMenus);
+        pendingSubmission = null;
+    }
+});
+
+// Envoi effectif de la réservation (factorisé pour être appelé directement,
+// ou après confirmation explicite d'une double réservation)
+function submitReservation(formData, selectedMenus) {
+    // Désactiver le bouton et afficher le statut "Envoi en cours..."
+    submitButton.disabled = true;
+    setSubmissionStatus('sending', 'Réservation en cours...');
+
     // Envoi des données au Google Apps Script
     fetch(WEB_APP_URL, {
         method: 'POST',
@@ -332,38 +438,34 @@ form.addEventListener('submit',e=>{
         // Mais si le code arrive ici, c'est que la requête est bien partie vers le Sheet !
 
         // 1. Logique de confirmation pour le stockage local
-        const data=loadReservations();
-        const entry={
+        const data = loadReservations();
+        const entry = {
             name: formData.Nom,
             phone: formData.Telephone,
             people: formData.NbPersonnes,
             soir: formData.Soir,
-            menus: selectedMenus, 
-            notes: formData.Notes
+            menus: selectedMenus,
+            notes: formData.Notes,
+            timestamp: Date.now() // horodatage réel, utilisé par la page de confirmation
         };
-        
+
         data.push(entry);
         saveReservations(data);
+        // On garde une trace de "la dernière réservation effectuée" pour que
+        // la page de confirmation sache laquelle afficher.
+        localStorage.setItem('luglon_last_reservation_timestamp', String(entry.timestamp));
         render();
 
-        // 2. Afficher une confirmation de succès vert
-        setSubmissionStatus('success', `Réservation CONFIRMÉE !`);
-        
-        // 3. Réinitialisation après soumission
-        form.reset();
-        peopleInput.value = DEFAULT_PEOPLE;
-        generateMenuInputs();
-        calculateTotalPrice();
+        // 2. Redirection vers la page de confirmation dédiée
+        window.location.href = '/reservation/confirmation/';
     })
     .catch(error => {
         // Cette erreur ne s'affichera que si l'utilisateur n'a vraiment pas d'internet
         console.error('Erreur lors de l\'envoi :', error);
         setSubmissionStatus('error', "Erreur de connexion internet. Veuillez réessayer.");
-    })
-    .finally(() => {
         submitButton.disabled = false;
     });
-});
+}
 
 // Initialisation
 if (peopleInput) {
@@ -371,4 +473,5 @@ if (peopleInput) {
     generateMenuInputs();
     calculateTotalPrice();
 }
+checkExistingReservationForDay();
 render();

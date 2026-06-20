@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Réservation confirmée - Fêtes de Luglon</title>
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Slackey&family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <a href="/" class="floating-logo">
+        <img src="/images/logo_cdf.jpg" alt="Logo Comité des Fêtes" />
+        <div class="logo-fixed-text">
+            <span class="logo-line-1">Comité des Fêtes</span>
+            <span class="logo-line-2">Luglon</span>
+        </div>
+    </a>
+    <div class="main-hero">
+        <div class="hero-content">
+            <h1 class="main-title">RÉSERVATION CONFIRMÉE</h1>
+            <p class="main-subtitle">Fêtes de Luglon 2026</p>
+        </div>
+        <img src="/images/dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image">
+    </div>
+
+    <div class="wrap res-wrap">
+
+        <!-- Affiché si une réservation récente est trouvée -->
+        <main class="card confirmation-card" id="confirmation-found" style="display:none;">
+            <div class="confirmation-check">✓</div>
+            <h2 class="confirmation-title">Merci, votre réservation est bien enregistrée !</h2>
+            <p class="confirmation-subtitle">Un récapitulatif a été envoyé par e-mail. Voici le détail :</p>
+
+            <div class="confirmation-details" id="confirmation-details">
+                <!-- Rempli dynamiquement par confirmation.js -->
+            </div>
+
+            <div id="confirmation-other-day-notice" class="info-feedback confirmation-other-day" style="display:none;"></div>
+
+            <div class="confirmation-actions">
+                <a href="/reservation/" class="btn nav-button" id="reserve-other-day-btn">RÉSERVER UN AUTRE SOIR</a>
+                <a href="/" class="btn nav-button confirmation-home-btn">RETOUR À L'ACCUEIL</a>
+            </div>
+        </main>
+
+        <!-- Affiché si la page est visitée directement, sans réservation récente -->
+        <main class="card confirmation-card" id="confirmation-not-found" style="display:none;">
+            <h2 class="confirmation-title">Aucune réservation récente trouvée</h2>
+            <p class="confirmation-subtitle">
+                Il semble que vous ayez accédé à cette page directement, sans venir de formuler une réservation.
+            </p>
+            <div class="confirmation-actions">
+                <a href="/reservation/" class="btn nav-button">FAIRE UNE RÉSERVATION</a>
+                <a href="/" class="btn nav-button confirmation-home-btn">RETOUR À L'ACCUEIL</a>
+            </div>
+        </main>
+
+    </div>
+    <footer>
+        <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
+    </footer>
+
+    <script src="/confirmation.js"></script>
+</body>
+</html>
