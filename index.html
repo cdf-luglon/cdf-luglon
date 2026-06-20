@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Réservation - Fêtes de Luglon</title>
+    <title>Accueil - Fêtes de Luglon</title>
     
     <link rel="icon" type="image/png" href="/favicon.png">
     
@@ -11,25 +11,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fascinate+Inline&family=Slackey&family=Special+Gothic+Condensed+One&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
 <body>
-    <a href="/" class="floating-logo">
-        <img src="/images/logo_cdf.jpg" alt="Logo Comité des Fêtes" />
-        <div class="logo-fixed-text">
-            <span class="logo-line-1">Comité des Fêtes</span>
-            <span class="logo-line-2">Luglon</span>
-        </div>
-    </a>
-    <div class="main-hero">
-        <div class="hero-content">
-            <h1 class="main-title">RÉSERVATION DES REPAS</h1>
-            <p class="main-subtitle">Fêtes de Luglon 2026</p> 
-        </div>
-        <img src="/images/dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image">
-    </div>
+    <div class="wrap">
+        
+        <a href="/" class="floating-logo">
+            <img src="/images/logo_cdf.jpg" alt="Logo Comité des Fêtes" class="logo-fixed-img" />
+            <div class="logo-fixed-text">
+                <span class="logo-line-1">Comité des Fêtes</span>
+                <span class="logo-line-2">Luglon</span>
+            </div>
+        </a>
 
-    <div class="wrap res-wrap">
+        <div class="main-hero">
+            <div class="hero-content">
+                <h1 class="main-title">FÊTES DE LUGLON 2026</h1>
+                <p class="main-subtitle">Programme et Réservation</p>
+            </div>
+            <img src="/images/dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image">
+        </div>
 
         <div id="countdown-banner" class="countdown-banner">
             <span class="countdown-label">Clôture des réservations dans</span>
@@ -41,155 +43,45 @@
             </div>
         </div>
 
-        <!-- Message affiché uniquement après la clôture, masque le formulaire -->
-        <div id="closed-message" class="closed-message" style="display:none;">
-            <h3>Réservations closes</h3>
-            <p>
-                La période de réservation en ligne pour les fêtes de Luglon 2026 est terminée.
-            </p>
-            <p>
-                Pour toute demande de dernière minute, merci de contacter directement
-                <strong>Félix</strong> ou <strong>Tiphaine</strong> qui traiteront votre demande au cas par cas.
-            </p>
-        </div>
-
-        <div class="tab-content">
-            <div id="reservation" class="tab-pane active">
-                <!-- <div class="grid"> -->
-                    <main class="card" id="reservation-card">
-                        
-                        <div class="price-plaque">
-                            <h3>Tarifs des Repas</h3>
-                            <table class="price-table">
-                                <thead>
-                                    <tr>
-                                        <th>Repas</th>
-                                        <th>Menu Adulte (Viande / Poisson)</th>
-                                        <th>Menu Enfant (Moins de 12 ans)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Vendredi soir</td>
-                                        <td>14 €</td>
-                                        <td>7 €</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Samedi soir</td>
-                                        <td>17 €</td>
-                                        <td>8,50 €</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="warning-note">
-                            <strong>Note :</strong> Pour manger le vendredi et le samedi, il faut effectuer deux réservations.
-                        </div>
-
-                        <form id="resForm" autocomplete="off">
-                            <div class="row form-group-spaced">
-                                <div class="field-auto">
-                                    <label for="name"><strong>Prénom et Nom</strong></label>
-                                    <input id="name" name="Nom" placeholder="Jean Dupont" autocomplete="name">
-                                    <p id="name-error" class="error-feedback"></p>
-                                </div>
-                                <div class="field-small">
-                                    <label for="phone"><strong>Téléphone</strong></label>
-                                    <input id="phone" name="Telephone" type="tel" placeholder="06 XX XX XX XX" autocomplete="tel">
-                                    <p id="phone-error" class="error-feedback"></p>
-                                </div>
-                            </div>
-
-                            <div class="form-group-spaced">
-                                <label for="email"><strong>Adresse Email</strong></label>
-                                <input id="email" name="Email" type="email" placeholder="votre.email@exemple.com" autocomplete="email">
-                                <p id="email-error" class="error-feedback"></p>
-                            </div>
-
-                            <div class="form-group-spaced">
-                                <label for="soir"><strong>Choix du soir</strong></label>
-                                <select id="soir" name="Soir" onchange="calculateTotalPrice(); checkExistingReservationForDay();">
-                                    <option value="vendredi"><strong>Vendredi soir</strong> - Menu : Terrine de saumon, Araignée de porc ou Txistorra, Flan</option>
-                                    <option value="samedi"><strong>Samedi soir</strong> — Menu : Assiette Luglonaise, Entrecôte, Pastis landais</option>
-                                </select>
-                                <p id="existing-reservation-notice" class="info-feedback" style="display:none;"></p>
-                            </div>
-
-                            <div class="row form-group-spaced field-end">
-                                <div class="field-small">
-                                    <label for="people"><strong>Nombre de personnes (Total)</strong></label>
-                                    <input id="people" name="NbPersonnes" type="number" value="1" onchange="generateMenuInputs(); calculateTotalPrice();">
-                                    <p id="people-error" class="error-feedback"></p>
-                                </div>
-                                <div class="field-auto">
-                                    <p class="small" id="total-count-message">Veuillez choisir le menu pour chaque personne.</p>
-                                </div>
-                            </div>
-
-                            <div id="menu-container"></div>
-                            
-                            <div class="form-group-spaced">
-                                <label for="notes"><strong>Commentaire (facultatif)</strong></label>
-                                <textarea id="notes" name="Notes" rows="3" placeholder="Allergies spécifiques, personne à mobilité réduite..."></textarea>
-                            </div>
-
-                            <div id="final-total">
-                                <span class="total-price">Prix Total (à payer sur place) : </span>
-                                <span class="amount" id="total-amount">0,00 €</span>
-                            </div>
-
-                            <div class="form-submit-row">
-                                <button class="btn submit-button" type="submit" id="submit-button">RÉSERVER</button>
-                                <div id="submission-status"></div> 
-                                <div class="reservation-count">Réservations sur cet appareil • <span id="count">0</span></div>
-                            </div>
-                        </form>
-
-                        <hr class="separator-line">
-                        <h3 class="reservation-list-title">Dernières réservations</h3>
-                        <div class="reservations" id="list">
-                            <div class="empty">Aucune réservation pour l'instant.</div>
-                        </div>
-                    </main>
-                </div>
+        <div class="history-images-container">
+            <div class="history-image-placeholder image-left">
+                <img src="/images/fougeres.png" alt="Fougère gauche" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+        
+            <section class="history-section">
+                <h3>QUATRE JOURS DE FÊTE EN ÉTÉ</h3>
+                <p class="history-text">
+                    À Luglon, les traditionnelles fêtes estivales unissent toutes les générations autour de la convivialité, des courses landaises et bien sûr, des excellents repas. C'est l'occasion idéale de découvrir la culture locale tout en profitant d'un cadre chaleureux et festif. Le Comité vous prépare une édition 2026 mémorable !
+                </p>
+            </section>
+            
+            <div class="history-image-placeholder image-right">
+                <img src="/images/fougeres.png" alt="Fougère droite" style="width:100%; height:100%; object-fit:cover;">
             </div>
         </div>
+        
         <section class="nav-grid">
-            <a href="/" class="nav-card">
-                <img src="/images/logo_index.png" alt="Index Logo" class="nav-logo">
-                <h3>Page principale</h3>
-                <p>Retournez à la page d'accueil du site</p>
-                <div class="btn nav-button">PAGE D'ACCUEIL</div>
-            </a>
-
+            
             <a href="/programme/" class="nav-card">
                 <img src="/images/logo_programme.png" alt="Programme Logo" class="nav-logo">
                 <h3>Le Programme des Fêtes</h3>
                 <p>Découvrez les animations de jeudi à dimanche</p>
                 <div class="btn nav-button">PROGRAMME</div>
             </a>
+
+            <a href="/reservation/" class="nav-card">
+                <img src="/images/logo_reservation.png" alt="Réservation Logo" class="nav-logo">
+                <h3>Réservation des Repas</h3>
+                <p>Réservez vos places pour les repas</p>
+                <div class="btn nav-button">RÉSERVATION</div>
+            </a>
         </section>
-    </div>
+
+    </div> 
     <footer>
         <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
     </footer>
-
-    <!-- Modale de confirmation en cas de double réservation pour le même soir -->
-    <div id="duplicate-modal" class="modal-overlay" style="display:none;">
-        <div class="modal-box">
-            <h3>⚠️ Vous avez déjà réservé ce soir-là</h3>
-            <p>Voici votre réservation existante pour <strong id="duplicate-day-label"></strong> :</p>
-            <div id="duplicate-summary" class="modal-summary"></div>
-            <p class="modal-question">Êtes-vous sûr de vouloir effectuer une <strong>deuxième réservation</strong> pour le même jour ?</p>
-            <div class="modal-actions">
-                <button type="button" id="duplicate-cancel" class="btn modal-btn-cancel">ANNULER</button>
-                <button type="button" id="duplicate-confirm" class="btn modal-btn-confirm">OUI, RÉSERVER QUAND MÊME</button>
-            </div>
-        </div>
-    </div>
-    
-    <script src="/countdown.js"></script>
-    <script src="/script.js"></script>
     <script src="/scroll-animations.js"></script>
+    <script src="/countdown.js"></script>
 </body>
 </html>
