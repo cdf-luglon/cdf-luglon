@@ -76,8 +76,8 @@
                                     </tr>
                                     <tr>
                                         <td>Samedi soir</td>
-                                        <td>17 €</td>
-                                        <td>8,50 €</td>
+                                        <td>16 €</td>
+                                        <td>8 €</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -173,6 +173,36 @@
     <footer>
         <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
     </footer>
+
+    <!-- Modale de récapitulatif final, avant envoi réel de la réservation -->
+    <div id="recap-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-box recap-modal-box">
+            <h3>📋 Récapitulatif de votre réservation</h3>
+
+            <div class="recap-event-block">
+                <div class="recap-event-day" id="recap-day-title"></div>
+                <div class="recap-event-meta">
+                    <span id="recap-event-time"></span> · <span id="recap-event-location"></span>
+                </div>
+            </div>
+
+            <div class="modal-summary recap-summary">
+                <div class="confirmation-row"><span>Nom</span><strong id="recap-name"></strong></div>
+                <div class="confirmation-row"><span>Téléphone</span><strong id="recap-phone"></strong></div>
+                <div class="confirmation-row"><span>E-mail</span><strong id="recap-email"></strong></div>
+                <div class="confirmation-row"><span>Nombre de personnes</span><strong id="recap-people"></strong></div>
+                <div class="confirmation-row confirmation-menus"><span>Menus</span><ul id="recap-menus"></ul></div>
+                <div class="confirmation-row" id="recap-notes-row" style="display:none;"><span>Commentaire</span><strong id="recap-notes"></strong></div>
+                <div class="confirmation-row confirmation-total-row"><span>Total à payer sur place</span><strong id="recap-total"></strong></div>
+            </div>
+
+            <p class="modal-question">Confirmez-vous cette réservation ?</p>
+            <div class="modal-actions">
+                <button type="button" id="recap-cancel" class="btn modal-btn-cancel">MODIFIER</button>
+                <button type="button" id="recap-confirm" class="btn modal-btn-confirm-green">CONFIRMER LA RÉSERVATION</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Modale de confirmation en cas de double réservation pour le même soir -->
     <div id="duplicate-modal" class="modal-overlay" style="display:none;">

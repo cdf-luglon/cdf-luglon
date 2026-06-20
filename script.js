@@ -6,9 +6,23 @@ const PRICES_BY_DAY = {
         'enfant': 7.00
     },
     'samedi': {
-        'standard': 17.00,
-        'poisson': 17.00,
-        'enfant': 8.50
+        'standard': 16.00,
+        'poisson': 16.00,
+        'enfant': 8.00
+    }
+};
+
+// Horaires et lieux du repas, par soir (utilisés dans le récapitulatif avant envoi)
+const EVENT_INFO_BY_DAY = {
+    'vendredi': {
+        label: 'Vendredi 31 Juillet',
+        time: '20h00',
+        location: "Luglon (centre bourg)"
+    },
+    'samedi': {
+        label: 'Samedi 1er Août',
+        time: '20h00',
+        location: 'Stade de Luglon'
     }
 };
 
@@ -58,6 +72,22 @@ const duplicateDayLabel = document.getElementById('duplicate-day-label');
 const duplicateSummary = document.getElementById('duplicate-summary');
 const duplicateCancelBtn = document.getElementById('duplicate-cancel');
 const duplicateConfirmBtn = document.getElementById('duplicate-confirm');
+
+// Éléments pour la modale de récapitulatif final (étape avant envoi réel)
+const recapModal = document.getElementById('recap-modal');
+const recapDayTitle = document.getElementById('recap-day-title');
+const recapEventTime = document.getElementById('recap-event-time');
+const recapEventLocation = document.getElementById('recap-event-location');
+const recapName = document.getElementById('recap-name');
+const recapPhone = document.getElementById('recap-phone');
+const recapEmail = document.getElementById('recap-email');
+const recapPeople = document.getElementById('recap-people');
+const recapMenus = document.getElementById('recap-menus');
+const recapNotesRow = document.getElementById('recap-notes-row');
+const recapNotes = document.getElementById('recap-notes');
+const recapTotal = document.getElementById('recap-total');
+const recapCancelBtn = document.getElementById('recap-cancel');
+const recapConfirmBtn = document.getElementById('recap-confirm');
 
 const DAY_LABELS = { vendredi: 'Vendredi', samedi: 'Samedi' };
 
@@ -337,8 +367,9 @@ function setSubmissionStatus(status, message = '') {
 
 // 6. GESTION DE LA SOUMISSION DU FORMULAIRE
 
-// Stocke temporairement les données validées en attendant une éventuelle
-// confirmation de double réservation via la modale.
+// Stocke temporairement les données validées en attendant la confirmation
+// finale de l'utilisateur (via la modale de récapitulatif, et éventuellement
+// la modale de double réservation avant elle).
 let pendingSubmission = null;
 
 form.addEventListener('submit', e => {
@@ -388,18 +419,20 @@ form.addEventListener('submit', e => {
         'Timestamp': new Date().toLocaleString('fr-FR'),
     };
 
+    pendingSubmission = { formData, selectedMenus };
+
     // VÉRIFICATION ANTI DOUBLE-RÉSERVATION : si une réservation existe déjà
-    // pour ce jour précis sur cet appareil, on bloque et on demande confirmation.
+    // pour ce jour précis sur cet appareil, on bloque et on demande confirmation
+    // AVANT même d'afficher le récapitulatif.
     const existing = findReservationForDay(selectedDay);
     if (existing) {
-        pendingSubmission = { formData, selectedMenus };
         duplicateDayLabel.textContent = DAY_LABELS[selectedDay] || selectedDay;
         duplicateSummary.innerHTML = buildReservationSummaryHTML(existing);
         duplicateModal.style.display = 'flex';
         return; // on attend la décision de l'utilisateur via la modale
     }
 
-    submitReservation(formData, selectedMenus);
+    openRecapModal();
 });
 
 // Bouton "Annuler" de la modale de double réservation
@@ -408,9 +441,64 @@ duplicateCancelBtn.addEventListener('click', () => {
     pendingSubmission = null;
 });
 
-// Bouton "Oui, réserver quand même" de la modale
+// Bouton "Oui, réserver quand même" de la modale doublon : on passe ensuite
+// par l'étape récapitulatif, comme pour un envoi normal.
 duplicateConfirmBtn.addEventListener('click', () => {
     duplicateModal.style.display = 'none';
+    if (pendingSubmission) {
+        openRecapModal();
+    }
+});
+
+// --- ÉTAPE 1 : Affichage du récapitulatif détaillé avant tout envoi réel ---
+function openRecapModal() {
+    if (!pendingSubmission) return;
+    const { formData, selectedMenus } = pendingSubmission;
+    const day = formData.Soir;
+    const info = EVENT_INFO_BY_DAY[day];
+
+    recapDayTitle.textContent = info ? info.label : DAY_LABELS[day];
+    recapEventTime.textContent = info ? info.time : '';
+    recapEventLocation.textContent = info ? info.location : '';
+
+    recapName.textContent = formData.Nom;
+    recapPhone.textContent = formData.Telephone;
+    recapEmail.textContent = formData.Email;
+    recapPeople.textContent = formData.NbPersonnes;
+
+    // Détail des menus, ex : "4 × Viande / 3 × Poisson / 1 × Menu enfant"
+    const menuCounts = {};
+    selectedMenus.forEach(m => { menuCounts[m] = (menuCounts[m] || 0) + 1; });
+    recapMenus.innerHTML = Object.keys(menuCounts).map(key => {
+        const opt = MENU_OPTIONS.find(o => o.value === key);
+        const label = opt ? opt.label : key;
+        return `<li>${menuCounts[key]} × ${label}</li>`;
+    }).join('');
+
+    if (formData.Notes) {
+        recapNotesRow.style.display = 'flex';
+        recapNotes.textContent = formData.Notes;
+    } else {
+        recapNotesRow.style.display = 'none';
+    }
+
+    const formattedTotal = formData.Total_Euros.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
+    recapTotal.textContent = `${formattedTotal}€`;
+
+    recapModal.style.display = 'flex';
+}
+
+// Bouton "Modifier" de la modale récap : on referme, l'utilisateur peut
+// corriger le formulaire avant de re-soumettre.
+recapCancelBtn.addEventListener('click', () => {
+    recapModal.style.display = 'none';
+    pendingSubmission = null;
+});
+
+// Bouton "Confirmer la réservation" : c'est SEULEMENT ici que l'envoi réel
+// est déclenché, après validation explicite du récapitulatif complet.
+recapConfirmBtn.addEventListener('click', () => {
+    recapModal.style.display = 'none';
     if (pendingSubmission) {
         submitReservation(pendingSubmission.formData, pendingSubmission.selectedMenus);
         pendingSubmission = null;

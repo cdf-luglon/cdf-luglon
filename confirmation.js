@@ -8,7 +8,7 @@
 
   const PRICES_BY_DAY = {
     'vendredi': { 'standard': 14.00, 'poisson': 14.00, 'enfant': 7.00 },
-    'samedi':   { 'standard': 17.00, 'poisson': 17.00, 'enfant': 8.50 }
+    'samedi':   { 'standard': 16.00, 'poisson': 16.00, 'enfant': 8.00 }
   };
 
   const MENU_OPTIONS = [

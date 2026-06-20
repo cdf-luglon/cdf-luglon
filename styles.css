@@ -392,7 +392,7 @@ a.nav-card:hover .nav-logo {
 .planning-section,
 .history-section,
 .nav-grid a.nav-card,
-.res-wrap .card,
+.res-wrap .card:not(.confirmation-card),
 .price-plaque,
 .warning-note {
   opacity: 0;
@@ -1182,6 +1182,49 @@ form .row {
 }
 .modal-btn-cancel:hover { filter: brightness(1.1); }
 .modal-btn-confirm:hover { filter: brightness(1.1); }
+
+/* --- Variante verte du bouton de confirmation (récap, action positive) --- */
+.modal-btn-confirm-green {
+  flex: 1;
+  background: var(--luglon-green);
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: "Special Gothic Condensed One", sans-serif;
+}
+.modal-btn-confirm-green:hover { filter: brightness(1.1); }
+
+/* --- Modale de récapitulatif final (avant envoi) --- */
+.recap-modal-box {
+  max-width: 520px;
+  max-height: 88vh;
+  overflow-y: auto;
+}
+.recap-modal-box h3 {
+  color: var(--luglon-green);
+}
+.recap-event-block {
+  background: rgba(22, 97, 54, 0.07);
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+.recap-event-day {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.15rem;
+  color: var(--luglon-green);
+}
+.recap-event-meta {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+.recap-summary {
+  background: var(--card);
+}
 
 /* ---------------------------------------------------------- */
 /* ================ PAGE DE CONFIRMATION ====================== */

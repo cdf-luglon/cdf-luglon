@@ -42,7 +42,7 @@
         '8h30-12h : Ball-trap, planche au mérite — Menon — ' +
         '16h30 : Course landaise (Ganaderia Maynus) au stade. Adulte 10€ | -18ans 5€ | Gratuit -12ans — ' +
         '20h30-23h30 : Animation musicale avec le groupe Les Tulipes — ' +
-        '20h : Repas du comité — Adulte 17€ | Enfant (-12 ans) 8,50€ — ' +
+        '20h : Repas du comité — Adulte 16€ | Enfant (-12 ans) 8€ — ' +
         'Assiette luglonaise, Entrecôte au brasero et sa sauce maison + frites, Pastis et Crème anglaise, Café.'
     },
     dimanche: {
