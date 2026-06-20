@@ -19,7 +19,7 @@
       end:   new Date(2026, 6, 30, 23, 30),
       location: 'Salle des fêtes, Luglon',
       description:
-        '20h30 : LOTO BINGO (nombreux lots)\\n' +
+        '20h30 : LOTO BINGO (nombreux lots) — ' +
         'Buvette + Sandwichs / Frites sur place.'
     },
     vendredi: {
@@ -28,9 +28,9 @@
       end:   new Date(2026, 6, 31, 23, 59),
       location: 'Luglon (centre bourg)',
       description:
-        '19h30 : Ouverture des fêtes — Remise des clés par le Maire\\n' +
-        '20h : Banda La Juventud\\n' +
-        '20h : Repas d\'ouverture — Adulte 14€ | Enfant (-12 ans) 7€\\n' +
+        '19h30 : Ouverture des fêtes — Remise des clés par le Maire — ' +
+        '20h : Banda La Juventud — ' +
+        '20h : Repas d\'ouverture — Adulte 14€ | Enfant (-12 ans) 7€ — ' +
         'Macédoine et terrine de saumon, Araignées de porc marinées aux épices ou txistorra + frites, Flan gourmand, Café.'
     },
     samedi: {
@@ -39,10 +39,10 @@
       end:   new Date(2026, 7, 1, 23, 59),
       location: 'Stade de Luglon',
       description:
-        '8h30-12h : Ball-trap, planche au mérite — Menon\\n' +
-        '16h30 : Course landaise (Ganaderia Maynus) au stade. Adulte 10€ | -18ans 5€ | Gratuit -12ans\\n' +
-        '20h30-23h30 : Animation musicale avec le groupe Les Tulipes\\n' +
-        '20h : Repas du comité — Adulte 17€ | Enfant (-12 ans) 8,50€\\n' +
+        '8h30-12h : Ball-trap, planche au mérite — Menon — ' +
+        '16h30 : Course landaise (Ganaderia Maynus) au stade. Adulte 10€ | -18ans 5€ | Gratuit -12ans — ' +
+        '20h30-23h30 : Animation musicale avec le groupe Les Tulipes — ' +
+        '20h : Repas du comité — Adulte 17€ | Enfant (-12 ans) 8,50€ — ' +
         'Assiette luglonaise, Entrecôte au brasero et sa sauce maison + frites, Pastis et Crème anglaise, Café.'
     },
     dimanche: {
@@ -51,11 +51,11 @@
       end:   new Date(2026, 7, 2, 23, 59),
       location: 'Luglon (église, stade et centre bourg)',
       description:
-        '11h : Messe en musique avec Sonneur de trompe et Accordéon\\n' +
-        '12h : Vin d\'honneur offert par la Mairie\\n' +
-        '14h30 : Concours de pétanque — au stade (inscription sur place)\\n' +
-        '20h-23h : Animation musicale avec le groupe Soul\'r Rock 82\\n' +
-        '20h : Soirée Tapas — 7€\\n' +
+        '11h : Messe en musique avec Sonneur de trompe et Accordéon — ' +
+        '12h : Vin d\'honneur offert par la Mairie — ' +
+        '14h30 : Concours de pétanque — au stade (inscription sur place) — ' +
+        '20h-23h : Animation musicale avec le groupe Soul\'r Rock 82 — ' +
+        '20h : Soirée Tapas — 7€ — ' +
         '23h : Feu d\'artifice (selon météo).'
     }
   };
@@ -103,8 +103,7 @@
     return String(text)
       .replace(/\\/g, '\\\\')
       .replace(/;/g, '\\;')
-      .replace(/,/g, '\\,')
-      .replace(/\n/g, '\\n');
+      .replace(/,/g, '\\,');
   }
 
   function downloadICS(dayKey) {

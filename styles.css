@@ -191,32 +191,32 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  margin: 0 auto 30px;
+  gap: 18px;
+  margin: 28px auto 30px;
   max-width: 720px;
   padding: 16px 24px;
   border-radius: 14px;
-  background: linear-gradient(120deg, var(--countdown-from), var(--countdown-to));
-  background-size: 200% auto;
-  color: var(--countdown-text);
-  animation: countdownPulse 2.5s ease-in-out infinite,
-             backgroundPan 6s ease-in-out infinite;
+  background: transparent;
+  border: 2px solid var(--countdown-to);
+  color: var(--countdown-to);
+  animation: countdownPulse 2.5s ease-in-out infinite;
 }
 
 .countdown-banner.countdown-urgent {
-  animation: countdownUrgentPulse 1.2s ease-in-out infinite,
-             backgroundPan 4s ease-in-out infinite;
+  animation: countdownUrgentPulse 1.2s ease-in-out infinite;
 }
 
 .countdown-banner.countdown-closed {
   animation: none;
-  background: linear-gradient(120deg, var(--muted), var(--text));
+  background: transparent;
+  border-color: var(--muted);
+  color: var(--muted);
   opacity: 0.9;
 }
 
 .countdown-label {
   font-family: "Special Gothic Condensed One", sans-serif;
-  font-size: 1rem;
+  font-size: 1.3rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -231,21 +231,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 50px;
+  min-width: 58px;
   padding: 6px 4px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(198, 40, 40, 0.08);
+}
+
+.countdown-banner.countdown-closed .countdown-unit {
+  background: rgba(107, 114, 128, 0.1);
 }
 
 .countdown-value {
   font-family: "Special Gothic Condensed One", sans-serif;
-  font-size: 1.6rem;
+  font-size: 2rem;
   line-height: 1;
   animation: countdownSecondTick 1s ease-in-out infinite;
 }
 
 .countdown-caption {
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   text-transform: uppercase;
   opacity: 0.85;
   margin-top: 2px;
@@ -279,20 +283,33 @@
   padding: 6px 14px;
   border: 1px solid var(--luglon-green);
   border-radius: 20px;
-  background: transparent;
-  color: var(--luglon-green);
+  background: var(--luglon-green);
+  color: #ffffff;
   font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s, color 0.2s, transform 0.15s;
+  transition: background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s;
 }
 .btn-add-calendar:hover {
-  background: var(--luglon-green);
-  color: white;
+  background: #ffffff;
+  color: var(--luglon-green);
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(22, 97, 54, 0.3);
 }
 .btn-add-calendar:active {
   transform: translateY(0) scale(0.97);
+}
+
+/* Conteneur du bouton, placé en bas de chaque bloc programme du jour */
+.day-calendar-action {
+  margin-top: 14px;
+  display: flex;
+}
+.planning-section.align-left .day-calendar-action {
+  justify-content: flex-start;
+}
+.planning-section.align-right .day-calendar-action {
+  justify-content: flex-end;
 }
 
 @media (max-width: 768px) {
@@ -305,7 +322,7 @@
     min-width: 42px;
   }
   .countdown-value {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 }
 
