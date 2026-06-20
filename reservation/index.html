@@ -30,10 +30,33 @@
     </div>
 
     <div class="wrap res-wrap">
+
+        <div id="countdown-banner" class="countdown-banner">
+            <span class="countdown-label">Clôture des réservations dans</span>
+            <div class="countdown-timer" id="countdown-timer">
+                <div class="countdown-unit"><span class="countdown-value" id="cd-days">--</span><span class="countdown-caption">jours</span></div>
+                <div class="countdown-unit"><span class="countdown-value" id="cd-hours">--</span><span class="countdown-caption">h</span></div>
+                <div class="countdown-unit"><span class="countdown-value" id="cd-minutes">--</span><span class="countdown-caption">min</span></div>
+                <div class="countdown-unit"><span class="countdown-value" id="cd-seconds">--</span><span class="countdown-caption">sec</span></div>
+            </div>
+        </div>
+
+        <!-- Message affiché uniquement après la clôture, masque le formulaire -->
+        <div id="closed-message" class="closed-message" style="display:none;">
+            <h3>Réservations closes</h3>
+            <p>
+                La période de réservation en ligne pour les fêtes de Luglon 2026 est terminée.
+            </p>
+            <p>
+                Pour toute demande de dernière minute, merci de contacter directement
+                <strong>Félix</strong> ou <strong>Tiphaine</strong> qui traiteront votre demande au cas par cas.
+            </p>
+        </div>
+
         <div class="tab-content">
             <div id="reservation" class="tab-pane active">
                 <!-- <div class="grid"> -->
-                    <main class="card">
+                    <main class="card" id="reservation-card">
                         
                         <div class="price-plaque">
                             <h3>Tarifs des Repas</h3>
@@ -150,6 +173,7 @@
         <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
     </footer>
     
+    <script src="/countdown.js"></script>
     <script src="/script.js"></script>
     <script src="/scroll-animations.js"></script>
 </body>

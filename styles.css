@@ -22,6 +22,12 @@
   --error-border: #c62828;
   --success-bg: #e8f5e9;
   --success-border: #2e7d32;
+
+  /* Compte à rebours — alerte rouge/orange (volontairement en rupture avec le vert) */
+  --countdown-from: #ff6a00;
+  --countdown-to: #c62828;
+  --countdown-text: #ffffff;
+  --countdown-shadow: rgba(198, 40, 40, 0.35);
 }
 
 /* --- DARK MODE --- */
@@ -152,12 +158,155 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
+@keyframes countdownPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--countdown-shadow); }
+  50%       { box-shadow: 0 4px 32px 8px var(--countdown-shadow); }
+}
+
+@keyframes countdownUrgentPulse {
+  0%, 100% { box-shadow: 0 4px 20px var(--countdown-shadow); transform: scale(1); }
+  50%       { box-shadow: 0 4px 40px 12px var(--countdown-shadow); transform: scale(1.015); }
+}
+
+@keyframes countdownSecondTick {
+  0%   { transform: scale(1); }
+  20%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
 /* --- Hero : titre et sous-titre --- */
 .main-title {
   animation: titleReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .main-subtitle {
   animation: subtitleReveal 0.7s 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---------------------------------------------------------- */
+/* =================== COMPTE À REBOURS ====================== */
+/* ---------------------------------------------------------- */
+
+.countdown-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 0 auto 30px;
+  max-width: 720px;
+  padding: 16px 24px;
+  border-radius: 14px;
+  background: linear-gradient(120deg, var(--countdown-from), var(--countdown-to));
+  background-size: 200% auto;
+  color: var(--countdown-text);
+  animation: countdownPulse 2.5s ease-in-out infinite,
+             backgroundPan 6s ease-in-out infinite;
+}
+
+.countdown-banner.countdown-urgent {
+  animation: countdownUrgentPulse 1.2s ease-in-out infinite,
+             backgroundPan 4s ease-in-out infinite;
+}
+
+.countdown-banner.countdown-closed {
+  animation: none;
+  background: linear-gradient(120deg, var(--muted), var(--text));
+  opacity: 0.9;
+}
+
+.countdown-label {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.countdown-timer {
+  display: flex;
+  gap: 10px;
+}
+
+.countdown-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+  padding: 6px 4px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.countdown-value {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1;
+  animation: countdownSecondTick 1s ease-in-out infinite;
+}
+
+.countdown-caption {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* --- Message de clôture des réservations --- */
+.closed-message {
+  max-width: 720px;
+  margin: 0 auto 30px;
+  padding: 24px 28px;
+  border-radius: 14px;
+  background: var(--error-bg);
+  border: 1px solid var(--countdown-to);
+  text-align: center;
+}
+.closed-message h3 {
+  margin: 0 0 10px;
+  color: var(--countdown-to);
+  font-family: "Special Gothic Condensed One", sans-serif;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+}
+.closed-message p {
+  margin: 6px 0;
+  color: var(--text);
+}
+
+/* --- Bouton "Ajouter au calendrier" (page Programme) --- */
+.btn-add-calendar {
+  margin-top: 6px;
+  padding: 6px 14px;
+  border: 1px solid var(--luglon-green);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--luglon-green);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-add-calendar:hover {
+  background: var(--luglon-green);
+  color: white;
+  transform: translateY(-1px);
+}
+.btn-add-calendar:active {
+  transform: translateY(0) scale(0.97);
+}
+
+@media (max-width: 768px) {
+  .countdown-banner {
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 16px;
+  }
+  .countdown-unit {
+    min-width: 42px;
+  }
+  .countdown-value {
+    font-size: 1.3rem;
+  }
 }
 
 

@@ -32,12 +32,23 @@
             <img src="/images/dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image">
         </div>
 
+        <div id="countdown-banner" class="countdown-banner">
+            <span class="countdown-label">Clôture des réservations dans</span>
+            <div class="countdown-timer" id="countdown-timer">
+                <div class="countdown-unit"><span class="countdown-value" id="cd-days">--</span><span class="countdown-caption">jours</span></div>
+                <div class="countdown-unit"><span class="countdown-value" id="cd-hours">--</span><span class="countdown-caption">h</span></div>
+                <div class="countdown-unit"><span class="countdown-value" id="cd-minutes">--</span><span class="countdown-caption">min</span></div>
+                <div class="countdown-unit"><span class="countdown-value" id="cd-seconds">--</span><span class="countdown-caption">sec</span></div>
+            </div>
+        </div>
+
         <div class="tab-content">
             <div id="presentation" class="tab-pane active">
                 <div class="card">
                     <div class="planning-section align-left">
                         <div class="day-title">
                             <h4>Jeudi 30 Juillet</h4>
+                            <button type="button" class="btn-add-calendar" data-day="jeudi">+ Ajouter au calendrier</button>
                         </div>
                         <div class="day-content">
                             <p class="activity-line"><span class="activity-time">20h30 :</span> <span class="activity-details"><strong>LOTO BINGO</strong> (nombreux lots)</span></p>
@@ -48,6 +59,7 @@
                     <div class="planning-section align-right">
                         <div class="day-title">
                             <h4>Vendredi 31 Juillet</h4>
+                            <button type="button" class="btn-add-calendar" data-day="vendredi">+ Ajouter au calendrier</button>
                         </div>
                         <div class="day-content">
                             <p class="activity-line"><span class="activity-time">19h30 :</span> <span class="activity-details"><strong>OUVERTURE DES FÊTES</strong></span></p>
@@ -61,6 +73,7 @@
                     <div class="planning-section align-left">
                         <div class="day-title">
                             <h4>Samedi 01 Août</h4>
+                            <button type="button" class="btn-add-calendar" data-day="samedi">+ Ajouter au calendrier</button>
                         </div>
                         <div class="day-content">
                             <p class="activity-line"><span class="activity-time">8h30-12h :</span> <span class="activity-details"><strong>BALL-TRAP</strong>, planche au mérite - Menon</span></p>
@@ -75,6 +88,7 @@
                     <div class="planning-section align-right">
                         <div class="day-title">
                             <h4>Dimanche 02 Août</h4>
+                            <button type="button" class="btn-add-calendar" data-day="dimanche">+ Ajouter au calendrier</button>
                         </div>
                         <div class="day-content">
                             <p class="activity-line"><span class="activity-time">11h :</span> <span class="activity-details"><strong>MESSE EN MUSIQUE</strong> avec Sonneur de trompe et Accordéon</span></p>
@@ -109,5 +123,7 @@
         <div>©2026 Comité des fêtes de Luglon - Tous droits réservés.</div>
     </footer>
     <script src="/scroll-animations.js"></script>
+    <script src="/countdown.js"></script>
+    <script src="/calendar-export.js"></script>
 </body>
 </html>
