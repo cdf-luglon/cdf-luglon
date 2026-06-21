@@ -109,6 +109,27 @@ function findReservationForDay(day){
   return data.find(r => r.soir === day) || null;
 }
 
+// Formate la date/heure RÉELLE d'une réservation (figée, basée sur son
+// timestamp d'origine) — affiche "aujourd'hui à HH:MM" si c'est le jour
+// même, sinon "JJ/MM à HH:MM". Gère aussi le cas d'anciennes réservations
+// enregistrées avant l'ajout du timestamp (fallback "heure inconnue").
+function formatReservationDate(timestamp) {
+    if (!timestamp) return 'heure inconnue';
+
+    const date = new Date(timestamp);
+    const now = new Date();
+    const isToday = date.toDateString() === now.toDateString();
+
+    const time = `${date.getHours()}:${String(date.getMinutes()).padStart(2, '0')}`;
+
+    if (isToday) {
+        return `${time} (aujourd'hui)`;
+    }
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    return `${time} (${day}/${month})`;
+}
+
 // 2. RENDU DE LA LISTE DES RÉSERVATIONS (Version complète restaurée)
 function render(){
   const data=loadReservations();
@@ -139,8 +160,7 @@ function render(){
         return `${menuCounts[key]} x ${label}`;
     }).join(' / ');
 
-    const now = new Date();
-    const formattedDate = `${now.getHours()}:${String(now.getMinutes()).padStart(2, '0')} (aujourd'hui)`;
+    const formattedDate = formatReservationDate(r.timestamp);
     const formattedTotal = totalPrice.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
     
     el.innerHTML=`
