@@ -1,3 +1,31 @@
+/* ============================================================
+   POLICES — hébergées en local (self-hosted)
+   Fichiers situés dans le dossier /fonts à la racine du site.
+   Remplace le chargement depuis fonts.googleapis.com, qui
+   nécessitait une bannière de consentement cookies (RGPD).
+   ============================================================ */
+@font-face {
+  font-family: 'Fascinate Inline';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/fascinate-inline.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Slackey';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/slackey.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Special Gothic Condensed One';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/special-gothic-condensed-one.woff2') format('woff2');
+}
+
 /* Variables */
 :root {
   --bg: #ffffff;
