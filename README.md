@@ -39,6 +39,10 @@ cdf-luglon/
 ├── scroll-animations.js            # Animations au scroll (IntersectionObserver)
 │
 ├── images/                         # Logos, illustrations, photos
+├── fonts/                          # Polices hébergées en local (self-hosted)
+│   ├── fascinate-inline.woff2
+│   ├── slackey.woff2
+│   └── special-gothic-condensed-one.woff2
 ├── favicon.png
 ├── CNAME                           # Domaine personnalisé (GitHub Pages)
 └── todo.me                         # Notes de suivi personnelles
@@ -124,7 +128,6 @@ Le fichier `Code.gs` ne se déploie pas via Git : toute modification doit être 
 
 ## 📌 Points de vigilance / à finaliser
 
-- **Polices Google Fonts** : actuellement chargées depuis `fonts.googleapis.com`, ce qui transmet l'IP du visiteur à Google avant tout consentement. Pour être pleinement conforme RGPD sans bannière cookies, il faudra héberger les polices en local (`Fascinate Inline`, `Slackey`, `Special Gothic Condensed One`) — non fait à ce jour.
 - **Mentions légales / politique de confidentialité** : à rédiger et publier sur le site (actuellement absentes).
 - **Stockage des réservations côté client** : la détection de double réservation et l'affichage "dernières réservations" reposent sur le `localStorage` du navigateur — cela ne fonctionne que par appareil, pas de vue d'ensemble multi-appareils côté visiteur.
 - **Lien Google Maps** dans l'e-mail de confirmation basé sur une recherche textuelle (`"Salle des fêtes, Luglon"`) plutôt que des coordonnées GPS exactes — à vérifier que le lien pointe bien sur le bon lieu.
