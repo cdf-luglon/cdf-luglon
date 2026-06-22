@@ -17,12 +17,12 @@ const EVENT_INFO_BY_DAY = {
     'vendredi': {
         label: 'Vendredi 31 Juillet',
         time: '20h00',
-        location: "Luglon (centre bourg)"
+        location: "Luglon (salle des fêtes)"
     },
     'samedi': {
         label: 'Samedi 1er Août',
         time: '20h00',
-        location: 'Stade de Luglon'
+        location: 'Luglon (salle des fêtes)'
     }
 };
 
@@ -107,6 +107,59 @@ function saveReservations(arr){localStorage.setItem('luglon_reservations',JSON.s
 function findReservationForDay(day){
   const data = loadReservations();
   return data.find(r => r.soir === day) || null;
+}
+
+// VÉRIFICATION CÔTÉ SERVEUR : interroge le Google Sheet (via Apps Script)
+// pour savoir si ce numéro de téléphone a déjà réservé pour ce soir-là,
+// tous appareils confondus. Contrairement au check localStorage (qui ne
+// voit que cet appareil), celui-ci détecte les doublons faits depuis un
+// autre téléphone/ordinateur.
+//
+// Apps Script ne renvoie pas les en-têtes CORS nécessaires à un fetch()
+// classique cross-origin : on utilise donc du JSONP (balise <script>
+// dynamique) plutôt qu'un fetch, pour contourner cette limitation.
+//
+// Ne bloque jamais le flux en cas d'échec réseau : si le serveur ne
+// répond pas (ou met trop de temps), on considère simplement qu'on n'a
+// "rien trouvé" et on laisse l'utilisateur continuer normalement.
+function checkPhoneOnServer(telephone, soir) {
+    return new Promise((resolve) => {
+        const callbackName = 'luglonCheckPhoneCallback_' + Date.now();
+        let settled = false;
+
+        // Sécurité : si Apps Script ne répond pas sous 4 secondes
+        // (lenteur réseau, script en veille...), on abandonne sans bloquer.
+        const timeout = setTimeout(() => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            resolve(null);
+        }, 4000);
+
+        function cleanup() {
+            clearTimeout(timeout);
+            delete window[callbackName];
+            if (script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        window[callbackName] = (data) => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            resolve(data && data.found ? data.reservation : null);
+        };
+
+        const url = `${WEB_APP_URL}?action=checkPhone&telephone=${encodeURIComponent(telephone)}&soir=${encodeURIComponent(soir)}&callback=${callbackName}`;
+        const script = document.createElement('script');
+        script.src = url;
+        script.onerror = () => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            resolve(null);
+        };
+        document.body.appendChild(script);
+    });
 }
 
 // Formate la date/heure RÉELLE d'une réservation (figée, basée sur son
@@ -199,6 +252,29 @@ function buildReservationSummaryHTML(r) {
         <strong>${r.name}</strong> (${r.phone}) — ${r.people} pers.<br>
         Menus : ${menuSummary}<br>
         Total : ${formattedTotal}€
+    `;
+}
+
+// Construit le résumé HTML d'une réservation trouvée CÔTÉ SERVEUR (réponse
+// d'Apps Script, structure différente de l'objet stocké en localStorage :
+// pas de détail des menus un par un, juste les compteurs par type).
+function buildServerReservationSummaryHTML(r) {
+    const parts = [];
+    const nbViande = parseInt(r.viande, 10) || 0;
+    const nbPoisson = parseInt(r.poisson, 10) || 0;
+    const nbEnfant = parseInt(r.enfant, 10) || 0;
+    if (nbViande > 0) parts.push(`${nbViande} x Viande`);
+    if (nbPoisson > 0) parts.push(`${nbPoisson} x Poisson`);
+    if (nbEnfant > 0) parts.push(`${nbEnfant} x Menu enfant`);
+
+    const total = parseFloat(r.total) || 0;
+    const formattedTotal = total.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
+
+    return `
+        <strong>${r.nom}</strong> — ${r.nbPersonnes} pers.<br>
+        Menus : ${parts.join(' / ') || '—'}<br>
+        Total : ${formattedTotal}€<br>
+        <span style="font-size:12px; opacity:0.75;">Réservation trouvée sur un autre appareil avec ce numéro</span>
     `;
 }
 
@@ -392,7 +468,7 @@ function setSubmissionStatus(status, message = '') {
 // la modale de double réservation avant elle).
 let pendingSubmission = null;
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', async e => {
     e.preventDefault();
 
     // Validation des champs de contact
@@ -441,15 +517,31 @@ form.addEventListener('submit', e => {
 
     pendingSubmission = { formData, selectedMenus };
 
-    // VÉRIFICATION ANTI DOUBLE-RÉSERVATION : si une réservation existe déjà
-    // pour ce jour précis sur cet appareil, on bloque et on demande confirmation
-    // AVANT même d'afficher le récapitulatif.
-    const existing = findReservationForDay(selectedDay);
-    if (existing) {
+    // VÉRIFICATION ANTI DOUBLE-RÉSERVATION (LOCAL) : si une réservation existe
+    // déjà pour ce jour précis sur CET APPAREIL, on avertit en premier (pas
+    // besoin d'aller interroger le serveur dans ce cas, c'est déjà détecté).
+    const existingLocal = findReservationForDay(selectedDay);
+    if (existingLocal) {
         duplicateDayLabel.textContent = DAY_LABELS[selectedDay] || selectedDay;
-        duplicateSummary.innerHTML = buildReservationSummaryHTML(existing);
+        duplicateSummary.innerHTML = buildReservationSummaryHTML(existingLocal);
         duplicateModal.style.display = 'flex';
         return; // on attend la décision de l'utilisateur via la modale
+    }
+
+    // VÉRIFICATION ANTI DOUBLE-RÉSERVATION (SERVEUR) : ce téléphone a-t-il
+    // déjà réservé ce soir-là, depuis n'importe quel appareil ? Court
+    // délai pendant l'appel réseau, sans bloquer le flux si ça échoue.
+    submitButton.disabled = true;
+    setSubmissionStatus('sending', 'Vérification en cours...');
+    const existingServer = await checkPhoneOnServer(formData.Telephone, selectedDay);
+    setSubmissionStatus(null);
+    submitButton.disabled = false;
+
+    if (existingServer) {
+        duplicateDayLabel.textContent = DAY_LABELS[selectedDay] || selectedDay;
+        duplicateSummary.innerHTML = buildServerReservationSummaryHTML(existingServer);
+        duplicateModal.style.display = 'flex';
+        return;
     }
 
     openRecapModal();
