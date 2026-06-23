@@ -189,7 +189,6 @@ Sur Safari, activer d'abord le menu Développement : **Safari → Réglages → 
 
 - **Mentions légales / politique de confidentialité** : à rédiger et publier sur le site (actuellement absentes).
 - **Détection doublon `localStorage`** : ne fonctionne que sur le même appareil/navigateur. La vérification serveur (téléphone + soir) couvre les autres cas, mais avec un timeout de 4 secondes — si Apps Script est en veille froide, la première requête peut ne pas aboutir.
-- **Lien Google Maps** dans l'e-mail de confirmation : basé sur une recherche textuelle (`"Salle des fêtes, Luglon"`) — vérifier que le lien pointe bien sur le bon lieu avant les fêtes.
 - **Sitelinks Google** (sous-liens Programme/Réservation dans les résultats) : non contrôlables, affichés à la discrétion de Google selon le trafic et l'ancienneté du site.
 
 ---
