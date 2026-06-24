@@ -1,40 +1,26 @@
-// Table des prix par jour et par type de menu
-const PRICES_BY_DAY = {
-    'vendredi': {
-        'standard': 14.00,
-        'poisson': 14.00,
-        'enfant': 7.00
-    },
-    'samedi': {
-        'standard': 16.00,
-        'poisson': 16.00,
-        'enfant': 8.00
-    }
-};
-
-// Horaires et lieux du repas, par soir (utilisés dans le récapitulatif avant envoi)
-const EVENT_INFO_BY_DAY = {
-    'vendredi': {
-        label: 'Vendredi 31 Juillet',
-        time: '20h00',
-        location: "Luglon (salle des fêtes)"
-    },
-    'samedi': {
-        label: 'Samedi 1er Août',
-        time: '20h00',
-        location: 'Luglon (salle des fêtes)'
-    }
-};
-
-// Structure simple des options de menu
-const MENU_OPTIONS = [
-    { value: 'standard', label: 'Viande' },
-    { value: 'poisson', label: 'Poisson' },
-    { value: 'enfant', label: 'Menu enfant' }
-];
+// Configuration partagée (tarifs, menus, infos repas) : définie dans
+// /config.js, inclus AVANT ce fichier. On récupère les valeurs ici pour
+// que le reste du code n'ait pas à changer.
+const PRICES_BY_DAY = window.LUGLON.PRICES_BY_DAY;
+const EVENT_INFO_BY_DAY = window.LUGLON.EVENT_INFO_BY_DAY;
+const MENU_OPTIONS = window.LUGLON.MENU_OPTIONS;
 
 // Constante pour la valeur par défaut pour l'initialisation
 const DEFAULT_PEOPLE = 1;
+// Garde-fou : nombre maximum de personnes par réservation
+const MAX_PEOPLE = window.LUGLON.MAX_PEOPLE;
+
+// Échappe le HTML d'un texte saisi par l'utilisateur (nom, commentaire...)
+// avant de l'insérer dans la page via innerHTML. Empêche qu'un texte
+// contenant du code (ex: une balise) soit exécuté par le navigateur.
+function escapeHTML(value) {
+    return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
 
 // *************************************************************************
 // NOUVELLE URL : Colle ici l'URL obtenue lors du déploiement Google Apps Script
@@ -89,7 +75,7 @@ const recapTotal = document.getElementById('recap-total');
 const recapCancelBtn = document.getElementById('recap-cancel');
 const recapConfirmBtn = document.getElementById('recap-confirm');
 
-const DAY_LABELS = { vendredi: 'Vendredi', samedi: 'Samedi' };
+const DAY_LABELS = window.LUGLON.DAY_LABELS;
 
 
 // FONCTION UTILITAIRE : Calcule le prix d'un seul menu en fonction du jour
@@ -217,10 +203,10 @@ function render(){
     const formattedTotal = totalPrice.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
     
     el.innerHTML=`
-      <h4>${r.name} (${r.phone}) — ${r.people} pers 
+      <h4>${escapeHTML(r.name)} (${escapeHTML(r.phone)}) — ${escapeHTML(r.people)} pers
       <span class="total-price">Total: ${formattedTotal}€</span></h4>
-      <div class="meta">${r.soir} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
-      <div>Commentaire : ${r.notes || 'Aucun'}</div>
+      <div class="meta">${escapeHTML(r.soir)} • Menus: ${menuSummary} • Réservé à ${formattedDate}</div>
+      <div>Commentaire : ${escapeHTML(r.notes || 'Aucun')}</div>
     `;
     
     list.appendChild(el);
@@ -249,7 +235,7 @@ function buildReservationSummaryHTML(r) {
     const formattedTotal = totalPrice.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
 
     return `
-        <strong>${r.name}</strong> (${r.phone}) — ${r.people} pers.<br>
+        <strong>${escapeHTML(r.name)}</strong> (${escapeHTML(r.phone)}) — ${escapeHTML(r.people)} pers.<br>
         Menus : ${menuSummary}<br>
         Total : ${formattedTotal}€
     `;
@@ -271,7 +257,7 @@ function buildServerReservationSummaryHTML(r) {
     const formattedTotal = total.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
 
     return `
-        <strong>${r.nom}</strong> — ${r.nbPersonnes} pers.<br>
+        <strong>${escapeHTML(r.nom)}</strong> — ${escapeHTML(r.nbPersonnes)} pers.<br>
         Menus : ${parts.join(' / ') || '—'}<br>
         Total : ${formattedTotal}€<br>
         <span style="font-size:12px; opacity:0.75;">Réservation trouvée sur un autre appareil avec ce numéro</span>
@@ -334,7 +320,14 @@ function calculateTotalPrice() {
 
 // 3. GÉNÉRATION DYNAMIQUE DES CHAMPS DE MENUS
 function generateMenuInputs() {
-    const numPeople = Number(peopleInput.value);
+    // Garde-fou : on borne le nombre de personnes entre 1 et MAX_PEOPLE
+    // pour éviter qu'une saisie énorme (ex: 9999) ne fige la page en
+    // générant des milliers de menus.
+    let numPeople = Number(peopleInput.value);
+    if (numPeople > MAX_PEOPLE) {
+        numPeople = MAX_PEOPLE;
+        peopleInput.value = MAX_PEOPLE;
+    }
     menuContainer.innerHTML = '';
     
     totalCountMessage.textContent = `Veuillez choisir le menu pour chacune des ${numPeople} personne${numPeople > 1 ? 's' : ''}.`;
@@ -666,6 +659,32 @@ function submitReservation(formData, selectedMenus) {
         submitButton.disabled = false;
     });
 }
+
+// --- Fermeture des modales (accessibilité) ---
+// On peut désormais fermer une modale avec la touche Échap ou en cliquant
+// sur le fond sombre, en plus des boutons. Cela revient à "annuler" :
+// on referme et on oublie la réservation en attente.
+function closeModals() {
+    if (recapModal) recapModal.style.display = 'none';
+    if (duplicateModal) duplicateModal.style.display = 'none';
+    pendingSubmission = null;
+}
+
+// Clic sur le fond sombre (et pas sur le contenu de la boîte) = fermeture
+[recapModal, duplicateModal].forEach(modal => {
+    if (!modal) return;
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModals();
+    });
+});
+
+// Touche Échap = fermeture, uniquement si une modale est ouverte
+document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    const recapOpen = recapModal && recapModal.style.display === 'flex';
+    const dupOpen = duplicateModal && duplicateModal.style.display === 'flex';
+    if (recapOpen || dupOpen) closeModals();
+});
 
 // Initialisation
 if (peopleInput) {

@@ -31,8 +31,12 @@ cdf-luglon/
 │   └── confirmation/
 │       └── index.html              # Page affichée après une réservation réussie
 │
+├── confidentialite/
+│   └── index.html                  # Politique de confidentialité (RGPD)
+│
 ├── styles.css                      # Feuille de style unique, partagée par toutes les pages
 │
+├── config.js                       # Configuration partagée (tarifs, menus, infos repas)
 ├── script.js                       # Logique complète du formulaire de réservation
 ├── confirmation.js                 # Logique de la page de confirmation post-réservation
 ├── countdown.js                    # Compte à rebours + blocage formulaire après clôture
@@ -49,9 +53,10 @@ cdf-luglon/
 │   ├── logo_google.jpg             # Logo fond blanc pour Google Search / Open Graph
 │   └── ...                         # Autres assets visuels
 │
-├── favicon.png                     # Favicon carré 512×512 (format exigé par Google)
-├── CNAME                           # Domaine personnalisé (GitHub Pages)
-└── todo.me                         # Notes de suivi personnelles
+├── favicon.png                     # Favicon carré 192×192 (multiple de 48, optimisée ~34 Ko)
+├── robots.txt                      # Indique le sitemap aux moteurs de recherche
+├── sitemap.xml                     # Plan du site (pages à indexer)
+└── CNAME                           # Domaine personnalisé (GitHub Pages)
 ```
 
 > Le script Google Apps Script (`Code.gs`) ne vit pas dans ce dépôt : il est géré directement dans l'éditeur Apps Script lié au Google Sheet. Conserver une copie locale à jour pour le suivi des versions.
@@ -109,18 +114,24 @@ const WEB_APP_URL = 'https://script.google.com/macros/s/XXXXX/exec';
 const RESERVATION_DEADLINE = new Date('2026-07-28T23:59:59');
 ```
 
-### `script.js` — Tarifs (à synchroniser avec les 3 autres emplacements)
+### `config.js` — Tarifs (source unique pour le code)
 ```js
-const PRICES_BY_DAY = {
+window.LUGLON = {
+  PRICES_BY_DAY: {
     'vendredi': { 'standard': 14.00, 'poisson': 14.00, 'enfant': 7.00 },
     'samedi':   { 'standard': 16.00, 'poisson': 16.00, 'enfant': 8.00 }
+  },
+  ...
 };
 ```
-> ⚠️ Les tarifs sont définis à **4 endroits distincts** à garder synchronisés :
-> - `script.js` (`PRICES_BY_DAY`) — calcul côté formulaire
-> - `confirmation.js` (`PRICES_BY_DAY`) — affichage page confirmation
+> Les tarifs utilisés par le **calcul** (formulaire + page de confirmation) sont
+> désormais définis **une seule fois** dans `config.js` ; `script.js` et
+> `confirmation.js` les lisent depuis là.
+>
+> ⚠️ Restent à mettre à jour **à la main** (texte en dur, pas du calcul) :
 > - `reservation/index.html` — tableau des tarifs affiché
 > - `programme/index.html` — texte des repas avec tarifs
+> - les blocs JSON-LD (`index.html`, `programme/index.html`) — prix des `Offer`
 
 ### `calendar-export.js` — Événements par jour (page Programme)
 ```js
@@ -187,7 +198,8 @@ Sur Safari, activer d'abord le menu Développement : **Safari → Réglages → 
 
 ## 📌 Points de vigilance
 
-- **Mentions légales / politique de confidentialité** : à rédiger et publier sur le site (actuellement absentes).
+- **Politique de confidentialité** : publiée sur `/confidentialite/` (RGPD). Des **mentions légales** complètes (identité de l'association, hébergeur) peuvent encore être ajoutées si besoin.
+- **Confirmation d'envoi non garantie** : l'envoi de la réservation se fait en `fetch` `mode: 'no-cors'` ([script.js](script.js), `submitReservation`). Le navigateur ne peut pas lire la réponse de Google : on affiche « confirmée » dès que la requête part, sans vérifier que le Sheet a bien enregistré. Pour une vraie confirmation, il faudrait passer l'envoi en **JSONP** (comme le check anti-doublon) **et** adapter `Code.gs` côté serveur. Non fait ici car cela nécessite un redéploiement coordonné du script Apps Script.
 - **Détection doublon `localStorage`** : ne fonctionne que sur le même appareil/navigateur. La vérification serveur (téléphone + soir) couvre les autres cas, mais avec un timeout de 4 secondes — si Apps Script est en veille froide, la première requête peut ne pas aboutir.
 - **Sitelinks Google** (sous-liens Programme/Réservation dans les résultats) : non contrôlables, affichés à la discrétion de Google selon le trafic et l'ancienneté du site.
 

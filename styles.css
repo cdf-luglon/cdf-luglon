@@ -839,6 +839,19 @@ body {
   border-color: var(--luglon-green);
 }
 
+/* Lien "Politique de confidentialité" dans le pied de page */
+.footer-legal-link {
+  font-size: 0.75rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.footer-legal-link:hover {
+  color: var(--luglon-green);
+  border-color: var(--luglon-green);
+}
+
 @media (max-width: 640px) {
   .footer-inner {
     flex-direction: column;
@@ -1357,6 +1370,43 @@ form .row {
 }
 .recap-summary {
   background: var(--card);
+}
+
+/* ---------------------------------------------------------- */
+/* ============ PAGE POLITIQUE DE CONFIDENTIALITÉ ============ */
+/* ---------------------------------------------------------- */
+.legal-card {
+  background: var(--bg);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px var(--resa-shadow);
+  padding: 28px 32px;
+  line-height: 1.65;
+}
+.legal-card h2 {
+  font-family: "Special Gothic Condensed One", sans-serif;
+  color: var(--luglon-green);
+  font-size: 1.4rem;
+  margin: 28px 0 8px;
+}
+.legal-card p {
+  margin: 8px 0;
+  color: var(--text);
+}
+.legal-card ul {
+  margin: 8px 0;
+  padding-left: 22px;
+}
+.legal-card li {
+  margin: 4px 0;
+}
+.legal-card a {
+  color: var(--luglon-green);
+  text-decoration: underline;
+}
+.legal-updated {
+  font-size: 0.85rem;
+  color: var(--muted);
+  font-style: italic;
 }
 
 /* ---------------------------------------------------------- */

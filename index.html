@@ -40,12 +40,116 @@
       ]
     }
     </script>
+
+    <!-- JSON-LD : série d'événements (programme des 4 jours) pour Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EventSeries",
+      "name": "Fêtes de Luglon 2026",
+      "description": "Quatre jours de fête à Luglon : loto, course landaise, repas, animations musicales et feu d'artifice, du 30 juillet au 2 août 2026.",
+      "startDate": "2026-07-30",
+      "endDate": "2026-08-02",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "image": "https://cdf-luglon.fr/images/logo_google.jpg",
+      "location": {
+        "@type": "Place",
+        "name": "Luglon",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Luglon",
+          "postalCode": "40630",
+          "addressCountry": "FR"
+        }
+      },
+      "organizer": {
+        "@type": "Organization",
+        "name": "Comité des Fêtes de Luglon",
+        "url": "https://cdf-luglon.fr"
+      },
+      "subEvent": [
+        {
+          "@type": "Event",
+          "name": "Jeudi : Loto Bingo",
+          "startDate": "2026-07-30T20:30:00+02:00",
+          "endDate": "2026-07-30T23:30:00+02:00",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "description": "Loto Bingo avec de nombreux lots. Buvette, sandwichs et frites sur place.",
+          "location": {
+            "@type": "Place",
+            "name": "Salle des fêtes de Luglon",
+            "address": { "@type": "PostalAddress", "addressLocality": "Luglon", "postalCode": "40630", "addressCountry": "FR" }
+          }
+        },
+        {
+          "@type": "Event",
+          "name": "Vendredi : Ouverture des fêtes et repas",
+          "startDate": "2026-07-31T19:30:00+02:00",
+          "endDate": "2026-07-31T23:59:00+02:00",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "description": "Ouverture des fêtes, remise des clés par le Maire, banda La Juventud et repas d'ouverture.",
+          "location": {
+            "@type": "Place",
+            "name": "Luglon (centre bourg)",
+            "address": { "@type": "PostalAddress", "addressLocality": "Luglon", "postalCode": "40630", "addressCountry": "FR" }
+          },
+          "offers": {
+            "@type": "Offer",
+            "name": "Repas d'ouverture (adulte)",
+            "price": "14.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://cdf-luglon.fr/reservation/"
+          }
+        },
+        {
+          "@type": "Event",
+          "name": "Samedi : Course landaise et repas du comité",
+          "startDate": "2026-08-01T08:30:00+02:00",
+          "endDate": "2026-08-01T23:59:00+02:00",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "description": "Ball-trap, course landaise (Ganaderia Maynus), animation musicale avec Les Tulipes et repas du comité.",
+          "location": {
+            "@type": "Place",
+            "name": "Stade de Luglon",
+            "address": { "@type": "PostalAddress", "addressLocality": "Luglon", "postalCode": "40630", "addressCountry": "FR" }
+          },
+          "offers": {
+            "@type": "Offer",
+            "name": "Repas du comité (adulte)",
+            "price": "16.00",
+            "priceCurrency": "EUR",
+            "availability": "https://schema.org/InStock",
+            "url": "https://cdf-luglon.fr/reservation/"
+          }
+        },
+        {
+          "@type": "Event",
+          "name": "Dimanche : Messe, pétanque et feu d'artifice",
+          "startDate": "2026-08-02T11:00:00+02:00",
+          "endDate": "2026-08-02T23:59:00+02:00",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "description": "Messe en musique, vin d'honneur, concours de pétanque, soirée tapas, animation Soul'r Rock 82 et feu d'artifice.",
+          "location": {
+            "@type": "Place",
+            "name": "Luglon (église, stade et centre bourg)",
+            "address": { "@type": "PostalAddress", "addressLocality": "Luglon", "postalCode": "40630", "addressCountry": "FR" }
+          }
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="wrap">
         
         <a href="/" class="floating-logo">
-            <img src="/images/logo_cdf.jpg" alt="Logo Comité des Fêtes" class="logo-fixed-img" />
+            <img src="/images/logo_cdf.jpg" alt="Logo Comité des Fêtes" class="logo-fixed-img" width="60" height="60" />
             <div class="logo-fixed-text">
                 <span class="logo-line-1">Comité des Fêtes</span>
                 <span class="logo-line-2">Luglon</span>
@@ -57,7 +161,7 @@
                 <h1 class="main-title">FÊTES DE LUGLON 2026</h1>
                 <p class="main-subtitle">Programme et Réservation</p>
             </div>
-            <img src="/images/dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image">
+            <img src="/images/dessin_luglon.jpeg" alt="Dessin Luglon" class="hero-image" width="1734" height="1814">
         </div>
 
         <div id="countdown-banner" class="countdown-banner">
@@ -110,6 +214,7 @@
             <div class="footer-brand">
                 <span class="footer-title">Comité des Fêtes de Luglon</span>
                 <span class="footer-copyright">©2026 Tous droits réservés.</span>
+                <a href="/confidentialite/" class="footer-legal-link">Politique de confidentialité</a>
             </div>
             <div class="footer-social">
                 <a href="https://www.instagram.com/cdfluglon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram du Comité des Fêtes de Luglon" class="footer-social-link footer-instagram">

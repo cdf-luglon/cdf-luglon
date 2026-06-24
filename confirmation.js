@@ -6,21 +6,23 @@
 
 (function () {
 
-  const PRICES_BY_DAY = {
-    'vendredi': { 'standard': 14.00, 'poisson': 14.00, 'enfant': 7.00 },
-    'samedi':   { 'standard': 16.00, 'poisson': 16.00, 'enfant': 8.00 }
-  };
-
-  const MENU_OPTIONS = [
-    { value: 'standard', label: 'Viande' },
-    { value: 'poisson', label: 'Poisson' },
-    { value: 'enfant', label: 'Menu enfant' }
-  ];
-
-  const DAY_LABELS = { vendredi: 'Vendredi', samedi: 'Samedi' };
+  // Configuration partagée, définie dans /config.js (inclus avant ce fichier)
+  const PRICES_BY_DAY = window.LUGLON.PRICES_BY_DAY;
+  const MENU_OPTIONS = window.LUGLON.MENU_OPTIONS;
+  const DAY_LABELS = window.LUGLON.DAY_LABELS;
 
   function getMenuPrice(day, menuType) {
     return PRICES_BY_DAY[day] ? (PRICES_BY_DAY[day][menuType] || 0) : 0;
+  }
+
+  // Échappe le HTML d'un texte saisi par l'utilisateur avant insertion
+  function escapeHTML(value) {
+    return String(value == null ? '' : value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
   }
 
   function loadReservations() {
@@ -73,12 +75,12 @@
   const dayLabel = DAY_LABELS[lastReservation.soir] || lastReservation.soir;
 
   detailsEl.innerHTML = `
-    <div class="confirmation-row"><span>Nom</span><strong>${lastReservation.name}</strong></div>
-    <div class="confirmation-row"><span>Téléphone</span><strong>${lastReservation.phone}</strong></div>
-    <div class="confirmation-row"><span>Soir réservé</span><strong>${dayLabel}</strong></div>
-    <div class="confirmation-row"><span>Nombre de personnes</span><strong>${lastReservation.people}</strong></div>
+    <div class="confirmation-row"><span>Nom</span><strong>${escapeHTML(lastReservation.name)}</strong></div>
+    <div class="confirmation-row"><span>Téléphone</span><strong>${escapeHTML(lastReservation.phone)}</strong></div>
+    <div class="confirmation-row"><span>Soir réservé</span><strong>${escapeHTML(dayLabel)}</strong></div>
+    <div class="confirmation-row"><span>Nombre de personnes</span><strong>${escapeHTML(lastReservation.people)}</strong></div>
     <div class="confirmation-row confirmation-menus"><span>Menus</span><ul>${menuLines}</ul></div>
-    ${lastReservation.notes ? `<div class="confirmation-row"><span>Commentaire</span><strong>${lastReservation.notes}</strong></div>` : ''}
+    ${lastReservation.notes ? `<div class="confirmation-row"><span>Commentaire</span><strong>${escapeHTML(lastReservation.notes)}</strong></div>` : ''}
     <div class="confirmation-row confirmation-total-row"><span>Total à payer sur place</span><strong>${formattedTotal}€</strong></div>
   `;
 
