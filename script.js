@@ -610,6 +610,57 @@ recapConfirmBtn.addEventListener('click', () => {
     }
 });
 
+// Envoie la réservation au serveur en JSONP (même canal que le check
+// anti-doublon), ce qui permet de LIRE la réponse de Google et donc de
+// confirmer le RÉEL enregistrement. Impossible avec un fetch no-cors, qui
+// renvoyait une réponse opaque : on affichait "confirmée" même si le Sheet
+// n'avait rien enregistré.
+//
+// Résout avec l'objet réponse du serveur ({ success: true/false, error })
+// ou avec null en cas d'échec réseau / timeout.
+function submitReservationOnServer(formData) {
+    return new Promise((resolve) => {
+        const callbackName = 'luglonSubmitCallback_' + Date.now();
+        let settled = false;
+
+        // Apps Script peut être lent à démarrer (veille froide) : on laisse
+        // jusqu'à 15 secondes avant d'abandonner.
+        const timeout = setTimeout(() => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            resolve(null);
+        }, 15000);
+
+        function cleanup() {
+            clearTimeout(timeout);
+            delete window[callbackName];
+            if (script.parentNode) script.parentNode.removeChild(script);
+        }
+
+        window[callbackName] = (data) => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            resolve(data);
+        };
+
+        const params = new URLSearchParams(formData);
+        params.set('action', 'submit');
+        params.set('callback', callbackName);
+
+        const script = document.createElement('script');
+        script.src = `${WEB_APP_URL}?${params.toString()}`;
+        script.onerror = () => {
+            if (settled) return;
+            settled = true;
+            cleanup();
+            resolve(null);
+        };
+        document.body.appendChild(script);
+    });
+}
+
 // Envoi effectif de la réservation (factorisé pour être appelé directement,
 // ou après confirmation explicite d'une double réservation)
 function submitReservation(formData, selectedMenus) {
@@ -617,46 +668,43 @@ function submitReservation(formData, selectedMenus) {
     submitButton.disabled = true;
     setSubmissionStatus('sending', 'Réservation en cours...');
 
-    // Envoi des données au Google Apps Script
-    fetch(WEB_APP_URL, {
-        method: 'POST',
-        mode: 'no-cors', // <-- LE CHANGEMENT MAGIQUE EST ICI
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams(formData).toString(),
-    })
-    .then(() => {
-        // En mode no-cors, on ne peut pas lire le {success: true} de Google.
-        // Mais si le code arrive ici, c'est que la requête est bien partie vers le Sheet !
+    submitReservationOnServer(formData).then((res) => {
+        if (res && res.success) {
+            // Le serveur a CONFIRMÉ l'enregistrement.
 
-        // 1. Logique de confirmation pour le stockage local
-        const data = loadReservations();
-        const entry = {
-            name: formData.Nom,
-            phone: formData.Telephone,
-            people: formData.NbPersonnes,
-            soir: formData.Soir,
-            menus: selectedMenus,
-            notes: formData.Notes,
-            timestamp: Date.now() // horodatage réel, utilisé par la page de confirmation
-        };
+            // 1. Logique de confirmation pour le stockage local
+            const data = loadReservations();
+            const entry = {
+                name: formData.Nom,
+                phone: formData.Telephone,
+                people: formData.NbPersonnes,
+                soir: formData.Soir,
+                menus: selectedMenus,
+                notes: formData.Notes,
+                timestamp: Date.now() // horodatage réel, utilisé par la page de confirmation
+            };
 
-        data.push(entry);
-        saveReservations(data);
-        // On garde une trace de "la dernière réservation effectuée" pour que
-        // la page de confirmation sache laquelle afficher.
-        localStorage.setItem('luglon_last_reservation_timestamp', String(entry.timestamp));
-        render();
+            data.push(entry);
+            saveReservations(data);
+            // On garde une trace de "la dernière réservation effectuée" pour que
+            // la page de confirmation sache laquelle afficher.
+            localStorage.setItem('luglon_last_reservation_timestamp', String(entry.timestamp));
+            render();
 
-        // 2. Redirection vers la page de confirmation dédiée
-        window.location.href = '/reservation/confirmation/';
-    })
-    .catch(error => {
-        // Cette erreur ne s'affichera que si l'utilisateur n'a vraiment pas d'internet
-        console.error('Erreur lors de l\'envoi :', error);
-        setSubmissionStatus('error', "Erreur de connexion internet. Veuillez réessayer.");
-        submitButton.disabled = false;
+            // 2. Redirection vers la page de confirmation dédiée
+            window.location.href = '/reservation/confirmation/';
+        } else {
+            // Échec : soit le serveur a renvoyé une erreur, soit le réseau a
+            // échoué / le délai a expiré. Dans tous les cas, on n'affiche PAS
+            // "confirmée" et on laisse l'utilisateur réessayer.
+            if (res && res.error) {
+                console.error('Erreur serveur lors de l\'envoi :', res.error);
+                setSubmissionStatus('error', "La réservation n'a pas pu être enregistrée. Merci de réessayer ou de nous contacter.");
+            } else {
+                setSubmissionStatus('error', "Connexion au serveur impossible. Vérifiez votre connexion internet et réessayez.");
+            }
+            submitButton.disabled = false;
+        }
     });
 }
 
