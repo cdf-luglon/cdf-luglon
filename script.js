@@ -472,10 +472,6 @@ form.addEventListener('submit', async e => {
     // On prépare nos compteurs pour la base de données
     let nbViande = 0;
     let nbEnfant = 0;
-    // Le poisson n'est plus proposé : on conserve une valeur figée à 0,
-    // uniquement pour rester compatible avec la colonne "Poisson" déjà
-    // présente dans le Google Sheet (évite de devoir le modifier).
-    const nbPoisson = 0;
 
     // Récupérer tous les choix de menus dynamiques (et vérifier qu'ils sont choisis)
     const selectedMenus = [];
@@ -501,7 +497,6 @@ form.addEventListener('submit', async e => {
         'NbPersonnes': numPeople,
         'Soir': selectedDay,
         'Viande': nbViande,
-        'Poisson': nbPoisson,
         'Enfant': nbEnfant,
         'Notes': form.notes.value.trim(),
         'Total_Euros': parseFloat(totalAmountEl.textContent.replace('€', '').replace(',', '.').replace(/\s/g, '')),
