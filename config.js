@@ -17,14 +17,13 @@ window.LUGLON = {
 
   // Tarifs par soir et par type de menu (en euros)
   PRICES_BY_DAY: {
-    'vendredi': { 'standard': 14.00, 'poisson': 14.00, 'enfant': 7.00 },
-    'samedi':   { 'standard': 16.00, 'poisson': 16.00, 'enfant': 8.00 }
+    'vendredi': { 'standard': 14.00, 'enfant': 7.00 },
+    'samedi':   { 'standard': 16.00, 'enfant': 8.00 }
   },
 
   // Options de menu proposées (valeur technique → libellé affiché)
   MENU_OPTIONS: [
     { value: 'standard', label: 'Viande' },
-    { value: 'poisson', label: 'Poisson' },
     { value: 'enfant', label: 'Menu enfant' }
   ],
 

@@ -247,10 +247,8 @@ function buildReservationSummaryHTML(r) {
 function buildServerReservationSummaryHTML(r) {
     const parts = [];
     const nbViande = parseInt(r.viande, 10) || 0;
-    const nbPoisson = parseInt(r.poisson, 10) || 0;
     const nbEnfant = parseInt(r.enfant, 10) || 0;
     if (nbViande > 0) parts.push(`${nbViande} x Viande`);
-    if (nbPoisson > 0) parts.push(`${nbPoisson} x Poisson`);
     if (nbEnfant > 0) parts.push(`${nbEnfant} x Menu enfant`);
 
     const total = parseFloat(r.total) || 0;
@@ -473,8 +471,11 @@ form.addEventListener('submit', async e => {
 
     // On prépare nos compteurs pour la base de données
     let nbViande = 0;
-    let nbPoisson = 0;
     let nbEnfant = 0;
+    // Le poisson n'est plus proposé : on conserve une valeur figée à 0,
+    // uniquement pour rester compatible avec la colonne "Poisson" déjà
+    // présente dans le Google Sheet (évite de devoir le modifier).
+    const nbPoisson = 0;
 
     // Récupérer tous les choix de menus dynamiques (et vérifier qu'ils sont choisis)
     const selectedMenus = [];
@@ -487,7 +488,6 @@ form.addEventListener('submit', async e => {
 
         // On incrémente le compteur correspondant
         if (menuSelect.value === 'standard') nbViande++;
-        if (menuSelect.value === 'poisson') nbPoisson++;
         if (menuSelect.value === 'enfant') nbEnfant++;
 
         selectedMenus.push(menuSelect.value);
@@ -571,7 +571,7 @@ function openRecapModal() {
     recapEmail.textContent = formData.Email;
     recapPeople.textContent = formData.NbPersonnes;
 
-    // Détail des menus, ex : "4 × Viande / 3 × Poisson / 1 × Menu enfant"
+    // Détail des menus, ex : "4 × Viande / 2 × Menu enfant"
     const menuCounts = {};
     selectedMenus.forEach(m => { menuCounts[m] = (menuCounts[m] || 0) + 1; });
     recapMenus.innerHTML = Object.keys(menuCounts).map(key => {
