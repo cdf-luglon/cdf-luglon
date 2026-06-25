@@ -346,6 +346,13 @@
     gap: 10px;
     padding: 14px 16px;
   }
+  /* Sur accueil/programme, .wrap fait 100% de large (sans marge) : la
+     bannière touchait les bords et la lueur rouge était coupée. On lui
+     donne la même largeur 95% que sur la page réservation (où
+     .wrap.res-wrap est déjà à 95%), pour un rendu identique partout. */
+  .wrap:not(.res-wrap) .countdown-banner {
+    width: 95%;
+  }
   .countdown-unit {
     min-width: 42px;
   }
