@@ -248,7 +248,7 @@ function buildServerReservationSummaryHTML(r) {
     const parts = [];
     const nbViande = parseInt(r.viande, 10) || 0;
     const nbEnfant = parseInt(r.enfant, 10) || 0;
-    if (nbViande > 0) parts.push(`${nbViande} x Viande`);
+    if (nbViande > 0) parts.push(`${nbViande} x Adulte`);
     if (nbEnfant > 0) parts.push(`${nbEnfant} x Menu enfant`);
 
     const total = parseFloat(r.total) || 0;

@@ -23,7 +23,7 @@ window.LUGLON = {
 
   // Options de menu proposées (valeur technique → libellé affiché)
   MENU_OPTIONS: [
-    { value: 'standard', label: 'Viande' },
+    { value: 'standard', label: 'Adulte' },
     { value: 'enfant', label: 'Menu enfant' }
   ],
 
