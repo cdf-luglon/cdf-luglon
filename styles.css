@@ -745,6 +745,16 @@ body {
     color: var(--muted);
 }
 
+/* Notes d'information RGPD du formulaire (sous le commentaire et le
+   bouton RÉSERVER) : plus petites que le texte saisi par l'utilisateur */
+.form-note {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+.form-note a {
+    color: var(--luglon-green);
+}
+
 /* ---------------------------------------------------------- */
 /* ======================= FOOTER ============================= */
 /* ---------------------------------------------------------- */
@@ -1408,7 +1418,9 @@ form .row {
 .legal-card li {
   margin: 4px 0;
 }
-.legal-card a {
+/* :not(.nav-button) : les boutons de bas de page sont aussi des liens,
+   mais doivent garder leur style de bouton (texte blanc, sans soulignement) */
+.legal-card a:not(.nav-button) {
   color: var(--luglon-green);
   text-decoration: underline;
 }
@@ -1503,6 +1515,9 @@ form .row {
 }
 .confirmation-home-btn {
   background: var(--muted) !important;
+  /* Texte couleur du fond de page : blanc sur gris foncé en mode clair,
+     noir sur gris clair en mode sombre — bon contraste dans les deux cas */
+  color: var(--bg);
 }
 
 @media (max-width: 768px) {

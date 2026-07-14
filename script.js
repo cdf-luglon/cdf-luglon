@@ -101,6 +101,10 @@ function findReservationForDay(day){
 // voit que cet appareil), celui-ci détecte les doublons faits depuis un
 // autre téléphone/ordinateur.
 //
+// Le serveur répond uniquement { found: true/false } : il ne renvoie
+// JAMAIS le détail de la réservation (nom, menus...), pour qu'on ne
+// puisse pas récupérer les données d'autrui en testant des numéros.
+//
 // Apps Script ne renvoie pas les en-têtes CORS nécessaires à un fetch()
 // classique cross-origin : on utilise donc du JSONP (balise <script>
 // dynamique) plutôt qu'un fetch, pour contourner cette limitation.
@@ -132,7 +136,7 @@ function checkPhoneOnServer(telephone, soir) {
             if (settled) return;
             settled = true;
             cleanup();
-            resolve(data && data.found ? data.reservation : null);
+            resolve(data && data.found ? true : null);
         };
 
         const url = `${WEB_APP_URL}?action=checkPhone&telephone=${encodeURIComponent(telephone)}&soir=${encodeURIComponent(soir)}&callback=${callbackName}`;
@@ -241,24 +245,13 @@ function buildReservationSummaryHTML(r) {
     `;
 }
 
-// Construit le résumé HTML d'une réservation trouvée CÔTÉ SERVEUR (réponse
-// d'Apps Script, structure différente de l'objet stocké en localStorage :
-// pas de détail des menus un par un, juste les compteurs par type).
-function buildServerReservationSummaryHTML(r) {
-    const parts = [];
-    const nbViande = parseInt(r.viande, 10) || 0;
-    const nbEnfant = parseInt(r.enfant, 10) || 0;
-    if (nbViande > 0) parts.push(`${nbViande} x Adulte`);
-    if (nbEnfant > 0) parts.push(`${nbEnfant} x Menu enfant`);
-
-    const total = parseFloat(r.total) || 0;
-    const formattedTotal = total.toLocaleString('fr-FR', { minimumFractionDigits: 2 });
-
+// Message générique affiché quand le doublon est détecté CÔTÉ SERVEUR.
+// Le serveur ne renvoie volontairement aucun détail (voir
+// checkPhoneOnServer), on ne peut donc rien afficher de plus précis.
+function buildServerReservationSummaryHTML() {
     return `
-        <strong>${escapeHTML(r.nom)}</strong> — ${escapeHTML(r.nbPersonnes)} pers.<br>
-        Menus : ${parts.join(' / ') || '—'}<br>
-        Total : ${formattedTotal}€<br>
-        <span style="font-size:12px; opacity:0.75;">Réservation trouvée sur un autre appareil avec ce numéro</span>
+        Une réservation a déjà été enregistrée pour ce soir-là avec ce
+        numéro de téléphone (probablement depuis un autre appareil).
     `;
 }
 
@@ -527,7 +520,7 @@ form.addEventListener('submit', async e => {
 
     if (existingServer) {
         duplicateDayLabel.textContent = DAY_LABELS[selectedDay] || selectedDay;
-        duplicateSummary.innerHTML = buildServerReservationSummaryHTML(existingServer);
+        duplicateSummary.innerHTML = buildServerReservationSummaryHTML();
         duplicateModal.style.display = 'flex';
         return;
     }

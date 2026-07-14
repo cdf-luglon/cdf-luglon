@@ -32,7 +32,7 @@
     <div class="wrap res-wrap">
         <main class="card legal-card">
 
-            <p class="legal-updated">Dernière mise à jour : juin 2026</p>
+            <p class="legal-updated">Dernière mise à jour : juillet 2026</p>
 
             <p>
                 Le Comité des Fêtes de Luglon accorde de l'importance à la protection de vos
@@ -55,8 +55,14 @@
                 <li>votre <strong>numéro de téléphone</strong> ;</li>
                 <li>votre <strong>adresse e-mail</strong> ;</li>
                 <li>le <strong>soir choisi</strong>, le <strong>nombre de personnes</strong> et les <strong>menus</strong> sélectionnés ;</li>
-                <li>un éventuel <strong>commentaire</strong> que vous saisissez (allergies, etc.).</li>
+                <li>un éventuel <strong>commentaire</strong> que vous saisissez.</li>
             </ul>
+            <p>
+                Si vous choisissez d'indiquer dans le commentaire des informations relatives
+                à votre santé (allergie, mobilité réduite...), vous le faites
+                <strong>volontairement</strong> : ces précisions servent uniquement à préparer
+                votre repas ou votre accueil, et sont supprimées avec la réservation.
+            </p>
 
             <h2>3. Pourquoi ces données ?</h2>
             <p>
@@ -65,12 +71,32 @@
                 vous contacter en cas de besoin concernant les fêtes. Elles ne sont
                 <strong>ni revendues, ni utilisées à des fins publicitaires</strong>.
             </p>
+            <p>
+                Ce traitement repose sur l'<strong>exécution du contrat de réservation</strong>
+                (article 6.1.b du RGPD) : sans ces informations, nous ne pouvons pas
+                enregistrer votre réservation ni vous la confirmer.
+            </p>
 
             <h2>4. Où sont-elles stockées ?</h2>
             <p>
                 Les réservations sont enregistrées dans un tableur <strong>Google Sheets</strong>
                 privé, accessible uniquement aux membres du comité en charge de l'organisation.
                 L'e-mail de confirmation est envoyé via les services de Google.
+            </p>
+            <p>
+                Lors d'une nouvelle réservation, une notification interne est envoyée aux
+                organisateurs via le service <strong>Pushover</strong> ; elle contient
+                uniquement le nom, le nombre de couverts et le montant — jamais vos
+                coordonnées (téléphone, e-mail) ni votre commentaire.
+            </p>
+            <p>
+                Google et Pushover agissent comme <strong>prestataires techniques</strong> : vos données ne sont
+                communiquées à aucun autre destinataire. Le site est hébergé par
+                <strong>GitHub, Inc.</strong> (GitHub Pages), qui peut collecter les adresses IP
+                des visiteurs dans ses journaux techniques. Google et GitHub étant des sociétés
+                américaines, certaines données peuvent être transférées vers les États-Unis ;
+                ces transferts sont encadrés par le <strong>Data Privacy Framework UE-États-Unis</strong>,
+                auquel ces deux sociétés sont certifiées.
             </p>
             <p>
                 Par ailleurs, votre navigateur conserve une copie de vos propres réservations
@@ -89,9 +115,16 @@
             <h2>6. Vos droits</h2>
             <p>
                 Conformément au Règlement Général sur la Protection des Données (RGPD), vous
-                pouvez à tout moment demander à <strong>consulter, corriger ou supprimer</strong>
-                les données vous concernant. Il vous suffit de nous écrire à
+                disposez à tout moment d'un droit <strong>d'accès, de rectification,
+                d'effacement, d'opposition, de limitation du traitement et de
+                portabilité</strong> des données vous concernant. Il vous suffit de nous écrire à
                 <a href="mailto:contact@cdf-luglon.fr">contact@cdf-luglon.fr</a>.
+            </p>
+            <p>
+                Si vous estimez que vos droits ne sont pas respectés, vous pouvez également
+                adresser une réclamation à la <strong>CNIL</strong> (Commission Nationale de
+                l'Informatique et des Libertés) :
+                <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer">www.cnil.fr</a>.
             </p>
 
             <div class="confirmation-actions">
@@ -107,6 +140,7 @@
                 <span class="footer-title">Comité des Fêtes de Luglon</span>
                 <span class="footer-copyright">©2026 Tous droits réservés.</span>
                 <a href="/confidentialite/" class="footer-legal-link">Politique de confidentialité</a>
+                <a href="/mentions-legales/" class="footer-legal-link">Mentions légales</a>
             </div>
             <div class="footer-social">
                 <a href="https://www.instagram.com/cdfluglon/" target="_blank" rel="noopener noreferrer" aria-label="Instagram du Comité des Fêtes de Luglon" class="footer-social-link footer-instagram">
@@ -122,5 +156,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="/scroll-animations.js"></script>
 </body>
 </html>
