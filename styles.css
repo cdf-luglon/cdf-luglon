@@ -1624,6 +1624,12 @@ input[type="number"] {
     line-height: 1;
     margin-bottom: 5px;
   }
+  /* Titre d'un seul mot très long (ex. « CONFIDENTIALITÉ ») : on réduit
+     la taille proportionnellement à la largeur de l'écran pour qu'il tienne
+     sur une seule ligne sans être coupé ni déborder horizontalement. */
+  .main-title--long {
+    font-size: clamp(1.9rem, 9.5vw, 4rem);
+  }
   .main-subtitle {
     font-size: 1.5rem; /* Réduit 3rem -> 1.5rem */
   }
