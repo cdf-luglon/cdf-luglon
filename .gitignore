@@ -1,1 +1,26 @@
-/.DS_Store
+.DS_Store
+
+# ----------------------------------------------------------------------
+# ORIGINAUX PHOTO — ne jamais les commiter.
+#
+# Les photos sorties d'un téléphone pèsent 2 à 8 Mo pièce (46 Mo pour le
+# lot de 2026). Une fois dans un commit, elles restent DÉFINITIVEMENT dans
+# l'historique git : les supprimer ensuite n'allège rien, il faut réécrire
+# tout l'historique. Le dépôt entier fait 2,8 Mo aujourd'hui.
+#
+# Ce qui est publié, ce sont les versions redimensionnées de
+# images/galerie/ (1600px, ~300 Ko, métadonnées EXIF/GPS retirées).
+# Celles-là sont suivies normalement.
+#
+# Pour préparer une nouvelle photo :
+#   sips -Z 1600 -s format jpeg -s formatOptions 70 \
+#        ~/chemin/photo.jpg --out images/galerie/2027-nom-parlant.jpg
+#   sips -g pixelWidth -g pixelHeight images/galerie/2027-nom-parlant.jpg
+#
+# Gardez les originaux ailleurs (Drive, disque externe) : ce dépôt n'est
+# pas un espace d'archivage.
+# ----------------------------------------------------------------------
+images/IMG_*.jpeg
+images/IMG_*.jpg
+images/IMG_*.HEIC
+images/IMG_*.heic

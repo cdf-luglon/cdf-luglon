@@ -3,21 +3,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <title>Comité des Fêtes de Luglon</title>
+    <title>Le Comité - Comité des Fêtes de Luglon</title>
 
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" href="/styles.css">
 
     <!-- SEO : balises meta -->
-    <meta name="description" content="Le Comité des Fêtes de Luglon (Landes) organise les fêtes de l'été, le concours de belote, le carnaval et les rendez-vous qui animent le village toute l'année.">
-    <link rel="canonical" href="https://cdf-luglon.fr/">
+    <meta name="description" content="Qui sommes-nous : le Comité des Fêtes de Luglon, association loi 1901 de bénévoles qui organise les fêtes et animations du village. Le bureau, nos missions, comment nous rejoindre.">
+    <link rel="canonical" href="https://cdf-luglon.fr/comite/">
 
     <!-- Open Graph (partage WhatsApp, Facebook, etc.) -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="Comité des Fêtes de Luglon">
-    <meta property="og:description" content="Le Comité des Fêtes de Luglon (Landes) organise les fêtes de l'été, le concours de belote, le carnaval et les rendez-vous qui animent le village toute l'année.">
-    <meta property="og:url" content="https://cdf-luglon.fr/">
+    <meta property="og:title" content="Le Comité — Comité des Fêtes de Luglon">
+    <meta property="og:description" content="Qui sommes-nous : le Comité des Fêtes de Luglon, association loi 1901 de bénévoles qui organise les fêtes et animations du village. Le bureau, nos missions, comment nous rejoindre.">
+    <meta property="og:url" content="https://cdf-luglon.fr/comite/">
     <meta property="og:image" content="https://cdf-luglon.fr/images/logo_google.jpg">
     <meta property="og:image:width" content="512">
     <meta property="og:image:height" content="512">
@@ -68,7 +68,7 @@
             </a>
 
             <ul class="site-nav__links" id="site-nav-panel">
-                <li><a href="/" aria-current="page">Accueil</a></li>
+                <li><a href="/">Accueil</a></li>
                 <li class="site-nav__item--has-menu">
                     <a href="/evenements/">Évènements<span class="site-nav__chevron" aria-hidden="true"></span></a>
                     <ul class="site-nav__submenu">
@@ -78,7 +78,7 @@
                         <li><a href="/evenements/">Tous les évènements</a></li>
                     </ul>
                 </li>
-                <li><a href="/comite/">Le Comité</a></li>
+                <li><a href="/comite/" aria-current="page">Le Comité</a></li>
                 <li><a href="/galerie/">Galerie</a></li>
                 <li><a href="/contact/">Contact</a></li>
             </ul>
@@ -96,12 +96,8 @@
 
     <div class="main-hero" id="contenu">
         <div class="hero-content">
-            <h1 class="main-title">COMITÉ DES FÊTES</h1>
-            <p class="main-subtitle">Luglon, dans les Landes</p>
-            <div class="cta-row">
-                <a class="btn btn--primary" href="/evenements/">Voir les évènements</a>
-                <a class="btn btn--ghost" href="/comite/">Le Comité</a>
-            </div>
+            <h1 class="main-title">LE COMITÉ</h1>
+            <p class="main-subtitle">Qui sommes-nous ?</p>
         </div>
         <!-- MOBILE : le dessin n'est pas seulement masqué, il n'est PAS
              TÉLÉCHARGÉ. Un simple display:none ne suffit pas — le
@@ -120,128 +116,124 @@
     </div>
 
     <main>
-        <div class="history-images-container">
-            <div class="history-image-placeholder image-left">
-                <img src="/images/fougeres.png" alt="" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-
-            <section class="history-section">
-                <h3>FAIRE VIVRE LE VILLAGE</h3>
-                <p class="history-text">
-                    Le Comité des Fêtes de Luglon est une association de bénévoles qui
-                    organise, tout au long de l'année, les moments où le village se
-                    retrouve : les grandes fêtes de l'été, mais aussi le carnaval, les
-                    concours de belotte et des repas dans l'année.
-                </p>
-            </section>
-
-            <div class="history-image-placeholder image-right">
-                <img src="/images/fougeres.png" alt="" style="width:100%; height:100%; object-fit:cover;">
-            </div>
-        </div>
-
-        <!-- ============================================================
-             APERÇU DES ÉVÈNEMENTS
-             ⚠️ Ces trois cartes DOUBLONNENT celles de evenements/index.html.
-             Si vous modifiez une date ici, modifiez-la aussi là-bas.
-             (Un site statique sans étape de build : il n'y a pas de
-             mécanisme d'inclusion, la recopie est le prix à payer.)
-             ============================================================ -->
         <section class="page-section has-decor">
-            <!-- DÉCOR VÉGÉTAL — voir la section 19 de styles.css.
-                 Purement ornemental : aucun contenu, aucune information, et
-                 rien à faire côté JavaScript. Ne s'affiche qu'au-dessus de
-                 1440px, là où la marge est assez large pour l'accueillir. -->
+            <!-- DÉCOR VÉGÉTAL — voir la section 19 de styles.css. Purement
+                 ornemental : aria-hidden, pointer-events:none, aucun JS, et rien
+                 ne s'affiche en dessous de 1440px. -->
             <span class="decor-vine decor-vine--left" aria-hidden="true"><span class="decor-vine__ink"></span></span>
             <span class="decor-vine decor-vine--right" aria-hidden="true"><span class="decor-vine__ink"></span></span>
-
             <div class="section-head" data-reveal>
-                <p class="kicker">Nos rendez-vous</p>
-                <h2>Ce qui vous attend</h2>
+                <p class="kicker">L'association</p>
+                <h2>Des bénévoles, et rien d'autre</h2>
+            </div>
+            <div class="prose" data-reveal>
                 <p>
-                    Trois temps forts rythment l'année. Le détail de chacun,
-                    et les autres animations, sont sur la page Évènements.
+                    Le Comité des Fêtes de Luglon est une association régie par la loi
+                    du 1<sup>er</sup> juillet 1901. Elle est composée uniquement de
+                    bénévoles, habitants du village ou attachés à lui, qui consacrent
+                    leurs soirées et leurs week-ends à préparer les rendez-vous de
+                    l'année.
+                </p>
+                <p>
+                    Notre rôle : organiser, financer et faire tourner les animations qui
+                    rassemblent Luglon — des grandes fêtes de l'été aux plus petits
+                    rendez-vous d'hiver. Les recettes des repas, des buvettes et des
+                    concours servent intégralement à financer l'édition suivante.
                 </p>
             </div>
+        </section>
 
-            <div class="rail event-grid" tabindex="0"
-                 role="group" aria-label="Nos rendez-vous">
-
-                <article class="event-card" data-date="2026-11-14" data-reveal style="--i:0">
-                    <div class="event-card__head">
-                        <span class="event-card__icon icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="3.4" width="11" height="14" rx="2"/><path d="M6 7a2 2 0 0 0-2 2v8.6a3 3 0 0 0 3 3h8.6"/><path d="m14.5 7.8 1.9 2.9-1.9 2.9-1.9-2.9Z"/></svg></span>
-                        <span class="event-card__badge">À venir</span>
+        <section class="page-section">
+            <div class="panel">
+                <div class="section-head" data-reveal>
+                    <p class="kicker">Ce qui nous tient</p>
+                    <h2>Nos trois principes</h2>
+                </div>
+                <div class="rail value-grid" tabindex="0"
+                     role="group" aria-label="Nos trois principes">
+                    <div class="value-card" data-reveal style="--i:0">
+                        <span class="value-card__icon icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="7.8" r="3.3"/><path d="M2.6 20a6.4 6.4 0 0 1 12.8 0"/><path d="M16.4 5a3.3 3.3 0 0 1 0 6.1"/><path d="M17.8 14.3A6.4 6.4 0 0 1 21.4 20"/></svg></span>
+                        <h3>Ouvert à tous</h3>
+                        <p>
+                            Aucun de nos évènements n'est réservé aux membres. On vient
+                            pour une heure ou pour quatre jours, seul ou en famille.
+                        </p>
                     </div>
-                    <p class="event-card__date">
-                        <time datetime="2026-11-14">Automne 2026</time> · Salle des fêtes
-                    </p>
-                    <h3 class="event-card__title">Concours de belote</h3>
-                    <p class="event-card__text">
-                        Concours en équipes de 2, ouvert à tous, nombreux lots à gagner,
-                        buvette et casse-croûte sur place.
-                    </p>
-                    <div class="event-card__foot">
-                        <a class="event-card__link" href="/evenements/concours-de-belote/">En savoir plus</a>
+                    <div class="value-card" data-reveal style="--i:1">
+                        <span class="value-card__icon icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 21v-8.2"/><path d="M12 12.8c0-4 2.8-6.8 6.8-6.8 0 4-2.8 6.8-6.8 6.8Z"/><path d="M12 12.8c0-4-2.8-6.8-6.8-6.8 0 4 2.8 6.8 6.8 6.8Z"/></svg></span>
+                        <h3>Attaché aux traditions</h3>
+                        <p>
+                            Course landaise, bandas, cuisine du coin : ce qui se fait ici
+                            depuis longtemps continue de se faire, et bien.
+                        </p>
                     </div>
-                </article>
-
-                <article class="event-card" data-date="2027-03-20" data-reveal style="--i:1">
-                    <div class="event-card__head">
-                        <span class="event-card__icon icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.6 7.5c3-1.1 5.9-.8 8.2 1 .7.5 1.7.5 2.4 0 2.3-1.8 5.2-2.1 8.2-1 .4 5.1-2.1 9.2-5.4 9.2-2.1 0-3.3-1.3-4-3.1-.7 1.8-1.9 3.1-4 3.1-3.3 0-5.8-4.1-5.4-9.2Z"/><circle cx="7.4" cy="11" r="1.15" fill="currentColor" stroke="none"/><circle cx="16.6" cy="11" r="1.15" fill="currentColor" stroke="none"/></svg></span>
-                        <span class="event-card__badge">À venir</span>
+                    <div class="value-card" data-reveal style="--i:2">
+                        <span class="value-card__icon icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M15.9 8.5a4.5 4.5 0 0 0-7.4 3.5 4.5 4.5 0 0 0 7.4 3.5"/><path d="M6.9 10.8h5.3M6.9 13.2h5.3"/></svg></span>
+                        <h3>Des prix qui restent bas</h3>
+                        <p>
+                            Repas, entrées, animations : les tarifs sont calculés pour
+                            couvrir les frais, pas pour dégager de la marge.
+                        </p>
                     </div>
-                    <p class="event-card__date">
-                        <time datetime="2027-03-20">Mars 2027</time> · Dans le bourg
-                    </p>
-                    <h3 class="event-card__title">Carnaval</h3>
-                    <p class="event-card__text">
-                        Défilé costumé dans les rues, jugement de Monsieur Carnaval
-                        et goûter offert aux enfants.
-                    </p>
-                    <div class="event-card__foot">
-                        <a class="event-card__link" href="/evenements/carnaval/">En savoir plus</a>
-                    </div>
-                </article>
-
-                <article class="event-card" data-date="2027-08-01" data-reveal style="--i:2">
-                    <div class="event-card__head">
-                        <span class="event-card__icon icon-badge"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.4 2.6 12.1 7.6 17.1 9.3 12.1 11 10.4 16 8.7 11 3.7 9.3 8.7 7.6Z"/><path d="m17.9 13.6.9 2.5 2.5.9-2.5.9-.9 2.5-.9-2.5-2.5-.9 2.5-.9Z"/></svg></span>
-                        <span class="event-card__badge">À venir</span>
-                    </div>
-                    <p class="event-card__date">
-                        <time datetime="2027-07-29">Fin juillet 2027</time> · 4 jours
-                    </p>
-                    <h3 class="event-card__title">Les Fêtes de Luglon</h3>
-                    <p class="event-card__text">
-                        Loto, course landaise, bandas, repas sous les chapiteaux,
-                        pétanque et feu d'artifice. Le grand rendez-vous de l'été.
-                    </p>
-                    <div class="event-card__foot">
-                        <a class="event-card__link" href="/evenements/fetes-de-luglon/">
-                            Programme et réservation
-                        </a>
-                    </div>
-                </article>
-
+                </div>
+                <!-- Points remplis par rail-dots.js : tout .rail suivi d'un
+                     .rail-dots en reçoit, sans rien déclarer côté JS.
+                     Masqués au-dessus de 900px, où le rail devient une grille. -->
+                <div class="rail-dots" role="group" aria-label="Aller à un principe"></div>
             </div>
-            <!-- Points remplis par rail-dots.js : tout .rail suivi d'un
-                 .rail-dots en reçoit, sans rien déclarer côté JS.
-                 Masqués au-dessus de 900px, où le rail devient une grille. -->
-            <div class="rail-dots" role="group" aria-label="Aller à un évènement"></div>
+        </section>
+
+        <section class="page-section has-decor">
+            <!-- DÉCOR VÉGÉTAL — voir la section 19 de styles.css. Purement
+                 ornemental : aria-hidden, pointer-events:none, aucun JS, et rien
+                 ne s'affiche en dessous de 1440px. -->
+            <span class="decor-vine decor-vine--left" aria-hidden="true"><span class="decor-vine__ink"></span></span>
+            <span class="decor-vine decor-vine--right" aria-hidden="true"><span class="decor-vine__ink"></span></span>
+            <div class="section-head" data-reveal>
+                <p class="kicker">Le bureau</p>
+                <h2>Qui fait quoi</h2>
+            </div>
+            <div class="team-grid">
+                <div class="member" data-reveal style="--i:0">
+                    <p class="member__role">Président</p>
+                    <p class="member__name">Florent Lesburgeures</p>
+                </div>
+                <div class="member" data-reveal style="--i:1">
+                    <p class="member__role">Vice-président</p>
+                    <p class="member__name">Anthony Da Silva</p>
+                </div>
+                <div class="member" data-reveal style="--i:2">
+                    <p class="member__role">Trésorier</p>
+                    <p class="member__name">Félix Lopez</p>
+                </div>
+                <div class="member" data-reveal style="--i:2">
+                    <p class="member__role">Vice-trésorier</p>
+                    <p class="member__name">Valentin Baur-Deveaux</p>
+                </div>
+                <div class="member" data-reveal style="--i:3">
+                    <p class="member__role">Secrétaire</p>
+                    <p class="member__name">Tiphaine Cazalis</p>
+                </div>
+                <div class="member" data-reveal style="--i:3">
+                    <p class="member__role">Vice-secrétaire</p>
+                    <p class="member__name">Marie Navarro</p>
+                </div>
+            </div>
         </section>
 
         <section class="page-section page-section--footer-band">
             <div class="section-head section-head--center" data-reveal>
-                <p class="kicker">Rejoignez-nous</p>
-                <h2>Un village, ça se fait à plusieurs</h2>
+                <p class="kicker">Nous rejoindre</p>
+                <h2>Il y a toujours de la place</h2>
                 <p>
-                    Monter un chapiteau, tenir la buvette une heure, prêter une
-                    remorque, donner un coup de main au rangement : toutes les aides
-                    comptent, et aucune n'engage pour l'année.
+                    Le Comité se réunit régulièrement pour préparer les évènements à
+                    venir. Un coup de main ponctuel, quelques heures à la buvette ou
+                    simplement une idée à proposer : écrivez-nous, c'est déjà
+                    beaucoup.
                 </p>
                 <div class="cta-row" style="justify-content:center">
                     <a class="btn btn--primary" href="/contact/">Nous contacter</a>
-                    <a class="btn btn--ghost" href="/galerie/">Voir la galerie</a>
+                    <a class="btn btn--ghost" href="/evenements/">Voir les évènements</a>
                 </div>
             </div>
         </section>
@@ -271,7 +263,6 @@
     </footer>
 
     <script src="/scroll-animations.js"></script>
-    <script src="/events.js"></script>
     <script src="/rail-dots.js"></script>
     <script src="/nav.js"></script>
 </body>
